@@ -4,6 +4,9 @@
         <loc>https://www.example.com/</loc>
       </url>
       <url>
+        <loc>https://www.example.com/app/</loc>
+      </url>
+      <url>
         <loc>https://www.example.com/bibliotecas/</loc>
       </url>
       <url>

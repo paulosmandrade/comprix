@@ -19,6 +19,7 @@ nav = [
     { "FastAPI" = "bibliotecas/fastapi.md" },
     { "Pydantic" = "bibliotecas/pydantic.md" },
   ]},
+  { "App" = "app.md"}
 ]
 
 # extra_css = ["stylesheets/extra.css"]
