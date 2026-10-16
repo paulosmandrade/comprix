@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 360" role="img" aria-label="Comprix — controle de gastos familiares">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#eef5ff"/>
+      <stop offset="1" stop-color="#effbf3"/>
+    </linearGradient>
+    <linearGradient id="coin" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffd76a"/>
+      <stop offset="1" stop-color="#f2a900"/>
+    </linearGradient>
+    <linearGradient id="bar" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#34c38f"/>
+      <stop offset="1" stop-color="#1f9d6f"/>
+    </linearGradient>
+  </defs>
+
+  <style>
+    .coin   { animation: drop 3.6s ease-in infinite; transform-box: fill-box; }
+    .c2     { animation-delay: 1.2s; }
+    .c3     { animation-delay: 2.4s; }
+    @keyframes drop {
+      0%   { transform: translateY(-190px); opacity: 0; }
+      12%  { opacity: 1; }
+      65%  { transform: translateY(0); opacity: 1; }
+      80%  { transform: translateY(0); opacity: 0; }
+      100% { transform: translateY(0); opacity: 0; }
+    }
+
+    .bar    { transform-box: fill-box; transform-origin: bottom; animation: grow 2.8s ease-in-out infinite alternate; }
+    .b2     { animation-delay: .4s; }
+    .b3     { animation-delay: .8s; }
+    .b4     { animation-delay: 1.2s; }
+    @keyframes grow { from { transform: scaleY(.35); } to { transform: scaleY(1); } }
+
+    .trend  { stroke-dasharray: 160; animation: draw 4s ease-in-out infinite; }
+    @keyframes draw {
+      0%   { stroke-dashoffset: 160; }
+      50%  { stroke-dashoffset: 0; }
+      85%  { stroke-dashoffset: 0; opacity: 1; }
+      100% { stroke-dashoffset: 0; opacity: 0; }
+    }
+
+    .flow   { stroke-dasharray: 6 8; animation: flow 1.2s linear infinite; }
+    @keyframes flow { to { stroke-dashoffset: -28; } }
+
+    .heart  { transform-box: fill-box; transform-origin: center; animation: beat 1.6s ease-in-out infinite; }
+    @keyframes beat { 0%,100% { transform: scale(1); } 15% { transform: scale(1.25); } 30% { transform: scale(1); } }
+
+    .smoke  { animation: smoke 3s ease-out infinite; }
+    .s2     { animation-delay: 1.5s; }
+    @keyframes smoke {
+      0%   { transform: translate(0,0); opacity: 0; }
+      20%  { opacity: .6; }
+      100% { transform: translate(8px,-36px); opacity: 0; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; }
+    }
+  </style>
+
+  <!-- Fundo -->
+  <rect width="800" height="360" rx="24" fill="url(#bg)"/>
+
+  <!-- Casa (a família) -->
+  <circle class="smoke" cx="222" cy="104" r="7" fill="#b9c4d6"/>
+  <circle class="smoke s2" cx="222" cy="104" r="6" fill="#b9c4d6"/>
+  <rect x="210" y="108" width="22" height="40" rx="3" fill="#8a5a44"/>
+  <polygon points="170,82 74,170 266,170" fill="#e2574c"/>
+  <rect x="96" y="168" width="148" height="122" rx="6" fill="#ffffff" stroke="#d6dde8" stroke-width="2"/>
+  <rect x="118" y="220" width="38" height="70" rx="5" fill="#4a6fa5"/>
+  <circle cx="148" cy="257" r="3" fill="#ffd76a"/>
+  <rect x="174" y="192" width="52" height="44" rx="6" fill="#dff0ff" stroke="#4a6fa5" stroke-width="2"/>
+  <path class="heart" d="M200 228 C 183 216, 188 200, 200 208 C 212 200, 217 216, 200 228 Z" fill="#e2574c"/>
+
+  <!-- Fluxo casa → cofrinho -->
+  <path class="flow" d="M250 150 Q 320 70 388 92" fill="none" stroke="#7d8fb0" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Moedas caindo -->
+  <g class="coin">
+    <circle cx="384" cy="262" r="15" fill="url(#coin)" stroke="#c98a00" stroke-width="2"/>
+    <text x="384" y="267" font-family="Arial, sans-serif" font-size="12" font-weight="700" fill="#8a5d00" text-anchor="middle">R$</text>
+  </g>
+  <g class="coin c2">
+    <circle cx="410" cy="262" r="15" fill="url(#coin)" stroke="#c98a00" stroke-width="2"/>
+    <text x="410" y="267" font-family="Arial, sans-serif" font-size="12" font-weight="700" fill="#8a5d00" text-anchor="middle">R$</text>
+  </g>
+  <g class="coin c3">
+    <circle cx="397" cy="262" r="15" fill="url(#coin)" stroke="#c98a00" stroke-width="2"/>
+    <text x="397" y="267" font-family="Arial, sans-serif" font-size="12" font-weight="700" fill="#8a5d00" text-anchor="middle">R$</text>
+  </g>
+
+  <!-- Pote de economias -->
+  <ellipse cx="397" cy="284" rx="40" ry="7" fill="#f2a900"/>
+  <ellipse cx="397" cy="276" rx="40" ry="7" fill="#ffc83d"/>
+  <ellipse cx="397" cy="268" rx="40" ry="7" fill="#ffd76a"/>
+  <rect x="337" y="190" width="120" height="108" rx="20" fill="#9fd8ff" fill-opacity=".35" stroke="#4a6fa5" stroke-width="3"/>
+  <rect x="331" y="180" width="132" height="16" rx="6" fill="#4a6fa5"/>
+
+  <!-- Fluxo pote → gráfico -->
+  <path class="flow" d="M462 240 Q 505 205 545 226" fill="none" stroke="#7d8fb0" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Gráfico de gastos -->
+  <line x1="552" y1="290" x2="726" y2="290" stroke="#9aa7bd" stroke-width="2" stroke-linecap="round"/>
+  <line x1="552" y1="150" x2="552" y2="290" stroke="#9aa7bd" stroke-width="2" stroke-linecap="round"/>
+  <rect class="bar"    x="566" y="240" width="28" height="50"  rx="5" fill="url(#bar)"/>
+  <rect class="bar b2" x="606" y="210" width="28" height="80"  rx="5" fill="#4a6fa5"/>
+  <rect class="bar b3" x="646" y="225" width="28" height="65"  rx="5" fill="url(#bar)"/>
+  <rect class="bar b4" x="686" y="190" width="28" height="100" rx="5" fill="#ffb020"/>
+  <polyline class="trend" points="580,228 620,198 660,212 700,176" fill="none" stroke="#e2574c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Título -->
+  <text x="400" y="334" font-family="Segoe UI, Roboto, Arial, sans-serif" font-size="22" font-weight="700" fill="#2b3a55" text-anchor="middle">
+    Comprix <tspan font-weight="400" fill="#5b6b86">· os gastos da família sob controle</tspan>
+  </text>
+</svg>

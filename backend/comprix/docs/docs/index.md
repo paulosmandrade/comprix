@@ -4,6 +4,8 @@ icon: lucide/rocket
 
 # :material-rocket-launch: Bem-vindo!
 
+![Comprix — controle de gastos familiares](assets/index/comprix-hero.svg){ width="100%" }
+
 Essa documentação tem como intúito, não apenas documentar todo o processo de criação deste software, mais sim aperfeiçoar os meus conhecimentos, colocando em prática tudo que tenho aprendido. Hoje com o avanço da inteligência artificial, os seres humanos não estão mais estudando e pesquisando, ficando totalmente dependentes da IA.
 
 Eu acredito que a educação e o conhecimento das pessoas, podem tornar o mundo melhor, por este motivo eu sempre incentivarei você a estudar e digitar seus próprios códigos.
@@ -27,3 +29,7 @@ Nesta documentação vamos realizar o processo do Backend, criando uma API *(App
 
 ## Ferramentas
 
+* [x] Python - (Versão 3.14 ou superior), vamos utilizar o python e suas biliotecas e frameworks (fastapi, pydantic, alembic, sqlalchemy, etc..), para criar nossa API.
+
+
+* [x] Sqlite - Vamos utilizar esse poderoso banco de dados local, como essa aplicação não terá uma grande escala, com muitos usuarios, será perfeito para nosso aprendizado.

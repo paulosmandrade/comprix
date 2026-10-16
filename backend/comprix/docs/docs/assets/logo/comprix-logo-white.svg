@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Comprix">
+  <!-- Casa (contorno) -->
+  <path d="M32 11 L53 30 H48 V51 H16 V30 H11 Z" fill="none" stroke="#ffffff" stroke-width="3.5" stroke-linejoin="round"/>
+
+  <!-- Gráfico de gastos -->
+  <rect x="21.5" y="40" width="5" height="7"  rx="1.5" fill="#ffffff"/>
+  <rect x="29.5" y="35" width="5" height="12" rx="1.5" fill="#ffffff"/>
+  <rect x="37.5" y="30" width="5" height="17" rx="1.5" fill="#ffffff"/>
+
+  <!-- Moeda -->
+  <circle cx="50" cy="14" r="7.5" fill="none" stroke="#ffffff" stroke-width="3"/>
+  <circle cx="50" cy="14" r="2.5" fill="#ffffff"/>
+</svg>

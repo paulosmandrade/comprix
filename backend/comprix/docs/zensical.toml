@@ -11,10 +11,14 @@ site_name = "Comprix"
 # edit_uri = "edit/main/docs/"
 
 nav = [
-  { "Get started" = "index.md" },
-  { "Markdown in 5min" = "markdown.md" },
-  { "Configuração de Ambiente" = "configuracao.md"},
-  { "biliotecas - frameworks" = "bibliotecas.md"}
+  { "Seja bem vindo" = "index.md" },
+  { "Configuração de Ambiente" = "configuracao.md" },
+  { "Bibliotecas e Frameworks" = [
+    "bibliotecas/index.md",
+    { "Estrutura do projeto" = "bibliotecas/estrutura.md" },
+    { "FastAPI" = "bibliotecas/fastapi.md" },
+    { "Pydantic" = "bibliotecas/pydantic.md" },
+  ]},
 ]
 
 # extra_css = ["stylesheets/extra.css"]
@@ -23,7 +27,8 @@ nav = [
 [project.theme]
 variant = "classic"
 # custom_dir = "overrides"
-# favicon = "images/favicon.png"
+logo = "assets/logo/comprix-icon.svg"
+favicon = "assets/logo/comprix-icon.svg"
 language = "en"
 features = [
   "announce.dismiss",
@@ -44,7 +49,7 @@ features = [
   # "navigation.instant.progress",
   "navigation.path",
   # "navigation.prune",
-  "navigation.sections",
+  # "navigation.sections",
   # "navigation.tabs",
   # "navigation.tabs.sticky",
   "navigation.top",

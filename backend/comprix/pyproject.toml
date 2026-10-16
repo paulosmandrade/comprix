@@ -62,3 +62,4 @@ test.sequence = [
     { cmd = "pytest -s -x -vv $POE_EXTRA_ARGS"},
     { cmd  = "coverage html --show-contexts"}
 ]
+docs = {cmd = "zensical serve", cwd = "docs"}

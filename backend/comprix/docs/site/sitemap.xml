@@ -4,12 +4,24 @@
         <loc>https://www.example.com/</loc>
       </url>
       <url>
-        <loc>https://www.example.com/assets/bibliotecas/</loc>
+        <loc>https://www.example.com/bibliotecas/</loc>
+      </url>
+      <url>
+        <loc>https://www.example.com/bibliotecas/estrutura/</loc>
+      </url>
+      <url>
+        <loc>https://www.example.com/bibliotecas/fastapi/</loc>
+      </url>
+      <url>
+        <loc>https://www.example.com/bibliotecas/pydantic/</loc>
+      </url>
+      <url>
+        <loc>https://www.example.com/bibliotecas/pytest/</loc>
+      </url>
+      <url>
+        <loc>https://www.example.com/bibliotecas/ruff/</loc>
       </url>
       <url>
         <loc>https://www.example.com/configuracao/</loc>
-      </url>
-      <url>
-        <loc>https://www.example.com/markdown/</loc>
       </url>
 </urlset>

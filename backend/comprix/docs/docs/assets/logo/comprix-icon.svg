@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Comprix">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#4a6fa5"/>
+      <stop offset="1" stop-color="#2fb985"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Fundo -->
+  <rect width="64" height="64" rx="14" fill="url(#g)"/>
+
+  <!-- Casa -->
+  <path d="M32 13 L51 30 H47 V50 H17 V30 H13 Z" fill="#ffffff" stroke="#ffffff" stroke-width="2" stroke-linejoin="round"/>
+
+  <!-- Gráfico de gastos dentro da casa -->
+  <rect x="22"   y="40" width="5" height="7"  rx="1.5" fill="#34c38f"/>
+  <rect x="29.5" y="35" width="5" height="12" rx="1.5" fill="#4a6fa5"/>
+  <rect x="37"   y="30" width="5" height="17" rx="1.5" fill="#34c38f"/>
+
+  <!-- Moeda -->
+  <circle cx="49" cy="15" r="8" fill="#ffc83d" stroke="#ffffff" stroke-width="2"/>
+  <circle cx="49" cy="15" r="4" fill="none" stroke="#c98a00" stroke-width="1.6"/>
+</svg>
