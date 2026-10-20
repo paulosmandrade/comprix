@@ -23,7 +23,7 @@
     
     
       
-        <title>Sqlite - Comprix</title>
+        <title>Sqlite - Models - Comprix</title>
       
     
     
@@ -111,7 +111,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Sqlite
+              Sqlite - Models
             
           </span>
         </div>
@@ -535,7 +535,7 @@
   <span class="md-ellipsis">
     
   
-  Sqlite
+  Sqlite - Models
 
     
   </span>
@@ -554,7 +554,7 @@
   <span class="md-ellipsis">
     
   
-  Sqlite
+  Sqlite - Models
 
     
   </span>
@@ -613,10 +613,387 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#criando-a-primeira-tabela-com-o-sqlalchemy" class="md-nav__link">
+  <a href="#criando-as-tabelas-com-o-sqlalchemy" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        Criando a primeira tabela com o SQLAlchemy
+        Criando as tabelas com o SQLAlchemy
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-base-dos-nossos-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        A base dos nossos models
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="A base dos nossos models">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#os-imports" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Os imports
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#o-fuso-horario" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        O fuso horário
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#colunas-reutilizaveis" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Colunas reutilizáveis
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-classe-base" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        A classe <code>Base</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#o-model-de-usuarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        O model de usuários
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="O model de usuários">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#os-imports_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Os imports
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-classe-e-a-tabela" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        A classe e a tabela
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#as-colunas" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        As colunas
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#o-primeiro-acesso" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        O primeiro acesso
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#criando-um-usuario" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Criando um usuário
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#organizando-os-models-com-o-__init__py" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Organizando os models com o <code>__init__.py</code>
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Organizando os models com o __init__.py">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#por-que-importar-os-models-aqui" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Por que importar os models aqui?
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#e-para-que-serve-o-__all__" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        E para que serve o <code>__all__</code>?
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adicionando-novos-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Adicionando novos models
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conectando-no-banco" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Conectando no banco
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Conectando no banco">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#o-engine" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        O engine
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#criando-as-tabelas-automaticamente-o-lifespan" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Criando as tabelas automaticamente: o <code>lifespan</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-sessao" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        A sessão
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ligando-o-banco-na-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Ligando o banco na API
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testando-o-banco" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Testando o banco
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Testando o banco">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#as-fixtures" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        As fixtures
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="As fixtures">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-fixture-client" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        A fixture <code>client</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-fixture-session" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        A fixture <code>session</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testando-a-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Testando a API
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testando-o-banco_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Testando o banco
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configurando-a-cobertura-de-testes" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Configurando a cobertura de testes
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#estrutura-do-projeto" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Estrutura do projeto
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rodando-os-testes" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Rodando os testes
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#o-relatorio-em-html" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        O relatório em HTML
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parabens" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.53 1.45-1.08 1.08 1.6 1.6q.33.375.33.87c0 .495-.11.64-.33.86L11.5 9.47l1 1.08 3.63-3.61c.53-.59.79-1.24.79-1.94s-.26-1.36-.79-1.95zm-3.98 2.02L9.47 4.55l.61.56c.22.22.33.52.33.89s-.11.67-.33.89l-.61.56 1.08 1.08.56-.61c.53-.59.8-1.23.8-1.92 0-.72-.27-1.37-.8-1.97zM21 5.06c-.69 0-1.33.27-1.92.8l-5.63 5.64 1.08 1 5.58-5.56c.25-.25.55-.38.89-.38s.64.13.89.38l.61.61 1.03-1.08-.56-.61c-.59-.53-1.25-.8-1.97-.8M7 8 2 22l14-5zm12 3.06c-.7 0-1.34.27-1.94.8l-1.59 1.59 1.08 1.08 1.59-1.59c.25-.25.53-.38.86-.38s.63.13.88.38l1.62 1.59 1.05-1.03-1.6-1.64c-.59-.53-1.25-.8-1.95-.8"/></svg></span> Parabéns!
       </span>
     </span>
   </a>
@@ -693,10 +1070,387 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#criando-a-primeira-tabela-com-o-sqlalchemy" class="md-nav__link">
+  <a href="#criando-as-tabelas-com-o-sqlalchemy" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        Criando a primeira tabela com o SQLAlchemy
+        Criando as tabelas com o SQLAlchemy
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-base-dos-nossos-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        A base dos nossos models
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="A base dos nossos models">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#os-imports" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Os imports
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#o-fuso-horario" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        O fuso horário
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#colunas-reutilizaveis" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Colunas reutilizáveis
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-classe-base" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        A classe <code>Base</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#o-model-de-usuarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        O model de usuários
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="O model de usuários">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#os-imports_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Os imports
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-classe-e-a-tabela" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        A classe e a tabela
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#as-colunas" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        As colunas
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#o-primeiro-acesso" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        O primeiro acesso
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#criando-um-usuario" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Criando um usuário
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#organizando-os-models-com-o-__init__py" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Organizando os models com o <code>__init__.py</code>
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Organizando os models com o __init__.py">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#por-que-importar-os-models-aqui" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Por que importar os models aqui?
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#e-para-que-serve-o-__all__" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        E para que serve o <code>__all__</code>?
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adicionando-novos-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Adicionando novos models
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conectando-no-banco" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Conectando no banco
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Conectando no banco">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#o-engine" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        O engine
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#criando-as-tabelas-automaticamente-o-lifespan" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Criando as tabelas automaticamente: o <code>lifespan</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-sessao" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        A sessão
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ligando-o-banco-na-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Ligando o banco na API
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testando-o-banco" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Testando o banco
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Testando o banco">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#as-fixtures" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        As fixtures
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="As fixtures">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-fixture-client" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        A fixture <code>client</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-fixture-session" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        A fixture <code>session</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testando-a-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Testando a API
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testando-o-banco_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Testando o banco
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configurando-a-cobertura-de-testes" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Configurando a cobertura de testes
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#estrutura-do-projeto" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Estrutura do projeto
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rodando-os-testes" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Rodando os testes
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#o-relatorio-em-html" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        O relatório em HTML
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parabens" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.53 1.45-1.08 1.08 1.6 1.6q.33.375.33.87c0 .495-.11.64-.33.86L11.5 9.47l1 1.08 3.63-3.61c.53-.59.79-1.24.79-1.94s-.26-1.36-.79-1.95zm-3.98 2.02L9.47 4.55l.61.56c.22.22.33.52.33.89s-.11.67-.33.89l-.61.56 1.08 1.08.56-.61c.53-.59.8-1.23.8-1.92 0-.72-.27-1.37-.8-1.97zM21 5.06c-.69 0-1.33.27-1.92.8l-5.63 5.64 1.08 1 5.58-5.56c.25-.25.55-.38.89-.38s.64.13.89.38l.61.61 1.03-1.08-.56-.61c-.59-.53-1.25-.8-1.97-.8M7 8 2 22l14-5zm12 3.06c-.7 0-1.34.27-1.94.8l-1.59 1.59 1.08 1.08 1.59-1.59c.25-.25.53-.38.86-.38s.63.13.88.38l1.62 1.59 1.05-1.03-1.6-1.64c-.59-.53-1.25-.8-1.95-.8"/></svg></span> Parabéns!
       </span>
     </span>
   </a>
@@ -729,7 +1483,7 @@
 
 
 <h1 id="configurando-o-banco-de-dados"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 7c0-2.21 3.58-4 8-4s8 1.79 8 4-3.58 4-8 4-8-1.79-8-4m8.08 11H12c-4.42 0-8-1.79-8-4v3c0 2.21 3.58 4 8 4h.29a7.4 7.4 0 0 1-.29-2c0-.34.03-.67.08-1M20 12.08V9c0 2.21-3.58 4-8 4s-8-1.79-8-4v3c0 2.21 3.58 4 8 4h.69c1.13-2.37 3.53-4 6.31-4 .34 0 .67.03 1 .08m3.8 8.32c.1 0 .1.1 0 .2l-1 1.7c-.1.1-.2.1-.3.1l-1.2-.4c-.3.2-.5.3-.8.5l-.2 1.3c0 .1-.1.2-.2.2h-2c-.1 0-.2-.1-.3-.2l-.2-1.3c-.3-.1-.6-.3-.8-.5l-1.2.5c-.1 0-.2 0-.3-.1l-1-1.7c-.1-.1 0-.2.1-.3l1.1-.8v-1l-1.1-.8c-.1-.1-.1-.2-.1-.3l1-1.7c.1-.1.2-.1.3-.1l1.2.5c.3-.2.5-.3.8-.5l.2-1.3c0-.1.1-.2.3-.2h2c.1 0 .2.1.2.2l.2 1.3c.3.1.6.3.9.5l1.2-.5c.1 0 .3 0 .3.1l1 1.7c.1.1 0 .2-.1.3l-1.1.8v1zM20.5 19c0-.8-.7-1.5-1.5-1.5s-1.5.7-1.5 1.5.7 1.5 1.5 1.5 1.5-.7 1.5-1.5"/></svg></span> Configurando o banco de dados<a class="headerlink" href="#configurando-o-banco-de-dados" title="Permanent link">&para;</a></h1>
-<p>Agora que já sabemos o que é um banco de dados e por que escolhemos o SQLite, vamos colocá-lo para funcionar no Comprix. Para isso, vamos usar três peças que trabalham juntas:</p>
+<p>Agora que já sabemos o que é um banco de dados e por que escolhemos o SQLite, vamos colocá-lo para funcionar no Comprix. Para isso, vamos usar algumas peças que trabalham juntas:</p>
 <table>
 <thead>
 <tr>
@@ -747,23 +1501,40 @@
 <td>Conecta no banco e permite criar tabelas e consultar dados usando classes Python</td>
 </tr>
 <tr>
+<td><strong>aiosqlite</strong></td>
+<td>Permite que o SQLAlchemy converse com o SQLite de forma <strong>assíncrona</strong></td>
+</tr>
+<tr>
 <td><strong>pydantic-settings</strong></td>
 <td>Lê e valida as configurações do projeto, como o endereço do banco</td>
 </tr>
 </tbody>
 </table>
-<p>O SQLite já vem com o Python, então só precisamos instalar as outras duas.</p>
+<p>O SQLite já vem com o Python, então só precisamos instalar as outras três.</p>
+<details class="info">
+<summary>Por que assíncrono?</summary>
+<p>O FastAPI foi feito para trabalhar de forma <strong>assíncrona</strong>: enquanto uma requisição espera uma resposta do banco, a API pode atender outras requisições, em vez de ficar parada. Para aproveitar isso, a conexão com o banco também precisa ser assíncrona. É por isso que usamos o <code>asyncio</code> do SQLAlchemy e o driver <code>aiosqlite</code>.</p>
+</details>
 <h2 id="instalando-as-dependencias">Instalando as dependências<a class="headerlink" href="#instalando-as-dependencias" title="Permanent link">&para;</a></h2>
 <p>No terminal, dentro da pasta do projeto, rode:</p>
-<div class="language-console highlight"><span class="filename">Terminal</span><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="gp">$ </span>poetry<span class="w"> </span>add<span class="w"> </span>sqlalchemy<span class="w"> </span>pydantic-settings
+<div class="language-console highlight"><span class="filename">Terminal</span><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="gp">$ </span>poetry<span class="w"> </span>add<span class="w"> </span><span class="s1">'sqlalchemy[asyncio]'</span><span class="w"> </span>aiosqlite<span class="w"> </span>pydantic-settings
 </span></code></pre></div>
-<p>O Poetry baixa as bibliotecas, adiciona as duas no <code>pyproject.toml</code> e atualiza o <code>poetry.lock</code>.</p>
+<p>O Poetry baixa as bibliotecas, adiciona todas no <code>pyproject.toml</code> e atualiza o <code>poetry.lock</code>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Não esqueça o <code>[asyncio]</code></p>
+<p>O <code>[asyncio]</code> instala junto uma biblioteca chamada <strong>greenlet</strong>, que o SQLAlchemy precisa para funcionar no modo assíncrono. Sem ela, a API para ao iniciar com o erro <em>"The SQLAlchemy asyncio module requires that the Python 'greenlet' library is installed"</em>. As aspas no comando evitam que o terminal interprete os colchetes.</p>
+</div>
 <h2 id="guardando-as-configuracoes-no-env">Guardando as configurações no <code>.env</code><a class="headerlink" href="#guardando-as-configuracoes-no-env" title="Permanent link">&para;</a></h2>
 <p>O endereço do banco é uma <strong>configuração</strong>, e configurações não devem ficar escritas direto no código. Se um dia quisermos usar outro banco, basta trocar a configuração, sem mexer em nenhuma linha de Python.</p>
 <p>Crie um arquivo chamado <code>.env</code> na raiz do projeto, na mesma pasta do <code>pyproject.toml</code>:</p>
-<div class="language-bash highlight"><span class="filename">.env</span><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nv">DATABASE_URL</span><span class="o">=</span><span class="s2">"sqlite:///database.db"</span>
+<div class="language-bash highlight"><span class="filename">.env</span><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nv">DATABASE_URL</span><span class="o">=</span><span class="s2">"sqlite+aiosqlite:///comprix.db"</span>
 </span></code></pre></div>
-<p>Esse endereço segue o formato <code>banco:///caminho</code>. Aqui, ele diz para usar o <strong>SQLite</strong> com um arquivo chamado <code>database.db</code>.</p>
+<p>Esse endereço tem três partes:</p>
+<ul>
+<li><strong><code>sqlite</code></strong>: o banco de dados que vamos usar.</li>
+<li><strong><code>+aiosqlite</code></strong>: o driver que faz a conexão de forma assíncrona.</li>
+<li><strong><code>comprix.db</code></strong>: o nome do arquivo onde os dados ficam guardados, criado na pasta onde a API é executada.</li>
+</ul>
 <div class="admonition danger">
 <p class="admonition-title">O <code>.env</code> não vai para o Git</p>
 <p>O <code>.env</code> pode guardar senhas e chaves secretas no futuro. Por isso, ele <strong>nunca</strong> deve ser enviado para o GitHub. O mesmo vale para o arquivo do banco, que guarda os dados. Adicione estas linhas ao <code>.gitignore</code>:</p>
@@ -771,25 +1542,31 @@
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>*.db
 </span></code></pre></div>
 </div>
+<p>Como o <code>.env</code> não vai para o GitHub, quem baixar o projeto não saberá quais configurações ele precisa ter. Para resolver isso, criamos também um arquivo de exemplo, sem nenhum dado secreto, que <strong>vai</strong> para o GitHub:</p>
+<div class="language-bash highlight"><span class="filename">.env.example</span><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nv">DATABASE_URL</span><span class="o">=</span><span class="s2">"sqlite+aiosqlite:///comprix.db"</span>
+</span></code></pre></div>
+<p>Quem baixar o projeto só precisa copiá-lo:</p>
+<div class="language-console highlight"><span class="filename">Terminal</span><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="gp">$ </span>cp<span class="w"> </span>.env.example<span class="w"> </span>.env
+</span></code></pre></div>
 <h2 id="lendo-as-configuracoes-com-o-pydantic-settings">Lendo as configurações com o pydantic-settings<a class="headerlink" href="#lendo-as-configuracoes-com-o-pydantic-settings" title="Permanent link">&para;</a></h2>
 <p>Agora vamos criar a classe que lê o <code>.env</code>:</p>
-<div class="language-python highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">src/comprix/settings.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span>
-<span class="normal"><a href="#__codelineno-3-2">2</a></span>
-<span class="normal"><a href="#__codelineno-3-3">3</a></span>
-<span class="normal"><a href="#__codelineno-3-4">4</a></span>
-<span class="normal"><a href="#__codelineno-3-5">5</a></span>
-<span class="normal"><a href="#__codelineno-3-6">6</a></span>
-<span class="normal"><a href="#__codelineno-3-7">7</a></span>
-<span class="normal"><a href="#__codelineno-3-8">8</a></span>
-<span class="normal"><a href="#__codelineno-3-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pydantic_settings</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseSettings</span><span class="p">,</span> <span class="n">SettingsConfigDict</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2"></a>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3"></a>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="k">class</span><span class="w"> </span><span class="nc">Settings</span><span class="p">(</span><span class="n">BaseSettings</span><span class="p">):</span>
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5"></a>    <span class="n">model_config</span> <span class="o">=</span> <span class="n">SettingsConfigDict</span><span class="p">(</span>
-</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6"></a>        <span class="n">env_file</span><span class="o">=</span><span class="s1">'.env'</span><span class="p">,</span> <span class="n">env_file_encoding</span><span class="o">=</span><span class="s1">'utf-8'</span>
-</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7"></a>    <span class="p">)</span>
-</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8"></a>
-</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9"></a>    <span class="n">DATABASE_URL</span><span class="p">:</span> <span class="nb">str</span>
+<div class="language-python highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">src/comprix/settings.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1">1</a></span>
+<span class="normal"><a href="#__codelineno-5-2">2</a></span>
+<span class="normal"><a href="#__codelineno-5-3">3</a></span>
+<span class="normal"><a href="#__codelineno-5-4">4</a></span>
+<span class="normal"><a href="#__codelineno-5-5">5</a></span>
+<span class="normal"><a href="#__codelineno-5-6">6</a></span>
+<span class="normal"><a href="#__codelineno-5-7">7</a></span>
+<span class="normal"><a href="#__codelineno-5-8">8</a></span>
+<span class="normal"><a href="#__codelineno-5-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pydantic_settings</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseSettings</span><span class="p">,</span> <span class="n">SettingsConfigDict</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2"></a>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3"></a>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4"></a><span class="k">class</span><span class="w"> </span><span class="nc">Settings</span><span class="p">(</span><span class="n">BaseSettings</span><span class="p">):</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5"></a>    <span class="n">model_config</span> <span class="o">=</span> <span class="n">SettingsConfigDict</span><span class="p">(</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6"></a>        <span class="n">env_file</span><span class="o">=</span><span class="s1">'.env'</span><span class="p">,</span> <span class="n">env_file_encoding</span><span class="o">=</span><span class="s1">'utf-8'</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7"></a>    <span class="p">)</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8"></a>
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9"></a>    <span class="n">DATABASE_URL</span><span class="p">:</span> <span class="nb">str</span>
 </span></code></pre></div></td></tr></table></div>
 <ul>
 <li>
@@ -806,8 +1583,861 @@
 <summary>Por que o editor sublinha o <code>Settings()</code>?</summary>
 <p>Em alguns editores, o <code>Settings()</code> aparece sublinhado com o aviso de que falta o argumento <code>DATABASE_URL</code>. Isso acontece porque o editor não sabe que o valor virá do <code>.env</code>. O código funciona normalmente.</p>
 </details>
-<h2 id="criando-a-primeira-tabela-com-o-sqlalchemy">Criando a primeira tabela com o SQLAlchemy<a class="headerlink" href="#criando-a-primeira-tabela-com-o-sqlalchemy" title="Permanent link">&para;</a></h2>
-<p>No SQLAlchemy, cada tabela do banco é representada por uma classe Python, chamada de <strong>model</strong>. Vamos criar a tabela de usuarios:</p>
+<h2 id="criando-as-tabelas-com-o-sqlalchemy">Criando as tabelas com o SQLAlchemy<a class="headerlink" href="#criando-as-tabelas-com-o-sqlalchemy" title="Permanent link">&para;</a></h2>
+<p>No SQLAlchemy, cada tabela do banco é representada por uma classe Python, chamada de <strong>model</strong>. Para manter o projeto organizado, vamos criar um diretório chamado <strong>models</strong>, onde ficarão todos os models da nossa aplicação:</p>
+<div class="language-text highlight"><span class="filename">Estrutura do projeto</span><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>src
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>└── comprix
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="hll">    ├── models
+</span></span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="hll">    │   ├── __init__.py
+</span></span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="hll">    │   ├── base.py
+</span></span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="hll">    │   └── usuarios.py
+</span></span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>    ├── schemas
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>    │   └── app.py
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>    ├── static
+</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>    │   └── comprix-icon.ico
+</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>    ├── __init__.py
+</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>    └── app.py
+</span></code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Model não é schema</p>
+<p>O <strong>schema</strong> (Pydantic) define o formato dos dados que <strong>entram e saem da API</strong>. O <strong>model</strong> (SQLAlchemy) define como os dados são <strong>guardados no banco</strong>. Os dois se parecem, mas têm papéis diferentes, e por isso ficam em pastas separadas.</p>
+</div>
+<h2 id="a-base-dos-nossos-models">A base dos nossos models<a class="headerlink" href="#a-base-dos-nossos-models" title="Permanent link">&para;</a></h2>
+<p>Todos os models do Comprix vão compartilhar algumas coisas em comum: a classe <code>Base</code>, que o SQLAlchemy usa para conhecer as tabelas, e as colunas de data de criação e de atualização. Para não repetir esse código em cada model, vamos reuni-lo no arquivo <code>base.py</code>.</p>
+<div class="language-python highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">src/comprix/models/base.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-7-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-7-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-7-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-7-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-7-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-7-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-7-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-7-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-7-10">10</a></span>
+<span class="normal"><a href="#__codelineno-7-11">11</a></span>
+<span class="normal"><a href="#__codelineno-7-12">12</a></span>
+<span class="normal"><a href="#__codelineno-7-13">13</a></span>
+<span class="normal"><a href="#__codelineno-7-14">14</a></span>
+<span class="normal"><a href="#__codelineno-7-15">15</a></span>
+<span class="normal"><a href="#__codelineno-7-16">16</a></span>
+<span class="normal"><a href="#__codelineno-7-17">17</a></span>
+<span class="normal"><a href="#__codelineno-7-18">18</a></span>
+<span class="normal"><a href="#__codelineno-7-19">19</a></span>
+<span class="normal"><a href="#__codelineno-7-20">20</a></span>
+<span class="normal"><a href="#__codelineno-7-21">21</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Annotated</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">zoneinfo</span><span class="w"> </span><span class="kn">import</span> <span class="n">ZoneInfo</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4"></a>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5"></a><span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy.orm</span><span class="w"> </span><span class="kn">import</span> <span class="n">DeclarativeBase</span><span class="p">,</span> <span class="n">mapped_column</span>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6"></a>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7"></a><span class="n">TIME</span> <span class="o">=</span> <span class="n">ZoneInfo</span><span class="p">(</span><span class="s1">'America/Sao_Paulo'</span><span class="p">)</span>
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8"></a>
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9"></a>
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10"></a><span class="k">def</span><span class="w"> </span><span class="nf">time_zone</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">datetime</span><span class="p">:</span>
+</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11"></a>    <span class="k">return</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(</span><span class="n">TIME</span><span class="p">)</span>
+</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12"></a>
+</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13"></a>
+</span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14"></a><span class="n">criado</span> <span class="o">=</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">datetime</span><span class="p">,</span> <span class="n">mapped_column</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="n">time_zone</span><span class="p">)]</span>
+</span><span id="__span-7-15"><a id="__codelineno-7-15" name="__codelineno-7-15"></a><span class="n">atualizado</span> <span class="o">=</span> <span class="n">Annotated</span><span class="p">[</span>
+</span><span id="__span-7-16"><a id="__codelineno-7-16" name="__codelineno-7-16"></a>    <span class="n">datetime</span><span class="p">,</span> <span class="n">mapped_column</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="n">time_zone</span><span class="p">,</span> <span class="n">onupdate</span><span class="o">=</span><span class="n">time_zone</span><span class="p">)</span>
+</span><span id="__span-7-17"><a id="__codelineno-7-17" name="__codelineno-7-17"></a><span class="p">]</span>
+</span><span id="__span-7-18"><a id="__codelineno-7-18" name="__codelineno-7-18"></a>
+</span><span id="__span-7-19"><a id="__codelineno-7-19" name="__codelineno-7-19"></a>
+</span><span id="__span-7-20"><a id="__codelineno-7-20" name="__codelineno-7-20"></a><span class="k">class</span><span class="w"> </span><span class="nc">Base</span><span class="p">(</span><span class="n">DeclarativeBase</span><span class="p">):</span>
+</span><span id="__span-7-21"><a id="__codelineno-7-21" name="__codelineno-7-21"></a>    <span class="k">pass</span>
+</span></code></pre></div></td></tr></table></div>
+<h3 id="os-imports">Os imports<a class="headerlink" href="#os-imports" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Linha 1:</strong> o <code>datetime</code> representa uma data com hora.</li>
+<li><strong>Linha 2:</strong> o <code>Annotated</code> permite juntar um tipo com informações extras. Vamos usá-lo para criar tipos de coluna reutilizáveis.</li>
+<li><strong>Linha 3:</strong> o <code>ZoneInfo</code> dá acesso aos fusos horários. Ele já vem com o Python, sem precisar instalar nada.</li>
+<li><strong>Linha 5:</strong> do SQLAlchemy, importamos o <code>DeclarativeBase</code>, a base dos models, e o <code>mapped_column</code>, que configura as colunas.</li>
+</ul>
+<h3 id="o-fuso-horario">O fuso horário<a class="headerlink" href="#o-fuso-horario" title="Permanent link">&para;</a></h3>
+<div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-8-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-8-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-8-10">10</a></span>
+<span class="normal"><a href="#__codelineno-8-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7"></a><span class="n">TIME</span> <span class="o">=</span> <span class="n">ZoneInfo</span><span class="p">(</span><span class="s1">'America/Sao_Paulo'</span><span class="p">)</span>
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8"></a>
+</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9"></a>
+</span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10"></a><span class="k">def</span><span class="w"> </span><span class="nf">time_zone</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">datetime</span><span class="p">:</span>
+</span><span id="__span-8-11"><a id="__codelineno-8-11" name="__codelineno-8-11"></a>    <span class="k">return</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(</span><span class="n">TIME</span><span class="p">)</span>
+</span></code></pre></div></td></tr></table></div>
+<ul>
+<li><strong>Linha 7:</strong> guardamos o fuso horário de São Paulo na constante <code>TIME</code>.</li>
+<li><strong>Linhas 10 e 11:</strong> a função <code>time_zone</code> devolve a data e a hora atuais nesse fuso.</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Atenção ao nome do fuso</p>
+<p>O nome correto é <code>America/Sao_Paulo</code>, <strong>sem o "n"</strong> no final de America. Com um nome errado, o Python para ao iniciar com o erro <code>ZoneInfoNotFoundError</code>.</p>
+</div>
+<details class="info">
+<summary>Por que não usar o horário do banco?</summary>
+<p>O SQLite registra a data e a hora sempre no horário <strong>UTC</strong>, que fica 3 horas à frente de Brasília. Gerando a data no Python, garantimos que ela seja gravada no horário de São Paulo.</p>
+</details>
+<h3 id="colunas-reutilizaveis">Colunas reutilizáveis<a class="headerlink" href="#colunas-reutilizaveis" title="Permanent link">&para;</a></h3>
+<div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-14">14</a></span>
+<span class="normal"><a href="#__codelineno-9-15">15</a></span>
+<span class="normal"><a href="#__codelineno-9-16">16</a></span>
+<span class="normal"><a href="#__codelineno-9-17">17</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-9-14"><a id="__codelineno-9-14" name="__codelineno-9-14"></a><span class="n">criado</span> <span class="o">=</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">datetime</span><span class="p">,</span> <span class="n">mapped_column</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="n">time_zone</span><span class="p">)]</span>
+</span><span id="__span-9-15"><a id="__codelineno-9-15" name="__codelineno-9-15"></a><span class="n">atualizado</span> <span class="o">=</span> <span class="n">Annotated</span><span class="p">[</span>
+</span><span id="__span-9-16"><a id="__codelineno-9-16" name="__codelineno-9-16"></a>    <span class="n">datetime</span><span class="p">,</span> <span class="n">mapped_column</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="n">time_zone</span><span class="p">,</span> <span class="n">onupdate</span><span class="o">=</span><span class="n">time_zone</span><span class="p">)</span>
+</span><span id="__span-9-17"><a id="__codelineno-9-17" name="__codelineno-9-17"></a><span class="p">]</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Aqui criamos dois <strong>tipos de coluna</strong> que qualquer model pode usar:</p>
+<ul>
+<li><strong><code>criado</code></strong> (linha 14): uma coluna de data cujo valor padrão (<code>default</code>) é o momento em que o registro é criado.</li>
+<li><strong><code>atualizado</code></strong> (linhas 15 a 17): além do valor padrão, o <code>onupdate</code> faz essa data ser <strong>atualizada automaticamente</strong> sempre que o registro for alterado.</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Sem parênteses em <code>time_zone</code></p>
+<p>Repare que escrevemos <code>default=time_zone</code>, e <strong>não</strong> <code>default=time_zone()</code>. Assim, passamos a função em si, e o SQLAlchemy a chama no momento de gravar cada registro. Com os parênteses, a função rodaria uma única vez, quando o servidor iniciasse, e todos os registros ficariam com a mesma data e hora.</p>
+</div>
+<p>Com isso, nos models, basta escrever:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">created_at</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="n">criado</span><span class="p">]</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="n">updated_at</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="n">atualizado</span><span class="p">]</span>
+</span></code></pre></div>
+<h3 id="a-classe-base">A classe <code>Base</code><a class="headerlink" href="#a-classe-base" title="Permanent link">&para;</a></h3>
+<div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-20">20</a></span>
+<span class="normal"><a href="#__codelineno-11-21">21</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-11-20"><a id="__codelineno-11-20" name="__codelineno-11-20"></a><span class="k">class</span><span class="w"> </span><span class="nc">Base</span><span class="p">(</span><span class="n">DeclarativeBase</span><span class="p">):</span>
+</span><span id="__span-11-21"><a id="__codelineno-11-21" name="__codelineno-11-21"></a>    <span class="k">pass</span>
+</span></code></pre></div></td></tr></table></div>
+<p>A classe <code>Base</code> herda do <code>DeclarativeBase</code> do SQLAlchemy e serve como ponto de partida para todos os models. Ela fica vazia (<code>pass</code>) porque toda a funcionalidade vem do <code>DeclarativeBase</code>. Quando um model herda de <code>Base</code>, o SQLAlchemy passa a conhecer a tabela dele, e é assim que ele sabe quais tabelas criar.</p>
+<h2 id="o-model-de-usuarios">O model de usuários<a class="headerlink" href="#o-model-de-usuarios" title="Permanent link">&para;</a></h2>
+<p>Agora vamos criar o nosso primeiro model: a tabela que vai guardar os usuários do Comprix.</p>
+<div class="language-python highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">src/comprix/models/usuarios.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-12-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-12-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-12-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-12-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-12-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-12-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-12-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-12-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-12-10">10</a></span>
+<span class="normal"><a href="#__codelineno-12-11">11</a></span>
+<span class="normal"><a href="#__codelineno-12-12">12</a></span>
+<span class="normal"><a href="#__codelineno-12-13">13</a></span>
+<span class="normal"><a href="#__codelineno-12-14">14</a></span>
+<span class="normal"><a href="#__codelineno-12-15">15</a></span>
+<span class="normal"><a href="#__codelineno-12-16">16</a></span>
+<span class="normal"><a href="#__codelineno-12-17">17</a></span>
+<span class="normal"><a href="#__codelineno-12-18">18</a></span>
+<span class="normal"><a href="#__codelineno-12-19">19</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy</span><span class="w"> </span><span class="kn">import</span> <span class="n">String</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy.orm</span><span class="w"> </span><span class="kn">import</span> <span class="n">Mapped</span><span class="p">,</span> <span class="n">mapped_column</span>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3"></a>
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4"></a><span class="kn">from</span><span class="w"> </span><span class="nn">comprix.models.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">Base</span><span class="p">,</span> <span class="n">atualizado</span><span class="p">,</span> <span class="n">criado</span>
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5"></a>
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6"></a>
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7"></a><span class="k">class</span><span class="w"> </span><span class="nc">Usuarios</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8"></a>    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s1">'usuarios'</span>
+</span><span id="__span-12-9"><a id="__codelineno-12-9" name="__codelineno-12-9"></a>    <span class="nb">id</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapped_column</span><span class="p">(</span><span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="__span-12-10"><a id="__codelineno-12-10" name="__codelineno-12-10"></a>    <span class="n">created_at</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="n">criado</span><span class="p">]</span>
+</span><span id="__span-12-11"><a id="__codelineno-12-11" name="__codelineno-12-11"></a>    <span class="n">updated_at</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="n">atualizado</span><span class="p">]</span>
+</span><span id="__span-12-12"><a id="__codelineno-12-12" name="__codelineno-12-12"></a>    <span class="n">nome</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapped_column</span><span class="p">(</span><span class="n">String</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span><span id="__span-12-13"><a id="__codelineno-12-13" name="__codelineno-12-13"></a>    <span class="n">email</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapped_column</span><span class="p">(</span>
+</span><span id="__span-12-14"><a id="__codelineno-12-14" name="__codelineno-12-14"></a>        <span class="n">String</span><span class="p">(</span><span class="mi">100</span><span class="p">),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">unique</span><span class="o">=</span><span class="kc">True</span>
+</span><span id="__span-12-15"><a id="__codelineno-12-15" name="__codelineno-12-15"></a>    <span class="p">)</span>
+</span><span id="__span-12-16"><a id="__codelineno-12-16" name="__codelineno-12-16"></a>    <span class="n">senha</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapped_column</span><span class="p">(</span><span class="n">String</span><span class="p">(</span><span class="mi">100</span><span class="p">),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span><span id="__span-12-17"><a id="__codelineno-12-17" name="__codelineno-12-17"></a>    <span class="n">codigo</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapped_column</span><span class="p">(</span><span class="n">String</span><span class="p">(</span><span class="mi">6</span><span class="p">),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span><span id="__span-12-18"><a id="__codelineno-12-18" name="__codelineno-12-18"></a>    <span class="n">primeiro_acesso</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapped_column</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="__span-12-19"><a id="__codelineno-12-19" name="__codelineno-12-19"></a>    <span class="n">status</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapped_column</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></code></pre></div></td></tr></table></div>
+<h3 id="os-imports_1">Os imports<a class="headerlink" href="#os-imports_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Linha 1:</strong> o <code>String</code> define colunas de texto com tamanho máximo.</li>
+<li><strong>Linha 2:</strong> o <code>Mapped</code> indica o tipo de cada coluna, e o <code>mapped_column</code> permite configurá-la.</li>
+<li><strong>Linha 4:</strong> do nosso <code>base.py</code>, importamos a classe <code>Base</code> e os tipos de coluna <code>criado</code> e <code>atualizado</code>, que já criamos.</li>
+</ul>
+<h3 id="a-classe-e-a-tabela">A classe e a tabela<a class="headerlink" href="#a-classe-e-a-tabela" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Linha 7:</strong> a classe <code>Usuarios</code> herda de <code>Base</code>. É isso que faz o SQLAlchemy reconhecê-la como uma tabela.</li>
+<li><strong>Linha 8:</strong> o <code>__tablename__</code> define o nome da tabela no banco de dados.</li>
+</ul>
+<h3 id="as-colunas">As colunas<a class="headerlink" href="#as-colunas" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Linha</th>
+<th>Coluna</th>
+<th>Tipo</th>
+<th>O que guarda</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>9</td>
+<td><code>id</code></td>
+<td>número inteiro</td>
+<td>Identificador único de cada usuário</td>
+</tr>
+<tr>
+<td>10</td>
+<td><code>created_at</code></td>
+<td>data e hora</td>
+<td>Quando o usuário foi criado</td>
+</tr>
+<tr>
+<td>11</td>
+<td><code>updated_at</code></td>
+<td>data e hora</td>
+<td>Quando o usuário foi alterado pela última vez</td>
+</tr>
+<tr>
+<td>12</td>
+<td><code>nome</code></td>
+<td>texto (até 50)</td>
+<td>O nome do usuário</td>
+</tr>
+<tr>
+<td>13 a 15</td>
+<td><code>email</code></td>
+<td>texto (até 100)</td>
+<td>O e-mail, que não pode se repetir</td>
+</tr>
+<tr>
+<td>16</td>
+<td><code>senha</code></td>
+<td>texto (até 100)</td>
+<td>A senha, guardada de forma protegida</td>
+</tr>
+<tr>
+<td>17</td>
+<td><code>codigo</code></td>
+<td>texto (até 6)</td>
+<td>Um código de 6 caracteres</td>
+</tr>
+<tr>
+<td>18</td>
+<td><code>primeiro_acesso</code></td>
+<td>verdadeiro ou falso</td>
+<td>Se o usuário ainda precisa trocar a senha inicial</td>
+</tr>
+<tr>
+<td>19</td>
+<td><code>status</code></td>
+<td>verdadeiro ou falso</td>
+<td>Se o usuário está ativo</td>
+</tr>
+</tbody>
+</table>
+<p>Vamos entender as configurações usadas:</p>
+<ul>
+<li>
+<p><strong><code>primary_key=True</code></strong> (linha 9): transforma o <code>id</code> na <strong>chave primária</strong> da tabela. Por ser um número inteiro, o banco gera o valor automaticamente: o primeiro usuário recebe <code>1</code>, o segundo <code>2</code>, e assim por diante.</p>
+</li>
+<li>
+<p><strong><code>Mapped[criado]</code> e <code>Mapped[atualizado]</code></strong> (linhas 10 e 11): usam os tipos que criamos no <code>base.py</code>. As datas são preenchidas e atualizadas sozinhas, no horário de São Paulo.</p>
+</li>
+<li>
+<p><strong><code>String(50)</code>, <code>String(100)</code> e <code>String(6)</code>:</strong> definem o <strong>tamanho máximo</strong> de cada texto.</p>
+</li>
+<li>
+<p><strong><code>nullable=False</code>:</strong> indica que o campo é <strong>obrigatório</strong>. O banco não aceita um usuário sem nome, e-mail, senha ou código.</p>
+</li>
+<li>
+<p><strong><code>unique=True</code></strong> (linha 14): impede que dois usuários sejam cadastrados com o <strong>mesmo e-mail</strong>.</p>
+</li>
+<li>
+<p><strong><code>default=True</code></strong> (linhas 18 e 19): todo usuário novo começa com o <strong>primeiro acesso pendente</strong> e <strong>ativo</strong>, sem precisar informar esses valores.</p>
+</li>
+</ul>
+<details class="info">
+<summary>O <code>nullable=False</code> é necessário?</summary>
+<p>No SQLAlchemy 2.0, o <code>Mapped[str]</code> já indica que a coluna é obrigatória. Para um campo opcional, escreveríamos <code>Mapped[str | None]</code>. Mesmo assim, mantivemos o <code>nullable=False</code> para deixar a regra <strong>explícita</strong> para quem lê o código.</p>
+</details>
+<h3 id="o-primeiro-acesso">O primeiro acesso<a class="headerlink" href="#o-primeiro-acesso" title="Permanent link">&para;</a></h3>
+<p>O campo <code>primeiro_acesso</code> é uma medida de <strong>segurança</strong>. Quando um usuário é cadastrado, ele recebe uma senha inicial, que pode ter sido criada ou vista por outra pessoa. Por isso, o sistema deve obrigá-lo a criar a sua própria senha logo ao entrar.</p>
+<p>O funcionamento é simples:</p>
+<ol>
+<li>Todo usuário novo é criado com <code>primeiro_acesso = True</code>.</li>
+<li>Ao fazer login, o sistema verifica esse campo. Se ele for <code>True</code>, o usuário é levado direto para a tela de troca de senha e não consegue usar o restante do sistema.</li>
+<li>Depois que o usuário cadastra a nova senha, o campo passa a ser <code>False</code>, e o acesso ao sistema é liberado.</li>
+</ol>
+<div class="admonition tip">
+<p class="admonition-title">A regra fica na API</p>
+<p>O model só <strong>guarda</strong> a informação. Quem vai <strong>aplicar</strong> a regra, bloqueando as outras rotas enquanto a senha não for trocada, são as rotas de autenticação que vamos criar mais adiante.</p>
+</div>
+<div class="admonition danger">
+<p class="admonition-title">Nunca guarde a senha como ela foi digitada</p>
+<p>A coluna <code>senha</code> não vai guardar a senha original, e sim um <strong>hash</strong>: uma versão embaralhada que não pode ser revertida. Assim, mesmo que alguém tenha acesso ao banco, não consegue descobrir a senha dos usuários. Vamos ver como fazer isso mais adiante.</p>
+</div>
+<h3 id="criando-um-usuario">Criando um usuário<a class="headerlink" href="#criando-um-usuario" title="Permanent link">&para;</a></h3>
+<p>Com o model pronto, criar um usuário é como criar qualquer objeto Python. Não precisamos informar o <code>id</code>, as datas, o <code>primeiro_acesso</code> nem o <code>status</code>, porque eles são preenchidos automaticamente:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="n">usuario</span> <span class="o">=</span> <span class="n">Usuarios</span><span class="p">(</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>    <span class="n">nome</span><span class="o">=</span><span class="s1">'Admin'</span><span class="p">,</span>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>    <span class="n">email</span><span class="o">=</span><span class="s1">'admin@comprix.com'</span><span class="p">,</span>
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>    <span class="n">senha</span><span class="o">=</span><span class="s1">'hash-da-senha'</span><span class="p">,</span>
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>    <span class="n">codigo</span><span class="o">=</span><span class="s1">'123456'</span><span class="p">,</span>
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="p">)</span>
+</span></code></pre></div>
+<h2 id="organizando-os-models-com-o-__init__py">Organizando os models com o <code>__init__.py</code><a class="headerlink" href="#organizando-os-models-com-o-__init__py" title="Permanent link">&para;</a></h2>
+<p>Dentro da pasta <code>models</code>, o arquivo <code>__init__.py</code> tem um papel especial: ele é executado automaticamente sempre que alguma parte do projeto importa algo de <code>comprix.models</code>. Vamos usá-lo para reunir todos os nossos models em um só lugar.</p>
+<div class="language-python highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">src/comprix/models/__init__.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1">1</a></span>
+<span class="normal"><a href="#__codelineno-14-2">2</a></span>
+<span class="normal"><a href="#__codelineno-14-3">3</a></span>
+<span class="normal"><a href="#__codelineno-14-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">comprix.models.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">Base</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">comprix.models.usuarios</span><span class="w"> </span><span class="kn">import</span> <span class="n">Usuarios</span>
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3"></a>
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4"></a><span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'Base'</span><span class="p">,</span> <span class="s1">'Usuarios'</span><span class="p">]</span>
+</span></code></pre></div></td></tr></table></div>
+<ul>
+<li>
+<p><strong>Linha 1:</strong> importamos a classe <code>Base</code>, que fica no arquivo <code>base.py</code>.</p>
+</li>
+<li>
+<p><strong>Linha 2:</strong> importamos o model <code>Usuarios</code>, que fica no arquivo <code>usuarios.py</code>.</p>
+</li>
+<li>
+<p><strong>Linha 4:</strong> a lista <code>__all__</code> declara quais nomes o pacote <code>models</code> oferece para o resto do projeto.</p>
+</li>
+</ul>
+<h3 id="por-que-importar-os-models-aqui">Por que importar os models aqui?<a class="headerlink" href="#por-que-importar-os-models-aqui" title="Permanent link">&para;</a></h3>
+<p>Esses imports têm dois objetivos.</p>
+<p>O primeiro é criar um <strong>atalho</strong>. Em vez de cada parte do projeto precisar saber em qual arquivo cada classe está, basta escrever:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">comprix.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Base</span><span class="p">,</span> <span class="n">Usuarios</span>
+</span></code></pre></div>
+<p>O segundo, e mais importante, é <strong>registrar os models</strong>. O comando <code>Base.metadata.create_all()</code>, que cria as tabelas no banco, só conhece os models que <strong>já foram carregados</strong> pelo Python. Como o <code>__init__.py</code> sempre roda quando importamos algo de <code>comprix.models</code>, temos a garantia de que todos os models estarão carregados antes de as tabelas serem criadas.</p>
+<div class="admonition danger">
+<p class="admonition-title">Cuidado</p>
+<p>Se um model não for importado no <code>__init__.py</code>, o <code>create_all</code> simplesmente <strong>não cria a tabela dele</strong>, e não mostra nenhum erro. Por isso, todo model novo precisa ser adicionado aqui.</p>
+</div>
+<h3 id="e-para-que-serve-o-__all__">E para que serve o <code>__all__</code>?<a class="headerlink" href="#e-para-que-serve-o-__all__" title="Permanent link">&para;</a></h3>
+<p>O <code>__all__</code> é uma lista com os nomes que o pacote torna públicos. No nosso projeto, ele também evita um aviso do <strong>ruff</strong>: como o <code>__init__.py</code> importa as classes mas não as usa diretamente, o ruff entenderia esses imports como esquecidos (regra F401). Com o <code>__all__</code>, deixamos claro que eles são intencionais.</p>
+<details class="info">
+<summary>Por que a <code>Base</code> fica em um arquivo separado?</summary>
+<p>Poderíamos escrever a classe <code>Base</code> direto no <code>__init__.py</code>. Mas o <code>usuarios.py</code> precisa importar a <code>Base</code>, e o <code>__init__.py</code> precisa importar o <code>usuarios.py</code>. Com os dois no mesmo arquivo, um dependeria do outro, causando um <strong>erro de importação circular</strong>. Separando a <code>Base</code> no <code>base.py</code>, cada arquivo depende só do que realmente precisa.</p>
+</details>
+<div class="admonition warning">
+<p class="admonition-title">Os nomes precisam combinar</p>
+<p>O nome importado no <code>__init__.py</code> precisa ser <strong>exatamente</strong> o nome da classe no <code>usuarios.py</code>, incluindo maiúsculas, minúsculas e plural. Se a classe se chama <code>Usuarios</code> e o <code>__init__.py</code> importa <code>Usuario</code>, o Python para com um <code>ImportError</code>.</p>
+</div>
+<h3 id="adicionando-novos-models">Adicionando novos models<a class="headerlink" href="#adicionando-novos-models" title="Permanent link">&para;</a></h3>
+<p>Sempre que criarmos um model novo, como um <code>produtos.py</code>, basta acrescentar o import dele e o nome dele no <code>__all__</code>:</p>
+<div class="language-python highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">src/comprix/models/__init__.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-16-1">1</a></span>
+<span class="normal"><a href="#__codelineno-16-2">2</a></span>
+<span class="normal"><a href="#__codelineno-16-3">3</a></span>
+<span class="normal"><a href="#__codelineno-16-4">4</a></span>
+<span class="normal"><a href="#__codelineno-16-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">comprix.models.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">Base</span>
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">comprix.models.usuarios</span><span class="w"> </span><span class="kn">import</span> <span class="n">Usuarios</span>
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3"></a><span class="hll"><span class="kn">from</span><span class="w"> </span><span class="nn">comprix.models.produtos</span><span class="w"> </span><span class="kn">import</span> <span class="n">Produtos</span>
+</span></span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4"></a>
+</span><span id="__span-16-5"><a id="__codelineno-16-5" name="__codelineno-16-5"></a><span class="hll"><span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'Base'</span><span class="p">,</span> <span class="s1">'Produtos'</span><span class="p">,</span> <span class="s1">'Usuarios'</span><span class="p">]</span>
+</span></span></code></pre></div></td></tr></table></div>
+<h2 id="conectando-no-banco">Conectando no banco<a class="headerlink" href="#conectando-no-banco" title="Permanent link">&para;</a></h2>
+<p>Com os models prontos, vamos criar a conexão com o banco. O arquivo <code>database.py</code> reúne tudo o que é de banco de dados: a conexão, a criação das tabelas e as sessões.</p>
+<div class="language-python highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">src/comprix/database.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-17-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-17-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-17-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-17-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-17-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-17-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-17-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-17-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-17-10">10</a></span>
+<span class="normal"><a href="#__codelineno-17-11">11</a></span>
+<span class="normal"><a href="#__codelineno-17-12">12</a></span>
+<span class="normal"><a href="#__codelineno-17-13">13</a></span>
+<span class="normal"><a href="#__codelineno-17-14">14</a></span>
+<span class="normal"><a href="#__codelineno-17-15">15</a></span>
+<span class="normal"><a href="#__codelineno-17-16">16</a></span>
+<span class="normal"><a href="#__codelineno-17-17">17</a></span>
+<span class="normal"><a href="#__codelineno-17-18">18</a></span>
+<span class="normal"><a href="#__codelineno-17-19">19</a></span>
+<span class="normal"><a href="#__codelineno-17-20">20</a></span>
+<span class="normal"><a href="#__codelineno-17-21">21</a></span>
+<span class="normal"><a href="#__codelineno-17-22">22</a></span>
+<span class="normal"><a href="#__codelineno-17-23">23</a></span>
+<span class="normal"><a href="#__codelineno-17-24">24</a></span>
+<span class="normal"><a href="#__codelineno-17-25">25</a></span>
+<span class="normal"><a href="#__codelineno-17-26">26</a></span>
+<span class="normal"><a href="#__codelineno-17-27">27</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">contextlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">asynccontextmanager</span>
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2"></a>
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">fastapi</span><span class="w"> </span><span class="kn">import</span> <span class="n">FastAPI</span>
+</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4"></a><span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy.ext.asyncio</span><span class="w"> </span><span class="kn">import</span> <span class="n">AsyncSession</span><span class="p">,</span> <span class="n">create_async_engine</span>
+</span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5"></a>
+</span><span id="__span-17-6"><a id="__codelineno-17-6" name="__codelineno-17-6"></a><span class="kn">from</span><span class="w"> </span><span class="nn">comprix.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Base</span>
+</span><span id="__span-17-7"><a id="__codelineno-17-7" name="__codelineno-17-7"></a><span class="kn">from</span><span class="w"> </span><span class="nn">comprix.settings</span><span class="w"> </span><span class="kn">import</span> <span class="n">Settings</span>
+</span><span id="__span-17-8"><a id="__codelineno-17-8" name="__codelineno-17-8"></a>
+</span><span id="__span-17-9"><a id="__codelineno-17-9" name="__codelineno-17-9"></a><span class="n">engine</span> <span class="o">=</span> <span class="n">create_async_engine</span><span class="p">(</span><span class="n">Settings</span><span class="p">()</span><span class="o">.</span><span class="n">DATABASE_URL</span><span class="p">,</span> <span class="n">echo</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span><span id="__span-17-10"><a id="__codelineno-17-10" name="__codelineno-17-10"></a>
+</span><span id="__span-17-11"><a id="__codelineno-17-11" name="__codelineno-17-11"></a>
+</span><span id="__span-17-12"><a id="__codelineno-17-12" name="__codelineno-17-12"></a><span class="nd">@asynccontextmanager</span>
+</span><span id="__span-17-13"><a id="__codelineno-17-13" name="__codelineno-17-13"></a><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">lifespan</span><span class="p">(</span><span class="n">app</span><span class="p">:</span> <span class="n">FastAPI</span><span class="p">):</span>
+</span><span id="__span-17-14"><a id="__codelineno-17-14" name="__codelineno-17-14"></a>    <span class="k">async</span> <span class="k">with</span> <span class="n">engine</span><span class="o">.</span><span class="n">begin</span><span class="p">()</span> <span class="k">as</span> <span class="n">conn</span><span class="p">:</span>
+</span><span id="__span-17-15"><a id="__codelineno-17-15" name="__codelineno-17-15"></a>        <span class="k">await</span> <span class="n">conn</span><span class="o">.</span><span class="n">run_sync</span><span class="p">(</span><span class="n">Base</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">create_all</span><span class="p">)</span>
+</span><span id="__span-17-16"><a id="__codelineno-17-16" name="__codelineno-17-16"></a>    <span class="k">yield</span>
+</span><span id="__span-17-17"><a id="__codelineno-17-17" name="__codelineno-17-17"></a>    <span class="k">await</span> <span class="n">engine</span><span class="o">.</span><span class="n">dispose</span><span class="p">()</span>
+</span><span id="__span-17-18"><a id="__codelineno-17-18" name="__codelineno-17-18"></a>
+</span><span id="__span-17-19"><a id="__codelineno-17-19" name="__codelineno-17-19"></a>
+</span><span id="__span-17-20"><a id="__codelineno-17-20" name="__codelineno-17-20"></a><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">get_session</span><span class="p">():</span>  <span class="c1"># pragma: no cover</span>
+</span><span id="__span-17-21"><a id="__codelineno-17-21" name="__codelineno-17-21"></a>    <span class="k">async</span> <span class="k">with</span> <span class="n">AsyncSession</span><span class="p">(</span><span class="n">engine</span><span class="p">,</span> <span class="n">expire_on_commit</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="k">as</span> <span class="n">session</span><span class="p">:</span>
+</span><span id="__span-17-22"><a id="__codelineno-17-22" name="__codelineno-17-22"></a>        <span class="k">try</span><span class="p">:</span>
+</span><span id="__span-17-23"><a id="__codelineno-17-23" name="__codelineno-17-23"></a>            <span class="k">yield</span> <span class="n">session</span>
+</span><span id="__span-17-24"><a id="__codelineno-17-24" name="__codelineno-17-24"></a>        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+</span><span id="__span-17-25"><a id="__codelineno-17-25" name="__codelineno-17-25"></a>            <span class="k">if</span> <span class="n">session</span><span class="o">.</span><span class="n">is_active</span><span class="p">:</span>
+</span><span id="__span-17-26"><a id="__codelineno-17-26" name="__codelineno-17-26"></a>                <span class="k">await</span> <span class="n">session</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span>
+</span><span id="__span-17-27"><a id="__codelineno-17-27" name="__codelineno-17-27"></a>            <span class="k">raise</span>
+</span></code></pre></div></td></tr></table></div>
+<h3 id="o-engine">O engine<a class="headerlink" href="#o-engine" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Linha 9:</strong> o <code>engine</code> é o "motor" de conexão com o banco. Ele é criado a partir do endereço que está no <code>.env</code>. O <code>echo=False</code> desliga a exibição dos comandos SQL no terminal. Se quiser ver o SQL que o SQLAlchemy gera, troque para <code>echo=True</code>.</li>
+</ul>
+<div class="admonition info">
+<p class="admonition-title">Criar o engine não cria o banco</p>
+<p>O <code>create_async_engine</code> só <strong>prepara</strong> a conexão. O arquivo <code>comprix.db</code> só é criado quando acontece a primeira conexão de verdade, e as tabelas só são criadas pelo <code>create_all</code>.</p>
+</div>
+<h3 id="criando-as-tabelas-automaticamente-o-lifespan">Criando as tabelas automaticamente: o <code>lifespan</code><a class="headerlink" href="#criando-as-tabelas-automaticamente-o-lifespan" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>Linhas 12 e 13:</strong> o <code>lifespan</code> é uma função que o FastAPI executa quando a API <strong>liga</strong> e quando ela <strong>desliga</strong>.</p>
+</li>
+<li>
+<p><strong>Linhas 14 e 15:</strong> quando a API liga, abrimos uma conexão e pedimos para o SQLAlchemy criar todas as tabelas que ainda não existem. O <code>run_sync</code> é necessário porque o <code>create_all</code> não é assíncrono, e ele faz a ponte entre os dois mundos.</p>
+</li>
+<li>
+<p><strong>Linha 16:</strong> o <code>yield</code> separa os dois momentos. Tudo o que vem antes roda quando a API liga, e tudo o que vem depois roda quando ela desliga.</p>
+</li>
+<li>
+<p><strong>Linha 17:</strong> quando a API desliga, o <code>dispose</code> fecha todas as conexões com o banco.</p>
+</li>
+</ul>
+<p>Com isso, quem baixar o projeto do GitHub não precisa criar o banco manualmente: ele é criado sozinho na primeira vez que a API for executada.</p>
+<div class="admonition warning">
+<p class="admonition-title">O <code>create_all</code> só cria, não altera</p>
+<p>Se uma tabela já existe, o <code>create_all</code> <strong>não mexe nela</strong>. Ou seja, se adicionarmos uma coluna nova em um model, ela não será criada no banco. Durante o desenvolvimento, podemos apagar o arquivo <code>comprix.db</code> e deixar a API criá-lo de novo. Quando o projeto tiver dados reais, vamos usar o <strong>Alembic</strong>, uma ferramenta feita para alterar tabelas sem perder os dados.</p>
+</div>
+<h3 id="a-sessao">A sessão<a class="headerlink" href="#a-sessao" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>Linhas 20 e 21:</strong> a função <code>get_session</code> abre uma <strong>sessão</strong>, que é por onde fazemos as operações no banco: salvar, buscar, alterar e apagar. O <code>async with</code> garante que a sessão seja fechada automaticamente quando a operação terminar.</p>
+</li>
+<li>
+<p><strong>Linha 21:</strong> o <code>expire_on_commit=False</code> mantém os dados dos objetos disponíveis depois de salvá-los. Sem ele, depois de um <code>commit</code>, acessar um campo como <code>usuario.id</code> exigiria uma nova consulta ao banco, o que não funciona bem no modo assíncrono.</p>
+</li>
+<li>
+<p><strong>Linhas 22 a 27:</strong> se acontecer algum erro durante a operação, o <code>rollback</code> desfaz tudo o que foi feito naquela sessão, para o banco não ficar com dados pela metade. Depois, o <code>raise</code> deixa o erro seguir adiante, para que ele apareça.</p>
+</li>
+<li>
+<p><strong>Linha 20:</strong> o comentário <code># pragma: no cover</code> avisa à ferramenta de cobertura de testes para ignorar essa função. Ela vai ser usada nas rotas, que vamos testar de outra forma.</p>
+</li>
+</ul>
+<h2 id="ligando-o-banco-na-api">Ligando o banco na API<a class="headerlink" href="#ligando-o-banco-na-api" title="Permanent link">&para;</a></h2>
+<p>Agora só falta avisar o FastAPI para usar o <code>lifespan</code>:</p>
+<div class="language-python highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">src/comprix/app.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-18-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-18-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-18-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-18-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-18-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-18-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-18-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-18-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-18-10">10</a></span>
+<span class="normal"><a href="#__codelineno-18-11">11</a></span>
+<span class="normal"><a href="#__codelineno-18-12">12</a></span>
+<span class="normal"><a href="#__codelineno-18-13">13</a></span>
+<span class="normal"><a href="#__codelineno-18-14">14</a></span>
+<span class="normal"><a href="#__codelineno-18-15">15</a></span>
+<span class="normal"><a href="#__codelineno-18-16">16</a></span>
+<span class="normal"><a href="#__codelineno-18-17">17</a></span>
+<span class="normal"><a href="#__codelineno-18-18">18</a></span>
+<span class="normal"><a href="#__codelineno-18-19">19</a></span>
+<span class="normal"><a href="#__codelineno-18-20">20</a></span>
+<span class="normal"><a href="#__codelineno-18-21">21</a></span>
+<span class="normal"><a href="#__codelineno-18-22">22</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">http</span><span class="w"> </span><span class="kn">import</span> <span class="n">HTTPStatus</span>
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3"></a>
+</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4"></a><span class="kn">from</span><span class="w"> </span><span class="nn">fastapi</span><span class="w"> </span><span class="kn">import</span> <span class="n">FastAPI</span>
+</span><span id="__span-18-5"><a id="__codelineno-18-5" name="__codelineno-18-5"></a><span class="kn">from</span><span class="w"> </span><span class="nn">fastapi.responses</span><span class="w"> </span><span class="kn">import</span> <span class="n">FileResponse</span>
+</span><span id="__span-18-6"><a id="__codelineno-18-6" name="__codelineno-18-6"></a>
+</span><span id="__span-18-7"><a id="__codelineno-18-7" name="__codelineno-18-7"></a><span class="hll"><span class="kn">from</span><span class="w"> </span><span class="nn">comprix.database</span><span class="w"> </span><span class="kn">import</span> <span class="n">lifespan</span>
+</span></span><span id="__span-18-8"><a id="__codelineno-18-8" name="__codelineno-18-8"></a><span class="kn">from</span><span class="w"> </span><span class="nn">comprix.schemas.app</span><span class="w"> </span><span class="kn">import</span> <span class="n">Message</span>
+</span><span id="__span-18-9"><a id="__codelineno-18-9" name="__codelineno-18-9"></a>
+</span><span id="__span-18-10"><a id="__codelineno-18-10" name="__codelineno-18-10"></a><span class="hll"><span class="n">app</span> <span class="o">=</span> <span class="n">FastAPI</span><span class="p">(</span><span class="n">lifespan</span><span class="o">=</span><span class="n">lifespan</span><span class="p">)</span>
+</span></span><span id="__span-18-11"><a id="__codelineno-18-11" name="__codelineno-18-11"></a>
+</span><span id="__span-18-12"><a id="__codelineno-18-12" name="__codelineno-18-12"></a><span class="n">FAVICON</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">parent</span> <span class="o">/</span> <span class="s1">'static'</span> <span class="o">/</span> <span class="s1">'comprix-icon.ico'</span>
+</span><span id="__span-18-13"><a id="__codelineno-18-13" name="__codelineno-18-13"></a>
+</span><span id="__span-18-14"><a id="__codelineno-18-14" name="__codelineno-18-14"></a>
+</span><span id="__span-18-15"><a id="__codelineno-18-15" name="__codelineno-18-15"></a><span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'/favicon.ico'</span><span class="p">,</span> <span class="n">include_in_schema</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span><span id="__span-18-16"><a id="__codelineno-18-16" name="__codelineno-18-16"></a><span class="k">def</span><span class="w"> </span><span class="nf">favicon</span><span class="p">():</span>
+</span><span id="__span-18-17"><a id="__codelineno-18-17" name="__codelineno-18-17"></a>    <span class="k">return</span> <span class="n">FileResponse</span><span class="p">(</span><span class="n">FAVICON</span><span class="p">)</span>
+</span><span id="__span-18-18"><a id="__codelineno-18-18" name="__codelineno-18-18"></a>
+</span><span id="__span-18-19"><a id="__codelineno-18-19" name="__codelineno-18-19"></a>
+</span><span id="__span-18-20"><a id="__codelineno-18-20" name="__codelineno-18-20"></a><span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span> <span class="n">status_code</span><span class="o">=</span><span class="n">HTTPStatus</span><span class="o">.</span><span class="n">OK</span><span class="p">,</span> <span class="n">response_model</span><span class="o">=</span><span class="n">Message</span><span class="p">)</span>
+</span><span id="__span-18-21"><a id="__codelineno-18-21" name="__codelineno-18-21"></a><span class="k">def</span><span class="w"> </span><span class="nf">read_root</span><span class="p">():</span>
+</span><span id="__span-18-22"><a id="__codelineno-18-22" name="__codelineno-18-22"></a>    <span class="k">return</span> <span class="p">{</span><span class="s1">'message'</span><span class="p">:</span> <span class="s1">'Bem-vindo ao Comprix'</span><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<ul>
+<li><strong>Linha 7:</strong> importamos o <code>lifespan</code> do <code>database.py</code>.</li>
+<li><strong>Linha 10:</strong> com o <code>lifespan=lifespan</code>, o FastAPI passa a executar essa função quando a API liga e desliga.</li>
+</ul>
+<p>Agora, rode a API:</p>
+<div class="language-console highlight"><span class="filename">Terminal</span><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="gp">$ </span>poetry<span class="w"> </span>serve
+</span></code></pre></div>
+<p>Ao iniciar, a API cria o arquivo <code>comprix.db</code> com a tabela <code>usuarios</code>. Para conferir, instale o terminal do SQLite e consulte o banco:</p>
+<div class="language-console highlight"><span class="filename">Terminal</span><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="gp">$ </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>sqlite3
+</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="gp">$ </span>sqlite3<span class="w"> </span>comprix.db<span class="w"> </span><span class="s2">".schema usuarios"</span>
+</span></code></pre></div>
+<p>O resultado mostra a estrutura da tabela, com todas as colunas que definimos no model:</p>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">usuarios</span><span class="w"> </span><span class="p">(</span>
+</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+</span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="w">    </span><span class="n">created_at</span><span class="w"> </span><span class="n">DATETIME</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+</span><span id="__span-21-4"><a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="w">    </span><span class="n">updated_at</span><span class="w"> </span><span class="n">DATETIME</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+</span><span id="__span-21-5"><a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a><span class="w">    </span><span class="n">nome</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+</span><span id="__span-21-6"><a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a><span class="w">    </span><span class="n">email</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+</span><span id="__span-21-7"><a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a><span class="w">    </span><span class="n">senha</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+</span><span id="__span-21-8"><a id="__codelineno-21-8" name="__codelineno-21-8" href="#__codelineno-21-8"></a><span class="w">    </span><span class="n">codigo</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+</span><span id="__span-21-9"><a id="__codelineno-21-9" name="__codelineno-21-9" href="#__codelineno-21-9"></a><span class="w">    </span><span class="n">primeiro_acesso</span><span class="w"> </span><span class="nb">BOOLEAN</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+</span><span id="__span-21-10"><a id="__codelineno-21-10" name="__codelineno-21-10" href="#__codelineno-21-10"></a><span class="w">    </span><span class="n">status</span><span class="w"> </span><span class="nb">BOOLEAN</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+</span><span id="__span-21-11"><a id="__codelineno-21-11" name="__codelineno-21-11" href="#__codelineno-21-11"></a><span class="w">    </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">id</span><span class="p">),</span>
+</span><span id="__span-21-12"><a id="__codelineno-21-12" name="__codelineno-21-12" href="#__codelineno-21-12"></a><span class="w">    </span><span class="k">UNIQUE</span><span class="w"> </span><span class="p">(</span><span class="n">email</span><span class="p">)</span>
+</span><span id="__span-21-13"><a id="__codelineno-21-13" name="__codelineno-21-13" href="#__codelineno-21-13"></a><span class="p">)</span>
+</span></code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Visualizando o banco no VS Code</p>
+<p>Se preferir ver os dados em forma de tabela, instale uma extensão como a <strong>SQLite Viewer</strong> no VS Code e clique no arquivo <code>comprix.db</code>.</p>
+</div>
+<h2 id="testando-o-banco">Testando o banco<a class="headerlink" href="#testando-o-banco" title="Permanent link">&para;</a></h2>
+<p>Por fim, vamos garantir que tudo funciona com um teste. Como o banco é assíncrono, os testes também precisam ser. Para isso, instalamos o <strong>pytest-asyncio</strong> como dependência de desenvolvimento:</p>
+<div class="language-console highlight"><span class="filename">Terminal</span><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="gp">$ </span>poetry<span class="w"> </span>add<span class="w"> </span>--group<span class="w"> </span>dev<span class="w"> </span>pytest-asyncio
+</span></code></pre></div>
+<p>Nos testes, usamos um banco <strong>em memória</strong> (<code>sqlite+aiosqlite:///:memory:</code>): ele é criado do zero a cada teste e desaparece ao final, sem tocar no <code>comprix.db</code>.</p>
+<h3 id="as-fixtures">As fixtures<a class="headerlink" href="#as-fixtures" title="Permanent link">&para;</a></h3>
+<p>Primeiro, criamos as <strong>fixtures</strong>: funções que preparam o que os testes precisam e que eles recebem como parâmetro. Vamos ter duas: uma que liga a API e outra que entrega uma sessão do banco.</p>
+<div class="language-python highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">tests/conftest.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-23-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-23-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-23-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-23-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-23-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-23-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-23-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-23-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-23-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-23-10">10</a></span>
+<span class="normal"><a href="#__codelineno-23-11">11</a></span>
+<span class="normal"><a href="#__codelineno-23-12">12</a></span>
+<span class="normal"><a href="#__codelineno-23-13">13</a></span>
+<span class="normal"><a href="#__codelineno-23-14">14</a></span>
+<span class="normal"><a href="#__codelineno-23-15">15</a></span>
+<span class="normal"><a href="#__codelineno-23-16">16</a></span>
+<span class="normal"><a href="#__codelineno-23-17">17</a></span>
+<span class="normal"><a href="#__codelineno-23-18">18</a></span>
+<span class="normal"><a href="#__codelineno-23-19">19</a></span>
+<span class="normal"><a href="#__codelineno-23-20">20</a></span>
+<span class="normal"><a href="#__codelineno-23-21">21</a></span>
+<span class="normal"><a href="#__codelineno-23-22">22</a></span>
+<span class="normal"><a href="#__codelineno-23-23">23</a></span>
+<span class="normal"><a href="#__codelineno-23-24">24</a></span>
+<span class="normal"><a href="#__codelineno-23-25">25</a></span>
+<span class="normal"><a href="#__codelineno-23-26">26</a></span>
+<span class="normal"><a href="#__codelineno-23-27">27</a></span>
+<span class="normal"><a href="#__codelineno-23-28">28</a></span>
+<span class="normal"><a href="#__codelineno-23-29">29</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">pytest</span>
+</span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">pytest_asyncio</span>
+</span><span id="__span-23-3"><a id="__codelineno-23-3" name="__codelineno-23-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">fastapi.testclient</span><span class="w"> </span><span class="kn">import</span> <span class="n">TestClient</span>
+</span><span id="__span-23-4"><a id="__codelineno-23-4" name="__codelineno-23-4"></a><span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy.ext.asyncio</span><span class="w"> </span><span class="kn">import</span> <span class="n">AsyncSession</span><span class="p">,</span> <span class="n">create_async_engine</span>
+</span><span id="__span-23-5"><a id="__codelineno-23-5" name="__codelineno-23-5"></a>
+</span><span id="__span-23-6"><a id="__codelineno-23-6" name="__codelineno-23-6"></a><span class="kn">from</span><span class="w"> </span><span class="nn">comprix.app</span><span class="w"> </span><span class="kn">import</span> <span class="n">app</span>
+</span><span id="__span-23-7"><a id="__codelineno-23-7" name="__codelineno-23-7"></a><span class="kn">from</span><span class="w"> </span><span class="nn">comprix.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Base</span>
+</span><span id="__span-23-8"><a id="__codelineno-23-8" name="__codelineno-23-8"></a>
+</span><span id="__span-23-9"><a id="__codelineno-23-9" name="__codelineno-23-9"></a>
+</span><span id="__span-23-10"><a id="__codelineno-23-10" name="__codelineno-23-10"></a><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+</span><span id="__span-23-11"><a id="__codelineno-23-11" name="__codelineno-23-11"></a><span class="k">def</span><span class="w"> </span><span class="nf">client</span><span class="p">(</span><span class="n">monkeypatch</span><span class="p">):</span>
+</span><span id="__span-23-12"><a id="__codelineno-23-12" name="__codelineno-23-12"></a>    <span class="n">engine</span> <span class="o">=</span> <span class="n">create_async_engine</span><span class="p">(</span><span class="s1">'sqlite+aiosqlite:///:memory:'</span><span class="p">)</span>
+</span><span id="__span-23-13"><a id="__codelineno-23-13" name="__codelineno-23-13"></a>    <span class="n">monkeypatch</span><span class="o">.</span><span class="n">setattr</span><span class="p">(</span><span class="s1">'comprix.database.engine'</span><span class="p">,</span> <span class="n">engine</span><span class="p">)</span>
+</span><span id="__span-23-14"><a id="__codelineno-23-14" name="__codelineno-23-14"></a>
+</span><span id="__span-23-15"><a id="__codelineno-23-15" name="__codelineno-23-15"></a>    <span class="k">with</span> <span class="n">TestClient</span><span class="p">(</span><span class="n">app</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+</span><span id="__span-23-16"><a id="__codelineno-23-16" name="__codelineno-23-16"></a>        <span class="k">yield</span> <span class="n">client</span>
+</span><span id="__span-23-17"><a id="__codelineno-23-17" name="__codelineno-23-17"></a>
+</span><span id="__span-23-18"><a id="__codelineno-23-18" name="__codelineno-23-18"></a>
+</span><span id="__span-23-19"><a id="__codelineno-23-19" name="__codelineno-23-19"></a><span class="nd">@pytest_asyncio</span><span class="o">.</span><span class="n">fixture</span>
+</span><span id="__span-23-20"><a id="__codelineno-23-20" name="__codelineno-23-20"></a><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">session</span><span class="p">():</span>
+</span><span id="__span-23-21"><a id="__codelineno-23-21" name="__codelineno-23-21"></a>    <span class="n">engine</span> <span class="o">=</span> <span class="n">create_async_engine</span><span class="p">(</span><span class="s1">'sqlite+aiosqlite:///:memory:'</span><span class="p">)</span>
+</span><span id="__span-23-22"><a id="__codelineno-23-22" name="__codelineno-23-22"></a>
+</span><span id="__span-23-23"><a id="__codelineno-23-23" name="__codelineno-23-23"></a>    <span class="k">async</span> <span class="k">with</span> <span class="n">engine</span><span class="o">.</span><span class="n">begin</span><span class="p">()</span> <span class="k">as</span> <span class="n">conn</span><span class="p">:</span>
+</span><span id="__span-23-24"><a id="__codelineno-23-24" name="__codelineno-23-24"></a>        <span class="k">await</span> <span class="n">conn</span><span class="o">.</span><span class="n">run_sync</span><span class="p">(</span><span class="n">Base</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">create_all</span><span class="p">)</span>
+</span><span id="__span-23-25"><a id="__codelineno-23-25" name="__codelineno-23-25"></a>
+</span><span id="__span-23-26"><a id="__codelineno-23-26" name="__codelineno-23-26"></a>    <span class="k">async</span> <span class="k">with</span> <span class="n">AsyncSession</span><span class="p">(</span><span class="n">engine</span><span class="p">,</span> <span class="n">expire_on_commit</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="k">as</span> <span class="n">session</span><span class="p">:</span>
+</span><span id="__span-23-27"><a id="__codelineno-23-27" name="__codelineno-23-27"></a>        <span class="k">yield</span> <span class="n">session</span>
+</span><span id="__span-23-28"><a id="__codelineno-23-28" name="__codelineno-23-28"></a>
+</span><span id="__span-23-29"><a id="__codelineno-23-29" name="__codelineno-23-29"></a>    <span class="k">await</span> <span class="n">engine</span><span class="o">.</span><span class="n">dispose</span><span class="p">()</span>
+</span></code></pre></div></td></tr></table></div>
+<h4 id="a-fixture-client">A fixture <code>client</code><a class="headerlink" href="#a-fixture-client" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Linha 12:</strong> criamos um engine que aponta para um banco em memória.</li>
+<li><strong>Linha 13:</strong> o <code>monkeypatch.setattr</code> troca, <strong>só durante o teste</strong>, o <code>engine</code> do <code>database.py</code> por esse engine em memória. Assim, os testes nunca criam nem alteram o <code>comprix.db</code> de verdade. Ao final do teste, o <code>monkeypatch</code> desfaz a troca sozinho.</li>
+<li><strong>Linhas 15 e 16:</strong> ligamos a API com o <code>TestClient</code> e a entregamos ao teste com o <code>yield</code>.</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">O <code>with</code> é obrigatório</p>
+<p>O <code>TestClient</code> só executa o <code>lifespan</code> quando é usado com <code>with</code>. Sem ele, a API responde normalmente, mas as tabelas não são criadas, e o código do <code>lifespan</code> nunca é testado.</p>
+</div>
+<h4 id="a-fixture-session">A fixture <code>session</code><a class="headerlink" href="#a-fixture-session" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Linha 19:</strong> o <code>@pytest_asyncio.fixture</code> transforma a função em uma fixture assíncrona.</li>
+<li><strong>Linhas 21 a 24:</strong> criamos o banco em memória e as tabelas, do mesmo jeito que o <code>lifespan</code> faz.</li>
+<li><strong>Linhas 26 e 27:</strong> abrimos uma sessão e a entregamos ao teste com o <code>yield</code>.</li>
+<li><strong>Linha 29:</strong> depois do teste, fechamos as conexões, e o banco em memória desaparece.</li>
+</ul>
+<h3 id="testando-a-api">Testando a API<a class="headerlink" href="#testando-a-api" title="Permanent link">&para;</a></h3>
+<p>Com a fixture <code>client</code>, os testes da API ficam simples. Além da rota principal, testamos também a rota do favicon:</p>
+<div class="language-python highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">tests/test_app.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-24-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-24-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-24-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-24-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-24-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-24-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-24-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-24-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-24-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-24-10">10</a></span>
+<span class="normal"><a href="#__codelineno-24-11">11</a></span>
+<span class="normal"><a href="#__codelineno-24-12">12</a></span>
+<span class="normal"><a href="#__codelineno-24-13">13</a></span>
+<span class="normal"><a href="#__codelineno-24-14">14</a></span>
+<span class="normal"><a href="#__codelineno-24-15">15</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">http</span><span class="w"> </span><span class="kn">import</span> <span class="n">HTTPStatus</span>
+</span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2"></a>
+</span><span id="__span-24-3"><a id="__codelineno-24-3" name="__codelineno-24-3"></a>
+</span><span id="__span-24-4"><a id="__codelineno-24-4" name="__codelineno-24-4"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_root_deve_retornar_ok_e_mensagem</span><span class="p">(</span><span class="n">client</span><span class="p">):</span>
+</span><span id="__span-24-5"><a id="__codelineno-24-5" name="__codelineno-24-5"></a>    <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'/'</span><span class="p">)</span>
+</span><span id="__span-24-6"><a id="__codelineno-24-6" name="__codelineno-24-6"></a>
+</span><span id="__span-24-7"><a id="__codelineno-24-7" name="__codelineno-24-7"></a>    <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="n">HTTPStatus</span><span class="o">.</span><span class="n">OK</span>
+</span><span id="__span-24-8"><a id="__codelineno-24-8" name="__codelineno-24-8"></a>    <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span> <span class="o">==</span> <span class="p">{</span><span class="s1">'message'</span><span class="p">:</span> <span class="s1">'Bem-vindo ao Comprix'</span><span class="p">}</span>
+</span><span id="__span-24-9"><a id="__codelineno-24-9" name="__codelineno-24-9"></a>
+</span><span id="__span-24-10"><a id="__codelineno-24-10" name="__codelineno-24-10"></a>
+</span><span id="__span-24-11"><a id="__codelineno-24-11" name="__codelineno-24-11"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_favicon_deve_retornar_o_icone</span><span class="p">(</span><span class="n">client</span><span class="p">):</span>
+</span><span id="__span-24-12"><a id="__codelineno-24-12" name="__codelineno-24-12"></a>    <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'/favicon.ico'</span><span class="p">)</span>
+</span><span id="__span-24-13"><a id="__codelineno-24-13" name="__codelineno-24-13"></a>
+</span><span id="__span-24-14"><a id="__codelineno-24-14" name="__codelineno-24-14"></a>    <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="n">HTTPStatus</span><span class="o">.</span><span class="n">OK</span>
+</span><span id="__span-24-15"><a id="__codelineno-24-15" name="__codelineno-24-15"></a>    <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s1">'content-type'</span><span class="p">]</span> <span class="o">==</span> <span class="s1">'image/vnd.microsoft.icon'</span>
+</span></code></pre></div></td></tr></table></div>
+<ul>
+<li><strong>Linhas 4 a 8:</strong> a rota <code>/</code> deve responder com o código <strong>200</strong> e a mensagem de boas-vindas.</li>
+<li><strong>Linhas 11 a 15:</strong> a rota <code>/favicon.ico</code> deve responder com o código <strong>200</strong> e com o tipo de arquivo de um ícone (<code>image/vnd.microsoft.icon</code>).</li>
+</ul>
+<p>Repare que os testes recebem <code>client</code> como parâmetro: o pytest encontra a fixture com esse nome no <code>conftest.py</code> e a entrega automaticamente.</p>
+<h3 id="testando-o-banco_1">Testando o banco<a class="headerlink" href="#testando-o-banco_1" title="Permanent link">&para;</a></h3>
+<p>E então o teste do banco de dados:</p>
+<div class="language-python highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">tests/test_db.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-25-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-25-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-25-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-25-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-25-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-25-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-25-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-25-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-25-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-25-10">10</a></span>
+<span class="normal"><a href="#__codelineno-25-11">11</a></span>
+<span class="normal"><a href="#__codelineno-25-12">12</a></span>
+<span class="normal"><a href="#__codelineno-25-13">13</a></span>
+<span class="normal"><a href="#__codelineno-25-14">14</a></span>
+<span class="normal"><a href="#__codelineno-25-15">15</a></span>
+<span class="normal"><a href="#__codelineno-25-16">16</a></span>
+<span class="normal"><a href="#__codelineno-25-17">17</a></span>
+<span class="normal"><a href="#__codelineno-25-18">18</a></span>
+<span class="normal"><a href="#__codelineno-25-19">19</a></span>
+<span class="normal"><a href="#__codelineno-25-20">20</a></span>
+<span class="normal"><a href="#__codelineno-25-21">21</a></span>
+<span class="normal"><a href="#__codelineno-25-22">22</a></span>
+<span class="normal"><a href="#__codelineno-25-23">23</a></span>
+<span class="normal"><a href="#__codelineno-25-24">24</a></span>
+<span class="normal"><a href="#__codelineno-25-25">25</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">pytest</span>
+</span><span id="__span-25-2"><a id="__codelineno-25-2" name="__codelineno-25-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy</span><span class="w"> </span><span class="kn">import</span> <span class="n">select</span>
+</span><span id="__span-25-3"><a id="__codelineno-25-3" name="__codelineno-25-3"></a>
+</span><span id="__span-25-4"><a id="__codelineno-25-4" name="__codelineno-25-4"></a><span class="kn">from</span><span class="w"> </span><span class="nn">comprix.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Usuarios</span>
+</span><span id="__span-25-5"><a id="__codelineno-25-5" name="__codelineno-25-5"></a>
+</span><span id="__span-25-6"><a id="__codelineno-25-6" name="__codelineno-25-6"></a>
+</span><span id="__span-25-7"><a id="__codelineno-25-7" name="__codelineno-25-7"></a><span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">asyncio</span>
+</span><span id="__span-25-8"><a id="__codelineno-25-8" name="__codelineno-25-8"></a><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">test_criar_usuario</span><span class="p">(</span><span class="n">session</span><span class="p">):</span>
+</span><span id="__span-25-9"><a id="__codelineno-25-9" name="__codelineno-25-9"></a>    <span class="n">usuario</span> <span class="o">=</span> <span class="n">Usuarios</span><span class="p">(</span>
+</span><span id="__span-25-10"><a id="__codelineno-25-10" name="__codelineno-25-10"></a>        <span class="n">nome</span><span class="o">=</span><span class="s1">'Admin'</span><span class="p">,</span>
+</span><span id="__span-25-11"><a id="__codelineno-25-11" name="__codelineno-25-11"></a>        <span class="n">email</span><span class="o">=</span><span class="s1">'admin@comprix.com'</span><span class="p">,</span>
+</span><span id="__span-25-12"><a id="__codelineno-25-12" name="__codelineno-25-12"></a>        <span class="n">senha</span><span class="o">=</span><span class="s1">'hash-da-senha'</span><span class="p">,</span>
+</span><span id="__span-25-13"><a id="__codelineno-25-13" name="__codelineno-25-13"></a>        <span class="n">codigo</span><span class="o">=</span><span class="s1">'123456'</span><span class="p">,</span>
+</span><span id="__span-25-14"><a id="__codelineno-25-14" name="__codelineno-25-14"></a>    <span class="p">)</span>
+</span><span id="__span-25-15"><a id="__codelineno-25-15" name="__codelineno-25-15"></a>
+</span><span id="__span-25-16"><a id="__codelineno-25-16" name="__codelineno-25-16"></a>    <span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">usuario</span><span class="p">)</span>
+</span><span id="__span-25-17"><a id="__codelineno-25-17" name="__codelineno-25-17"></a>    <span class="k">await</span> <span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+</span><span id="__span-25-18"><a id="__codelineno-25-18" name="__codelineno-25-18"></a>
+</span><span id="__span-25-19"><a id="__codelineno-25-19" name="__codelineno-25-19"></a>    <span class="n">resultado</span> <span class="o">=</span> <span class="k">await</span> <span class="n">session</span><span class="o">.</span><span class="n">scalar</span><span class="p">(</span>
+</span><span id="__span-25-20"><a id="__codelineno-25-20" name="__codelineno-25-20"></a>        <span class="n">select</span><span class="p">(</span><span class="n">Usuarios</span><span class="p">)</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">Usuarios</span><span class="o">.</span><span class="n">email</span> <span class="o">==</span> <span class="s1">'paulo@email.com'</span><span class="p">)</span>
+</span><span id="__span-25-21"><a id="__codelineno-25-21" name="__codelineno-25-21"></a>    <span class="p">)</span>
+</span><span id="__span-25-22"><a id="__codelineno-25-22" name="__codelineno-25-22"></a>
+</span><span id="__span-25-23"><a id="__codelineno-25-23" name="__codelineno-25-23"></a>    <span class="k">assert</span> <span class="n">resultado</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="mi">1</span>
+</span><span id="__span-25-24"><a id="__codelineno-25-24" name="__codelineno-25-24"></a>    <span class="k">assert</span> <span class="n">resultado</span><span class="o">.</span><span class="n">primeiro_acesso</span> <span class="ow">is</span> <span class="kc">True</span>
+</span><span id="__span-25-25"><a id="__codelineno-25-25" name="__codelineno-25-25"></a>    <span class="k">assert</span> <span class="n">resultado</span><span class="o">.</span><span class="n">status</span> <span class="ow">is</span> <span class="kc">True</span>
+</span></code></pre></div></td></tr></table></div>
+<ul>
+<li><strong>Linha 7:</strong> o <code>@pytest.mark.asyncio</code> avisa ao pytest que o teste é assíncrono.</li>
+<li><strong>Linhas 9 a 14:</strong> criamos um usuário informando só os campos obrigatórios.</li>
+<li><strong>Linhas 16 e 17:</strong> adicionamos o usuário na sessão e confirmamos a gravação com o <code>commit</code>.</li>
+<li><strong>Linhas 19 a 21:</strong> buscamos no banco o usuário com aquele e-mail.</li>
+<li><strong>Linhas 23 a 25:</strong> verificamos que o banco gerou o <code>id</code> e que o <code>primeiro_acesso</code> e o <code>status</code> receberam os valores padrão.</li>
+</ul>
+<h3 id="configurando-a-cobertura-de-testes">Configurando a cobertura de testes<a class="headerlink" href="#configurando-a-cobertura-de-testes" title="Permanent link">&para;</a></h3>
+<p>O nosso <code>poetry test</code> mede a <strong>cobertura</strong>: quantas linhas do código foram executadas pelos testes. Mas há um detalhe: no modo assíncrono, o SQLAlchemy executa parte do trabalho dentro de um <strong>greenlet</strong>, e a ferramenta de cobertura não acompanha esse caminho por padrão. Sem uma configuração extra, a linha do <code>create_all</code> aparece como não testada, mesmo sendo executada.</p>
+<p>Para resolver, acrescente no <code>pyproject.toml</code>:</p>
+<div class="language-toml highlight"><span class="filename">pyproject.toml</span><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="k">[tool.coverage.run]</span>
+</span><span id="__span-26-2"><a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="n">concurrency</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s1">'thread'</span><span class="p">,</span><span class="w"> </span><span class="s1">'greenlet'</span><span class="p">]</span>
+</span><span id="__span-26-3"><a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="n">core</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'ctrace'</span>
+</span></code></pre></div>
+<ul>
+<li><strong><code>concurrency</code>:</strong> avisa ao coverage que o código usa <strong>threads</strong> (o <code>TestClient</code> roda a API em uma thread separada) e <strong>greenlets</strong> (usados pelo SQLAlchemy assíncrono).</li>
+<li><strong><code>core = 'ctrace'</code>:</strong> a partir do Python 3.14, o coverage usa por padrão um modo de rastreamento que não suporta o <code>--cov-context=test</code> do nosso projeto, e mostra um aviso a cada execução. Com essa linha, ele volta ao modo tradicional.</li>
+</ul>
+<p>Com tudo configurado, vamos ver o resultado no final desta página.</p>
+<h2 id="estrutura-do-projeto">Estrutura do projeto<a class="headerlink" href="#estrutura-do-projeto" title="Permanent link">&para;</a></h2>
+<p>Ao final desta etapa, o projeto fica assim:</p>
+<div class="language-text highlight"><span class="filename">Estrutura do projeto</span><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="hll">├── .env
+</span></span><span id="__span-27-2"><a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="hll">├── .env.example
+</span></span><span id="__span-27-3"><a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a><span class="hll">├── comprix.db
+</span></span><span id="__span-27-4"><a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a>├── pyproject.toml
+</span><span id="__span-27-5"><a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a>├── src
+</span><span id="__span-27-6"><a id="__codelineno-27-6" name="__codelineno-27-6" href="#__codelineno-27-6"></a>│   └── comprix
+</span><span id="__span-27-7"><a id="__codelineno-27-7" name="__codelineno-27-7" href="#__codelineno-27-7"></a><span class="hll">│       ├── models
+</span></span><span id="__span-27-8"><a id="__codelineno-27-8" name="__codelineno-27-8" href="#__codelineno-27-8"></a><span class="hll">│       │   ├── __init__.py
+</span></span><span id="__span-27-9"><a id="__codelineno-27-9" name="__codelineno-27-9" href="#__codelineno-27-9"></a><span class="hll">│       │   ├── base.py
+</span></span><span id="__span-27-10"><a id="__codelineno-27-10" name="__codelineno-27-10" href="#__codelineno-27-10"></a><span class="hll">│       │   └── usuarios.py
+</span></span><span id="__span-27-11"><a id="__codelineno-27-11" name="__codelineno-27-11" href="#__codelineno-27-11"></a>│       ├── schemas
+</span><span id="__span-27-12"><a id="__codelineno-27-12" name="__codelineno-27-12" href="#__codelineno-27-12"></a>│       │   └── app.py
+</span><span id="__span-27-13"><a id="__codelineno-27-13" name="__codelineno-27-13" href="#__codelineno-27-13"></a>│       ├── static
+</span><span id="__span-27-14"><a id="__codelineno-27-14" name="__codelineno-27-14" href="#__codelineno-27-14"></a>│       │   └── comprix-icon.ico
+</span><span id="__span-27-15"><a id="__codelineno-27-15" name="__codelineno-27-15" href="#__codelineno-27-15"></a><span class="hll">│       ├── database.py
+</span></span><span id="__span-27-16"><a id="__codelineno-27-16" name="__codelineno-27-16" href="#__codelineno-27-16"></a><span class="hll">│       ├── settings.py
+</span></span><span id="__span-27-17"><a id="__codelineno-27-17" name="__codelineno-27-17" href="#__codelineno-27-17"></a>│       ├── __init__.py
+</span><span id="__span-27-18"><a id="__codelineno-27-18" name="__codelineno-27-18" href="#__codelineno-27-18"></a>│       └── app.py
+</span><span id="__span-27-19"><a id="__codelineno-27-19" name="__codelineno-27-19" href="#__codelineno-27-19"></a>└── tests
+</span><span id="__span-27-20"><a id="__codelineno-27-20" name="__codelineno-27-20" href="#__codelineno-27-20"></a><span class="hll">    ├── conftest.py
+</span></span><span id="__span-27-21"><a id="__codelineno-27-21" name="__codelineno-27-21" href="#__codelineno-27-21"></a><span class="hll">    ├── test_db.py
+</span></span><span id="__span-27-22"><a id="__codelineno-27-22" name="__codelineno-27-22" href="#__codelineno-27-22"></a>    └── test_app.py
+</span></code></pre></div>
+<h2 id="rodando-os-testes">Rodando os testes<a class="headerlink" href="#rodando-os-testes" title="Permanent link">&para;</a></h2>
+<p>Com o projeto completo, rode os testes:</p>
+<div class="language-console highlight"><span class="filename">Terminal</span><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="gp">$ </span>poetry<span class="w"> </span><span class="nb">test</span>
+</span></code></pre></div>
+<p>O <code>poetry test</code> executa três etapas em sequência: o <strong>ruff</strong>, para verificar o código, o <strong>pytest</strong>, para rodar os testes e medir a cobertura, e o <strong>coverage</strong>, para gerar o relatório em HTML. O resultado deve ser parecido com este:</p>
+<div class="language-console highlight"><span class="filename">Terminal</span><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="go">Poe =&gt; ruff check</span>
+</span><span id="__span-29-2"><a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a><span class="go">All checks passed!</span>
+</span><span id="__span-29-3"><a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a><span class="go">Poe =&gt; pytest -s -x -vv</span>
+</span><span id="__span-29-4"><a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a><span class="go">============================= test session starts ==============================</span>
+</span><span id="__span-29-5"><a id="__codelineno-29-5" name="__codelineno-29-5" href="#__codelineno-29-5"></a><span class="go">collected 3 items</span>
+</span><span id="__span-29-6"><a id="__codelineno-29-6" name="__codelineno-29-6" href="#__codelineno-29-6"></a>
+</span><span id="__span-29-7"><a id="__codelineno-29-7" name="__codelineno-29-7" href="#__codelineno-29-7"></a><span class="go">tests/test_app.py::test_root_deve_retornar_ok_e_mensagem PASSED</span>
+</span><span id="__span-29-8"><a id="__codelineno-29-8" name="__codelineno-29-8" href="#__codelineno-29-8"></a><span class="go">tests/test_app.py::test_favicon_deve_retornar_o_icone PASSED</span>
+</span><span id="__span-29-9"><a id="__codelineno-29-9" name="__codelineno-29-9" href="#__codelineno-29-9"></a><span class="go">tests/test_db.py::test_criar_usuario PASSED</span>
+</span><span id="__span-29-10"><a id="__codelineno-29-10" name="__codelineno-29-10" href="#__codelineno-29-10"></a>
+</span><span id="__span-29-11"><a id="__codelineno-29-11" name="__codelineno-29-11" href="#__codelineno-29-11"></a><span class="go">================================ tests coverage ================================</span>
+</span><span id="__span-29-12"><a id="__codelineno-29-12" name="__codelineno-29-12" href="#__codelineno-29-12"></a>
+</span><span id="__span-29-13"><a id="__codelineno-29-13" name="__codelineno-29-13" href="#__codelineno-29-13"></a><span class="go">Name                             Stmts   Miss  Cover</span>
+</span><span id="__span-29-14"><a id="__codelineno-29-14" name="__codelineno-29-14" href="#__codelineno-29-14"></a><span class="go">----------------------------------------------------</span>
+</span><span id="__span-29-15"><a id="__codelineno-29-15" name="__codelineno-29-15" href="#__codelineno-29-15"></a><span class="go">src/comprix/__init__.py              0      0   100%</span>
+</span><span id="__span-29-16"><a id="__codelineno-29-16" name="__codelineno-29-16" href="#__codelineno-29-16"></a><span class="go">src/comprix/app.py                  14      0   100%</span>
+</span><span id="__span-29-17"><a id="__codelineno-29-17" name="__codelineno-29-17" href="#__codelineno-29-17"></a><span class="go">src/comprix/database.py             12      0   100%</span>
+</span><span id="__span-29-18"><a id="__codelineno-29-18" name="__codelineno-29-18" href="#__codelineno-29-18"></a><span class="go">src/comprix/models/__init__.py       3      0   100%</span>
+</span><span id="__span-29-19"><a id="__codelineno-29-19" name="__codelineno-29-19" href="#__codelineno-29-19"></a><span class="go">src/comprix/models/base.py          11      0   100%</span>
+</span><span id="__span-29-20"><a id="__codelineno-29-20" name="__codelineno-29-20" href="#__codelineno-29-20"></a><span class="go">src/comprix/models/usuarios.py      12      0   100%</span>
+</span><span id="__span-29-21"><a id="__codelineno-29-21" name="__codelineno-29-21" href="#__codelineno-29-21"></a><span class="go">src/comprix/schemas/app.py           2      0   100%</span>
+</span><span id="__span-29-22"><a id="__codelineno-29-22" name="__codelineno-29-22" href="#__codelineno-29-22"></a><span class="go">src/comprix/settings.py              4      0   100%</span>
+</span><span id="__span-29-23"><a id="__codelineno-29-23" name="__codelineno-29-23" href="#__codelineno-29-23"></a><span class="go">----------------------------------------------------</span>
+</span><span id="__span-29-24"><a id="__codelineno-29-24" name="__codelineno-29-24" href="#__codelineno-29-24"></a><span class="go">TOTAL                               58      0   100%</span>
+</span><span id="__span-29-25"><a id="__codelineno-29-25" name="__codelineno-29-25" href="#__codelineno-29-25"></a><span class="go">============================== 3 passed in 0.51s ===============================</span>
+</span><span id="__span-29-26"><a id="__codelineno-29-26" name="__codelineno-29-26" href="#__codelineno-29-26"></a><span class="go">Poe =&gt; coverage html --show-contexts</span>
+</span><span id="__span-29-27"><a id="__codelineno-29-27" name="__codelineno-29-27" href="#__codelineno-29-27"></a><span class="go">Wrote HTML report to htmlcov/index.html</span>
+</span></code></pre></div>
+<p>Vamos entender o que o relatório mostra:</p>
+<table>
+<thead>
+<tr>
+<th>Coluna</th>
+<th>Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Name</strong></td>
+<td>O arquivo analisado</td>
+</tr>
+<tr>
+<td><strong>Stmts</strong></td>
+<td>Quantas instruções o arquivo tem</td>
+</tr>
+<tr>
+<td><strong>Miss</strong></td>
+<td>Quantas instruções <strong>não</strong> foram executadas pelos testes</td>
+</tr>
+<tr>
+<td><strong>Cover</strong></td>
+<td>A porcentagem do arquivo coberta pelos testes</td>
+</tr>
+</tbody>
+</table>
+<p>Os três testes passaram (<strong>PASSED</strong>), e todos os arquivos estão com <strong>100%</strong> de cobertura: cada linha do nosso código foi executada por pelo menos um teste.</p>
+<h2 id="o-relatorio-em-html">O relatório em HTML<a class="headerlink" href="#o-relatorio-em-html" title="Permanent link">&para;</a></h2>
+<p>A última linha do resultado mostra que o coverage também gerou um relatório em HTML, na pasta <code>htmlcov</code>. Ele mostra as mesmas informações do terminal, mas de forma visual: dá para clicar em cada arquivo e ver o código com as linhas coloridas.</p>
+<ul>
+<li><span class="twemoji" style="color: #2fb985"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 3v18h18V3"/></svg></span> <strong>Verde:</strong> linha executada pelos testes.</li>
+<li><span class="twemoji" style="color: #d93025"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 3v18h18V3"/></svg></span> <strong>Vermelho:</strong> linha que nenhum teste executou.</li>
+</ul>
+<p>Para abrir o relatório no navegador do Windows direto pelo terminal do WSL, rode:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Google Chrome</label><label for="__tabbed_1_2">Firefox</label><label for="__tabbed_1_3">Microsoft Edge</label><label for="__tabbed_1_4">Navegador padrão</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-console highlight"><span class="filename">Terminal</span><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="gp">$ </span><span class="s2">"/mnt/c/Program Files/Google/Chrome/Application/chrome.exe"</span><span class="w"> </span><span class="s2">"</span><span class="k">$(</span>wslpath<span class="w"> </span>-w<span class="w"> </span>htmlcov/index.html<span class="k">)</span><span class="s2">"</span>
+</span></code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="language-console highlight"><span class="filename">Terminal</span><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="gp">$ </span><span class="s2">"/mnt/c/Program Files/Mozilla Firefox/firefox.exe"</span><span class="w"> </span><span class="s2">"</span><span class="k">$(</span>wslpath<span class="w"> </span>-w<span class="w"> </span>htmlcov/index.html<span class="k">)</span><span class="s2">"</span>
+</span></code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="language-console highlight"><span class="filename">Terminal</span><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="gp">$ </span><span class="s2">"/mnt/c/Program Files (x86)/Microsoft/Edge/Application/msedge.exe"</span><span class="w"> </span><span class="s2">"</span><span class="k">$(</span>wslpath<span class="w"> </span>-w<span class="w"> </span>htmlcov/index.html<span class="k">)</span><span class="s2">"</span>
+</span></code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="language-console highlight"><span class="filename">Terminal</span><pre><span></span><code><span id="__span-33-1"><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="gp">$ </span>explorer.exe<span class="w"> </span><span class="s2">"</span><span class="k">$(</span>wslpath<span class="w"> </span>-w<span class="w"> </span>htmlcov/index.html<span class="k">)</span><span class="s2">"</span>
+</span></code></pre></div>
+</div>
+</div>
+</div>
+<p>Os comandos têm duas partes:</p>
+<ul>
+<li><strong>O caminho do navegador:</strong> o WSL enxerga o disco <code>C:</code> do Windows na pasta <code>/mnt/c</code>, então conseguimos executar o navegador instalado no Windows.</li>
+<li><strong>O <code>wslpath -w</code>:</strong> converte o caminho do arquivo do formato do Linux para o formato do Windows, que é o que o navegador entende.</li>
+</ul>
+<details class="info">
+<summary>O navegador não abriu?</summary>
+<p>O caminho de instalação pode variar de um computador para outro. Se aparecer <em>"No such file or directory"</em>, procure onde o navegador está instalado, por exemplo com <code>ls "/mnt/c/Program Files/"</code>, e ajuste o caminho do comando.</p>
+<p>Se você usa <strong>Linux</strong> sem o WSL, use <code>xdg-open htmlcov/index.html</code>. No <strong>macOS</strong>, use <code>open htmlcov/index.html</code>.</p>
+</details>
+<details class="info">
+<summary>Para que serve o <code>--show-contexts</code>?</summary>
+<p>No nosso <code>pyproject.toml</code>, o pytest roda com a opção <code>--cov-context=test</code>, que registra <strong>qual teste</strong> executou cada linha. O <code>--show-contexts</code> leva essa informação para o relatório HTML: ao lado de cada linha verde, aparece a lista dos testes que passaram por ela. Isso ajuda muito a entender quais testes protegem cada parte do código.</p>
+</details>
+<div class="admonition warning">
+<p class="admonition-title">O relatório não vai para o Git</p>
+<p>A pasta <code>htmlcov</code> e o arquivo <code>.coverage</code> são gerados de novo a cada execução dos testes, então não precisam ir para o GitHub. Adicione estas linhas ao <code>.gitignore</code>:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-34-1"><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>htmlcov/
+</span><span id="__span-34-2"><a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a>.coverage
+</span></code></pre></div>
+</div>
+<h2 id="parabens"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.53 1.45-1.08 1.08 1.6 1.6q.33.375.33.87c0 .495-.11.64-.33.86L11.5 9.47l1 1.08 3.63-3.61c.53-.59.79-1.24.79-1.94s-.26-1.36-.79-1.95zm-3.98 2.02L9.47 4.55l.61.56c.22.22.33.52.33.89s-.11.67-.33.89l-.61.56 1.08 1.08.56-.61c.53-.59.8-1.23.8-1.92 0-.72-.27-1.37-.8-1.97zM21 5.06c-.69 0-1.33.27-1.92.8l-5.63 5.64 1.08 1 5.58-5.56c.25-.25.55-.38.89-.38s.64.13.89.38l.61.61 1.03-1.08-.56-.61c-.59-.53-1.25-.8-1.97-.8M7 8 2 22l14-5zm12 3.06c-.7 0-1.34.27-1.94.8l-1.59 1.59 1.08 1.08 1.59-1.59c.25-.25.53-.38.86-.38s.63.13.88.38l1.62 1.59 1.05-1.03-1.6-1.64c-.59-.53-1.25-.8-1.95-.8"/></svg></span> Parabéns!<a class="headerlink" href="#parabens" title="Permanent link">&para;</a></h2>
+<div class="admonition success">
+<p class="admonition-title">O Comprix agora tem um banco de dados!</p>
+<p>Chegamos ao fim de uma etapa importante. Nesta seção, você:</p>
+<ul>
+<li><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2m-2 15-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8z"/></svg></span> instalou o <strong>SQLAlchemy</strong>, o <strong>aiosqlite</strong> e o <strong>pydantic-settings</strong>;</li>
+<li><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2m-2 15-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8z"/></svg></span> guardou as configurações com segurança no <code>.env</code>;</li>
+<li><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2m-2 15-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8z"/></svg></span> criou a <strong>base dos models</strong>, com datas no horário de São Paulo;</li>
+<li><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2m-2 15-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8z"/></svg></span> criou o primeiro model, a tabela de <strong>usuários</strong>;</li>
+<li><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2m-2 15-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8z"/></svg></span> conectou a API ao banco, que agora é <strong>criado automaticamente</strong> quando ela liga;</li>
+<li><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2m-2 15-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8z"/></svg></span> escreveu <strong>testes</strong> para a API e para o banco, com <strong>100% de cobertura</strong>.</li>
+</ul>
+<p>Com essa base pronta, o próximo passo é criar as <strong>rotas de usuários</strong>, para cadastrar, consultar, alterar e remover usuários pela API.</p>
+</div>
 
 
 
