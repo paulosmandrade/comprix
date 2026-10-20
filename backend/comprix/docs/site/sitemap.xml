@@ -27,4 +27,13 @@
       <url>
         <loc>https://www.example.com/configuracao/</loc>
       </url>
+      <url>
+        <loc>https://www.example.com/db/</loc>
+      </url>
+      <url>
+        <loc>https://www.example.com/schemas/</loc>
+      </url>
+      <url>
+        <loc>https://www.example.com/sqlite/</loc>
+      </url>
 </urlset>

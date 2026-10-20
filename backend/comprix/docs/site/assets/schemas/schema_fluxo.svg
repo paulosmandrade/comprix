@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 580" font-family="Inter, Segoe UI, Roboto, Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="seta" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4b5563"/>
+    </marker>
+    <marker id="seta-verde" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#188038"/>
+    </marker>
+    <marker id="seta-vermelha" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#d93025"/>
+    </marker>
+  </defs>
+
+  <!-- Fundo -->
+  <rect x="0" y="0" width="900" height="580" rx="16" fill="#ffffff"/>
+
+  <!-- Título -->
+  <text x="30" y="38" font-size="18" font-weight="700" fill="#1f2937">Como o schema atua em uma requisição</text>
+
+  <!-- ============ ERRO ============ -->
+  <rect x="460" y="60" width="200" height="60" rx="10" fill="#fde8e8" stroke="#d93025" stroke-width="2"/>
+  <text x="560" y="86" text-anchor="middle" font-size="14" font-weight="700" fill="#b3261e">422 · Dados inválidos</text>
+  <text x="560" y="105" text-anchor="middle" font-size="12" fill="#b3261e">erro detalhado por campo</text>
+
+  <!-- ============ LINHA 1 ============ -->
+  <!-- Cliente -->
+  <rect x="30" y="170" width="150" height="140" rx="12" fill="#f3f4f6" stroke="#6b7280" stroke-width="2"/>
+  <rect x="87" y="188" width="36" height="24" rx="3" fill="none" stroke="#4b5563" stroke-width="2"/>
+  <line x1="105" y1="212" x2="105" y2="219" stroke="#4b5563" stroke-width="2"/>
+  <line x1="95" y1="220" x2="115" y2="220" stroke="#4b5563" stroke-width="2"/>
+  <text x="105" y="248" text-anchor="middle" font-size="16" font-weight="700" fill="#1f2937">Cliente</text>
+  <text x="105" y="270" text-anchor="middle" font-size="12" fill="#4b5563">navegador, app</text>
+  <text x="105" y="287" text-anchor="middle" font-size="12" fill="#4b5563">ou frontend</text>
+
+  <!-- Requisição -->
+  <rect x="220" y="170" width="200" height="140" rx="12" fill="#fff8e1" stroke="#f29900" stroke-width="2"/>
+  <text x="320" y="197" text-anchor="middle" font-size="14" font-weight="700" fill="#1f2937">Requisição (JSON)</text>
+  <rect x="235" y="210" width="170" height="86" rx="6" fill="#fdf1cc"/>
+  <g font-family="JetBrains Mono, Fira Code, Consolas, monospace" font-size="12" fill="#1f2937">
+    <text x="247" y="231">{</text>
+    <text x="247" y="249" xml:space="preserve">  "nome": "arroz",</text>
+    <text x="247" y="267" xml:space="preserve">  "preco": "12.90"</text>
+    <text x="247" y="285">}</text>
+  </g>
+
+  <!-- Schema de entrada -->
+  <rect x="460" y="170" width="200" height="140" rx="12" fill="#e8f0fe" stroke="#1a73e8" stroke-width="2"/>
+  <text x="560" y="195" text-anchor="middle" font-size="14" font-weight="700" fill="#1f2937">Schema de entrada</text>
+  <text x="560" y="213" text-anchor="middle" font-size="12" font-family="JetBrains Mono, Fira Code, Consolas, monospace" fill="#1a73e8">ProdutoEntrada</text>
+  <g font-size="12" fill="#1f2937">
+    <text x="478" y="238"><tspan fill="#188038" font-weight="700">✓</tspan> tipos dos campos</text>
+    <text x="478" y="257"><tspan fill="#188038" font-weight="700">✓</tspan> campos obrigatórios</text>
+    <text x="478" y="276"><tspan fill="#188038" font-weight="700">✓</tspan> regras do Field</text>
+    <text x="478" y="295"><tspan fill="#188038" font-weight="700">✓</tspan> "12.90" → 12.9</text>
+  </g>
+
+  <!-- Rota -->
+  <rect x="695" y="170" width="180" height="140" rx="12" fill="#f3e8fd" stroke="#8430ce" stroke-width="2"/>
+  <text x="785" y="197" text-anchor="middle" font-size="14" font-weight="700" fill="#1f2937">Rota</text>
+  <g font-family="JetBrains Mono, Fira Code, Consolas, monospace" font-size="11" fill="#8430ce">
+    <text x="785" y="222" text-anchor="middle">@app.post('/produtos')</text>
+    <text x="785" y="240" text-anchor="middle">def criar_produto()</text>
+  </g>
+  <text x="785" y="270" text-anchor="middle" font-size="12" fill="#4b5563">regras de negócio</text>
+  <text x="785" y="288" text-anchor="middle" font-size="12" fill="#4b5563">e banco de dados</text>
+
+  <!-- ============ LINHA 2 ============ -->
+  <!-- Resposta -->
+  <rect x="440" y="400" width="220" height="130" rx="12" fill="#fff8e1" stroke="#f29900" stroke-width="2"/>
+  <text x="550" y="425" text-anchor="middle" font-size="14" font-weight="700" fill="#1f2937">Resposta (JSON)</text>
+  <rect x="455" y="436" width="190" height="86" rx="6" fill="#fdf1cc"/>
+  <g font-family="JetBrains Mono, Fira Code, Consolas, monospace" font-size="12" fill="#1f2937">
+    <text x="467" y="453">{</text>
+    <text x="467" y="469" xml:space="preserve">  "id": 1,</text>
+    <text x="467" y="485" xml:space="preserve">  "nome": "Arroz",</text>
+    <text x="467" y="501" xml:space="preserve">  "preco": 12.9</text>
+    <text x="467" y="517">}</text>
+  </g>
+
+  <!-- Schema de saída -->
+  <rect x="695" y="400" width="180" height="130" rx="12" fill="#e6f4ea" stroke="#188038" stroke-width="2"/>
+  <text x="785" y="425" text-anchor="middle" font-size="14" font-weight="700" fill="#1f2937">Schema de saída</text>
+  <text x="785" y="443" text-anchor="middle" font-size="12" font-family="JetBrains Mono, Fira Code, Consolas, monospace" fill="#188038">ProdutoPublico</text>
+  <g font-size="12" fill="#1f2937">
+    <text x="710" y="468"><tspan fill="#188038" font-weight="700">✓</tspan> só campos públicos</text>
+    <text x="710" y="488"><tspan fill="#188038" font-weight="700">✓</tspan> esconde dados internos</text>
+    <text x="710" y="508"><tspan fill="#188038" font-weight="700">✓</tspan> formato garantido</text>
+  </g>
+
+  <!-- ============ SETAS ============ -->
+  <!-- Cliente → Requisição -->
+  <line x1="180" y1="240" x2="216" y2="240" stroke="#4b5563" stroke-width="2" marker-end="url(#seta)"/>
+  <!-- Requisição → Schema de entrada -->
+  <line x1="420" y1="240" x2="456" y2="240" stroke="#4b5563" stroke-width="2" marker-end="url(#seta)"/>
+  <!-- Schema de entrada → Rota (válido) -->
+  <line x1="660" y1="240" x2="691" y2="240" stroke="#188038" stroke-width="2" marker-end="url(#seta-verde)"/>
+  <text x="677" y="230" text-anchor="middle" font-size="10" font-weight="700" fill="#188038">válido</text>
+
+  <!-- Schema de entrada → Erro (inválido) -->
+  <line x1="560" y1="170" x2="560" y2="124" stroke="#d93025" stroke-width="2" marker-end="url(#seta-vermelha)"/>
+  <text x="568" y="152" font-size="11" font-weight="700" fill="#d93025">inválido</text>
+  <!-- Erro → Cliente -->
+  <path d="M460,90 L105,90 L105,166" fill="none" stroke="#d93025" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#seta-vermelha)"/>
+  <text x="282" y="82" text-anchor="middle" font-size="12" fill="#d93025">a rota nem chega a ser executada</text>
+
+  <!-- Rota → Schema de saída -->
+  <line x1="785" y1="310" x2="785" y2="396" stroke="#4b5563" stroke-width="2" marker-end="url(#seta)"/>
+  <text x="793" y="358" font-size="11" fill="#4b5563">response_model</text>
+  <!-- Schema de saída → Resposta -->
+  <line x1="695" y1="465" x2="664" y2="465" stroke="#4b5563" stroke-width="2" marker-end="url(#seta)"/>
+  <!-- Resposta → Cliente -->
+  <path d="M440,465 L105,465 L105,314" fill="none" stroke="#188038" stroke-width="2" marker-end="url(#seta-verde)"/>
+  <text x="272" y="457" text-anchor="middle" font-size="12" font-weight="700" fill="#188038">200 · resposta validada</text>
+
+  <!-- Rodapé -->
+  <text x="450" y="560" text-anchor="middle" font-size="13" fill="#4b5563">O schema de entrada protege a rota. O schema de saída protege o cliente.</text>
+</svg>

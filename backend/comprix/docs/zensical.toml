@@ -19,7 +19,10 @@ nav = [
     { "FastAPI" = "bibliotecas/fastapi.md" },
     { "Pydantic" = "bibliotecas/pydantic.md" },
   ]},
-  { "App" = "app.md"}
+  { "App" = "app.md"},
+  { "Schemas" = "schemas.md" },
+  { "Banco de Dados" = "db.md" },
+  { "Sqlite" = "sqlite.md" },
 ]
 
 # extra_css = ["stylesheets/extra.css"]
