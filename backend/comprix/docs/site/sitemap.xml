@@ -31,6 +31,9 @@
         <loc>https://www.example.com/db/</loc>
       </url>
       <url>
+        <loc>https://www.example.com/migrations/</loc>
+      </url>
+      <url>
         <loc>https://www.example.com/schemas/</loc>
       </url>
       <url>

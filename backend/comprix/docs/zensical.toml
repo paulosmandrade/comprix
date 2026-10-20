@@ -23,6 +23,7 @@ nav = [
   { "Schemas" = "schemas.md" },
   { "Banco de Dados" = "db.md" },
   { "Sqlite - Models" = "sqlite.md" },
+  { "Migrations" = "migrations.md"}
 ]
 
 # extra_css = ["stylesheets/extra.css"]
