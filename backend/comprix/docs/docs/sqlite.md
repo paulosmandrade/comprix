@@ -632,6 +632,8 @@ Com tudo configurado, vamos ver o resultado no final desta página.
 
 Ao final desta etapa, o projeto fica assim:
 
+Observe que agora temos nosso banco de dados **comprix.db**, você pode abri-lo através de ferramentas gratuitas no mercado como DBeaver, TablePlus, Beekeeper Studio, entre outros.
+
 ``` title="Estrutura do projeto" hl_lines="1 2 3 7-10 15 16 20 21"
 ├── .env
 ├── .env.example

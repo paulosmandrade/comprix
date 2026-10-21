@@ -10,10 +10,16 @@
         <loc>https://www.example.com/bibliotecas/</loc>
       </url>
       <url>
+        <loc>https://www.example.com/bibliotecas/alembic/</loc>
+      </url>
+      <url>
         <loc>https://www.example.com/bibliotecas/estrutura/</loc>
       </url>
       <url>
         <loc>https://www.example.com/bibliotecas/fastapi/</loc>
+      </url>
+      <url>
+        <loc>https://www.example.com/bibliotecas/pwdlib/</loc>
       </url>
       <url>
         <loc>https://www.example.com/bibliotecas/pydantic/</loc>
@@ -25,6 +31,9 @@
         <loc>https://www.example.com/bibliotecas/ruff/</loc>
       </url>
       <url>
+        <loc>https://www.example.com/bibliotecas/slqalchemy/</loc>
+      </url>
+      <url>
         <loc>https://www.example.com/configuracao/</loc>
       </url>
       <url>
@@ -32,6 +41,12 @@
       </url>
       <url>
         <loc>https://www.example.com/migrations/</loc>
+      </url>
+      <url>
+        <loc>https://www.example.com/routers/</loc>
+      </url>
+      <url>
+        <loc>https://www.example.com/routers/usuarios/</loc>
       </url>
       <url>
         <loc>https://www.example.com/schemas/</loc>

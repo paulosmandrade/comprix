@@ -14,6 +14,8 @@
         <link rel="prev" href="../sqlite/">
       
       
+        <link rel="next" href="../routers/">
+      
       
         
       
@@ -285,6 +287,12 @@
       
         
       
+        
+      
+        
+      
+        
+      
     
     
     
@@ -369,6 +377,33 @@
   
   
     <li class="md-nav__item">
+      <a href="../bibliotecas/alembic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Alembic
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../bibliotecas/fastapi/" class="md-nav__link">
         
   
@@ -404,6 +439,60 @@
     
   
   Pydantic
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../bibliotecas/pwdlib/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Pwdlib
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../bibliotecas/slqalchemy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  SQLAlchemy
 
     
   </span>
@@ -640,9 +729,338 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#instalando-e-configurando-o-alembic" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Instalando e configurando o Alembic
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#estrutura-do-projeto" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Estrutura do projeto
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#diretorio-migrations" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Diretório <code>migrations</code>
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Diretório migrations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#readme" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>README</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scriptpymako" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>script.py.mako</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#envpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>env.py</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#versions" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>versions/</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comandos-mais-usados" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Comandos mais usados
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ajustando-o-arquivo-migrationsenvpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Ajustando o arquivo migrations/env.py
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ajustando o arquivo migrations&#x2f;env.py">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pre-requisitos" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Pré-requisitos
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arquivo-migrationsenvpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Arquivo <code>migrations/env.py</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#o-que-cada-parte-faz" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        O que cada parte faz
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testando-a-configuracao" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Testando a configuração
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#por-que-importar-usuarios-no-envpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Por que importar <code>usuarios</code> no <code>env.py</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nomeando-as-migracoes-em-ordem" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Nomeando as migrações em ordem
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Nomeando as migrações em ordem">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#opcao-1-numero-como-id-da-revisao" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Opção 1: número como ID da revisão
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#opcao-2-data-no-nome-do-arquivo-recomendada" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Opção 2: data no nome do arquivo (recomendada)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-ordem-real-das-migracoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        A ordem real das migrações
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conclusao" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Conclusão
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../routers/" class="md-nav__link ">
+              
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-layers" viewBox="0 0 24 24"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z"/><path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12"/><path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  Routers
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_9" id="__nav_9_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        
+          <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+            <label class="md-nav__title" for="__nav_9">
+              <span class="md-nav__icon md-icon"></span>
+              
+  
+  Routers
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../routers/usuarios/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-user-key" viewBox="0 0 24 24"><path d="M20 11v6M20 13h2M3 21v-2a4 4 0 0 1 4-4h6a4 4 0 0 1 2.072.578"/><circle cx="10" cy="7" r="4"/><circle cx="20" cy="19" r="2"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  Usuários
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+            </ul>
+          </nav>
+        
       
     </li>
   
@@ -706,6 +1124,233 @@
       </span>
     </span>
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#instalando-e-configurando-o-alembic" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Instalando e configurando o Alembic
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#estrutura-do-projeto" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Estrutura do projeto
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#diretorio-migrations" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Diretório <code>migrations</code>
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Diretório migrations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#readme" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>README</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scriptpymako" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>script.py.mako</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#envpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>env.py</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#versions" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>versions/</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comandos-mais-usados" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Comandos mais usados
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ajustando-o-arquivo-migrationsenvpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Ajustando o arquivo migrations/env.py
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ajustando o arquivo migrations&#x2f;env.py">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pre-requisitos" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Pré-requisitos
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arquivo-migrationsenvpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Arquivo <code>migrations/env.py</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#o-que-cada-parte-faz" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        O que cada parte faz
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testando-a-configuracao" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Testando a configuração
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#por-que-importar-usuarios-no-envpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Por que importar <code>usuarios</code> no <code>env.py</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nomeando-as-migracoes-em-ordem" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Nomeando as migrações em ordem
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Nomeando as migrações em ordem">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#opcao-1-numero-como-id-da-revisao" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Opção 1: número como ID da revisão
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#opcao-2-data-no-nome-do-arquivo-recomendada" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Opção 2: data no nome do arquivo (recomendada)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-ordem-real-das-migracoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        A ordem real das migrações
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conclusao" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Conclusão
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -783,6 +1428,235 @@
 <p class="admonition-title">Sempre revise a migração gerada</p>
 <p>O <code>--autogenerate</code> é muito útil, mas não é perfeito. Ele não consegue perceber, por exemplo, que uma coluna foi <strong>renomeada</strong>: para ele, parece que uma coluna foi apagada e outra foi criada, o que faria os dados</p>
 </div>
+<h2 id="instalando-e-configurando-o-alembic">Instalando e configurando o Alembic<a class="headerlink" href="#instalando-e-configurando-o-alembic" title="Permanent link">&para;</a></h2>
+<p>Abaixo o comando para adicionar a biblioteca do alembic em nosso projeto.</p>
+<div class="language-console highlight"><span class="filename">Terminal</span><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="gp">$ </span>poetry<span class="w"> </span>add<span class="w"> </span>alembic
+</span></code></pre></div>
+<p>Com o Alembic instalado no projeto, podemos começar a configuração. O comando de inicialização cria um diretório chamado <em><strong>migrations</strong></em> e um arquivo de configuração chamado <code>alembic.ini</code>:</p>
+<div class="language-console highlight"><span class="filename">Terminal</span><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="gp">$ </span>poetry<span class="w"> </span>run<span class="w"> </span>alembic<span class="w"> </span>init<span class="w"> </span>migrations
+</span></code></pre></div>
+<h2 id="estrutura-do-projeto">Estrutura do projeto<a class="headerlink" href="#estrutura-do-projeto" title="Permanent link">&para;</a></h2>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>comprix/
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>├── migrations/           # Migrações do banco de dados (Alembic)
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>│   ├── README
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>│   └── script.py.mako
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>├── src/
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>│   └── comprix/
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>│       ├── models/       # Modelos do banco de dados
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>│       │   ├── __init__.py
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>│       │   ├── base.py
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>│       │   └── usuarios.py
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>│       ├── schemas/      # Schemas de validação
+</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>│       │   └── app.py
+</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>│       ├── static/       # Arquivos estáticos
+</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>│       ├── __init__.py
+</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>│       ├── app.py        # Ponto de entrada da aplicação
+</span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>│       ├── database.py   # Conexão com o banco de dados
+</span><span id="__span-4-17"><a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>│       └── settings.py   # Configurações da aplicação
+</span><span id="__span-4-18"><a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>├── tests/                # Testes automatizados
+</span><span id="__span-4-19"><a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>│   ├── __init__.py
+</span><span id="__span-4-20"><a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>│   ├── conftest.py
+</span><span id="__span-4-21"><a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a>│   ├── test_app.py
+</span><span id="__span-4-22"><a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a>│   └── test_db.py
+</span><span id="__span-4-23"><a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a>├── .env.example          # Modelo das variáveis de ambiente
+</span><span id="__span-4-24"><a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a>└── alembic.ini           # Configuração do Alembic
+</span></code></pre></div>
+<h2 id="diretorio-migrations">Diretório <code>migrations</code><a class="headerlink" href="#diretorio-migrations" title="Permanent link">&para;</a></h2>
+<p>O diretório <code>migrations</code> é criado pelo comando <code>alembic init migrations</code>. Ele guarda tudo que o Alembic usa para versionar o banco de dados: cada mudança na estrutura das tabelas vira um arquivo de migração que pode ser aplicado (<code>upgrade</code>) ou desfeito (<code>downgrade</code>).</p>
+<h3 id="readme"><code>README</code><a class="headerlink" href="#readme" title="Permanent link">&para;</a></h3>
+<p>Um arquivo de texto curto gerado automaticamente pelo Alembic. Ele só informa qual template foi usado na criação do diretório e não interfere no funcionamento das migrações.</p>
+<h3 id="scriptpymako"><code>script.py.mako</code><a class="headerlink" href="#scriptpymako" title="Permanent link">&para;</a></h3>
+<p>É o <strong>modelo</strong> usado para gerar cada novo arquivo de migração. Sempre que rodamos <code>alembic revision</code>, o Alembic preenche esse template e cria um arquivo novo dentro de <code>versions/</code>, já com:</p>
+<ul>
+<li>o identificador da revisão e o da revisão anterior;</li>
+<li>a data de criação e a mensagem informada no comando;</li>
+<li>as funções <code>upgrade()</code> e <code>downgrade()</code>, onde ficam as alterações do banco.</li>
+</ul>
+<p>Só é preciso editar esse arquivo se quisermos mudar o formato padrão de todas as migrações futuras (por exemplo, adicionar um import que toda migração usa).</p>
+<h3 id="envpy"><code>env.py</code><a class="headerlink" href="#envpy" title="Permanent link">&para;</a></h3>
+<p>É o arquivo que o Alembic executa sempre que um comando é rodado. Ele faz a ligação entre o Alembic e o projeto:</p>
+<ul>
+<li>lê a URL de conexão com o banco de dados;</li>
+<li>importa os modelos (<code>target_metadata</code>) para que o Alembic compare as tabelas existentes com os modelos e gere migrações automaticamente com <code>--autogenerate</code>;</li>
+<li>define como as migrações são executadas, conectado ao banco (modo <em>online</em>) ou gerando apenas o SQL (modo <em>offline</em>).</li>
+</ul>
+<h3 id="versions"><code>versions/</code><a class="headerlink" href="#versions" title="Permanent link">&para;</a></h3>
+<p>Pasta onde ficam os arquivos de migração gerados. Cada arquivo representa uma alteração no banco, e juntos formam o histórico da estrutura do banco de dados, na ordem em que as mudanças foram feitas.</p>
+<h3 id="comandos-mais-usados">Comandos mais usados<a class="headerlink" href="#comandos-mais-usados" title="Permanent link">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># Criar uma nova migração a partir das mudanças nos modelos</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>alembic<span class="w"> </span>revision<span class="w"> </span>--autogenerate<span class="w"> </span>-m<span class="w"> </span><span class="s2">"descrição da mudança"</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="c1"># Aplicar todas as migrações pendentes</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>alembic<span class="w"> </span>upgrade<span class="w"> </span>head
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="c1"># Desfazer a última migração</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>alembic<span class="w"> </span>downgrade<span class="w"> </span>-1
+</span></code></pre></div>
+<h2 id="ajustando-o-arquivo-migrationsenvpy">Ajustando o arquivo migrations/env.py<a class="headerlink" href="#ajustando-o-arquivo-migrationsenvpy" title="Permanent link">&para;</a></h2>
+<p>1º Devemos importar as <strong>Settings</strong> do nosso arquivo <strong>settings.py</strong> e o <strong>BaseModel</strong> do pydantic dos nosso modelos.</p>
+<p>2º Definir o caminho da nossa base de dados pela URL do SQLAlchemy.</p>
+<p>3º No arquivo migrations/env.py, defina o target_metadata como Base.metadata.create_all. É a partir dele que o Alembic compara os modelos com o banco e gera as migrações automaticamente:</p>
+<p>O projeto usa SQLite com o driver assíncrono <strong>aiosqlite</strong>. O template padrão do Alembic é síncrono e não funciona com esse driver, por isso o <code>env.py</code> abaixo é baseado no template assíncrono (<code>alembic init -t async migrations</code>).</p>
+<h3 id="pre-requisitos">Pré-requisitos<a class="headerlink" href="#pre-requisitos" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Driver instalado:</li>
+</ul>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>pip<span class="w"> </span>install<span class="w"> </span>aiosqlite
+</span></code></pre></div>
+<ul>
+<li><code>DATABASE_URL</code> no <code>.env</code> usando o driver assíncrono:</li>
+</ul>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>DATABASE_URL="sqlite+aiosqlite:///comprix.db"
+</span></code></pre></div>
+<ul>
+<li>No <code>alembic.ini</code>, apontar para a pasta <code>src</code>, caso o projeto não esteja instalado no ambiente:</li>
+</ul>
+<div class="language-ini highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="na">prepend_sys_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">src</span>
+</span></code></pre></div>
+<h3 id="arquivo-migrationsenvpy">Arquivo <code>migrations/env.py</code><a class="headerlink" href="#arquivo-migrationsenvpy" title="Permanent link">&para;</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">asyncio</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">logging.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">fileConfig</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy</span><span class="w"> </span><span class="kn">import</span> <span class="n">pool</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy.engine</span><span class="w"> </span><span class="kn">import</span> <span class="n">Connection</span>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy.ext.asyncio</span><span class="w"> </span><span class="kn">import</span> <span class="n">async_engine_from_config</span>
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="kn">from</span><span class="w"> </span><span class="nn">alembic</span><span class="w"> </span><span class="kn">import</span> <span class="n">context</span>
+</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>
+</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="kn">from</span><span class="w"> </span><span class="nn">comprix.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">usuarios</span>  <span class="c1"># noqa: F401</span>
+</span><span id="__span-9-11"><a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="kn">from</span><span class="w"> </span><span class="nn">comprix.models.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">Base</span>
+</span><span id="__span-9-12"><a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="kn">from</span><span class="w"> </span><span class="nn">comprix.settings</span><span class="w"> </span><span class="kn">import</span> <span class="n">Settings</span>
+</span><span id="__span-9-13"><a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>
+</span><span id="__span-9-14"><a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a><span class="c1"># Objeto de configuração do Alembic, com acesso aos valores do alembic.ini</span>
+</span><span id="__span-9-15"><a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a><span class="n">config</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">config</span>
+</span><span id="__span-9-16"><a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a>
+</span><span id="__span-9-17"><a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a><span class="c1"># Usa a URL do banco definida no .env, em vez da que está no alembic.ini</span>
+</span><span id="__span-9-18"><a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a><span class="n">config</span><span class="o">.</span><span class="n">set_main_option</span><span class="p">(</span><span class="s1">'sqlalchemy.url'</span><span class="p">,</span> <span class="n">Settings</span><span class="p">()</span><span class="o">.</span><span class="n">DATABASE_URL</span><span class="p">)</span>
+</span><span id="__span-9-19"><a id="__codelineno-9-19" name="__codelineno-9-19" href="#__codelineno-9-19"></a>
+</span><span id="__span-9-20"><a id="__codelineno-9-20" name="__codelineno-9-20" href="#__codelineno-9-20"></a><span class="c1"># Configura o logging a partir do alembic.ini</span>
+</span><span id="__span-9-21"><a id="__codelineno-9-21" name="__codelineno-9-21" href="#__codelineno-9-21"></a><span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">config_file_name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="__span-9-22"><a id="__codelineno-9-22" name="__codelineno-9-22" href="#__codelineno-9-22"></a>    <span class="n">fileConfig</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">config_file_name</span><span class="p">)</span>
+</span><span id="__span-9-23"><a id="__codelineno-9-23" name="__codelineno-9-23" href="#__codelineno-9-23"></a>
+</span><span id="__span-9-24"><a id="__codelineno-9-24" name="__codelineno-9-24" href="#__codelineno-9-24"></a><span class="c1"># Metadados dos modelos, usados pelo --autogenerate</span>
+</span><span id="__span-9-25"><a id="__codelineno-9-25" name="__codelineno-9-25" href="#__codelineno-9-25"></a><span class="n">target_metadata</span> <span class="o">=</span> <span class="n">Base</span><span class="o">.</span><span class="n">metadata</span>
+</span><span id="__span-9-26"><a id="__codelineno-9-26" name="__codelineno-9-26" href="#__codelineno-9-26"></a>
+</span><span id="__span-9-27"><a id="__codelineno-9-27" name="__codelineno-9-27" href="#__codelineno-9-27"></a>
+</span><span id="__span-9-28"><a id="__codelineno-9-28" name="__codelineno-9-28" href="#__codelineno-9-28"></a><span class="k">def</span><span class="w"> </span><span class="nf">run_migrations_offline</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="__span-9-29"><a id="__codelineno-9-29" name="__codelineno-9-29" href="#__codelineno-9-29"></a><span class="w">    </span><span class="sd">"""Gera o SQL das migrações sem conectar ao banco."""</span>
+</span><span id="__span-9-30"><a id="__codelineno-9-30" name="__codelineno-9-30" href="#__codelineno-9-30"></a>    <span class="n">url</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get_main_option</span><span class="p">(</span><span class="s1">'sqlalchemy.url'</span><span class="p">)</span>
+</span><span id="__span-9-31"><a id="__codelineno-9-31" name="__codelineno-9-31" href="#__codelineno-9-31"></a>    <span class="n">context</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span>
+</span><span id="__span-9-32"><a id="__codelineno-9-32" name="__codelineno-9-32" href="#__codelineno-9-32"></a>        <span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span>
+</span><span id="__span-9-33"><a id="__codelineno-9-33" name="__codelineno-9-33" href="#__codelineno-9-33"></a>        <span class="n">target_metadata</span><span class="o">=</span><span class="n">target_metadata</span><span class="p">,</span>
+</span><span id="__span-9-34"><a id="__codelineno-9-34" name="__codelineno-9-34" href="#__codelineno-9-34"></a>        <span class="n">literal_binds</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+</span><span id="__span-9-35"><a id="__codelineno-9-35" name="__codelineno-9-35" href="#__codelineno-9-35"></a>        <span class="n">dialect_opts</span><span class="o">=</span><span class="p">{</span><span class="s1">'paramstyle'</span><span class="p">:</span> <span class="s1">'named'</span><span class="p">},</span>
+</span><span id="__span-9-36"><a id="__codelineno-9-36" name="__codelineno-9-36" href="#__codelineno-9-36"></a>        <span class="n">render_as_batch</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+</span><span id="__span-9-37"><a id="__codelineno-9-37" name="__codelineno-9-37" href="#__codelineno-9-37"></a>    <span class="p">)</span>
+</span><span id="__span-9-38"><a id="__codelineno-9-38" name="__codelineno-9-38" href="#__codelineno-9-38"></a>
+</span><span id="__span-9-39"><a id="__codelineno-9-39" name="__codelineno-9-39" href="#__codelineno-9-39"></a>    <span class="k">with</span> <span class="n">context</span><span class="o">.</span><span class="n">begin_transaction</span><span class="p">():</span>
+</span><span id="__span-9-40"><a id="__codelineno-9-40" name="__codelineno-9-40" href="#__codelineno-9-40"></a>        <span class="n">context</span><span class="o">.</span><span class="n">run_migrations</span><span class="p">()</span>
+</span><span id="__span-9-41"><a id="__codelineno-9-41" name="__codelineno-9-41" href="#__codelineno-9-41"></a>
+</span><span id="__span-9-42"><a id="__codelineno-9-42" name="__codelineno-9-42" href="#__codelineno-9-42"></a>
+</span><span id="__span-9-43"><a id="__codelineno-9-43" name="__codelineno-9-43" href="#__codelineno-9-43"></a><span class="k">def</span><span class="w"> </span><span class="nf">do_run_migrations</span><span class="p">(</span><span class="n">connection</span><span class="p">:</span> <span class="n">Connection</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="__span-9-44"><a id="__codelineno-9-44" name="__codelineno-9-44" href="#__codelineno-9-44"></a>    <span class="n">context</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span>
+</span><span id="__span-9-45"><a id="__codelineno-9-45" name="__codelineno-9-45" href="#__codelineno-9-45"></a>        <span class="n">connection</span><span class="o">=</span><span class="n">connection</span><span class="p">,</span>
+</span><span id="__span-9-46"><a id="__codelineno-9-46" name="__codelineno-9-46" href="#__codelineno-9-46"></a>        <span class="n">target_metadata</span><span class="o">=</span><span class="n">target_metadata</span><span class="p">,</span>
+</span><span id="__span-9-47"><a id="__codelineno-9-47" name="__codelineno-9-47" href="#__codelineno-9-47"></a>        <span class="n">render_as_batch</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+</span><span id="__span-9-48"><a id="__codelineno-9-48" name="__codelineno-9-48" href="#__codelineno-9-48"></a>    <span class="p">)</span>
+</span><span id="__span-9-49"><a id="__codelineno-9-49" name="__codelineno-9-49" href="#__codelineno-9-49"></a>
+</span><span id="__span-9-50"><a id="__codelineno-9-50" name="__codelineno-9-50" href="#__codelineno-9-50"></a>    <span class="k">with</span> <span class="n">context</span><span class="o">.</span><span class="n">begin_transaction</span><span class="p">():</span>
+</span><span id="__span-9-51"><a id="__codelineno-9-51" name="__codelineno-9-51" href="#__codelineno-9-51"></a>        <span class="n">context</span><span class="o">.</span><span class="n">run_migrations</span><span class="p">()</span>
+</span><span id="__span-9-52"><a id="__codelineno-9-52" name="__codelineno-9-52" href="#__codelineno-9-52"></a>
+</span><span id="__span-9-53"><a id="__codelineno-9-53" name="__codelineno-9-53" href="#__codelineno-9-53"></a>
+</span><span id="__span-9-54"><a id="__codelineno-9-54" name="__codelineno-9-54" href="#__codelineno-9-54"></a><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">run_async_migrations</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="__span-9-55"><a id="__codelineno-9-55" name="__codelineno-9-55" href="#__codelineno-9-55"></a><span class="w">    </span><span class="sd">"""Cria uma engine assíncrona e executa as migrações."""</span>
+</span><span id="__span-9-56"><a id="__codelineno-9-56" name="__codelineno-9-56" href="#__codelineno-9-56"></a>    <span class="n">connectable</span> <span class="o">=</span> <span class="n">async_engine_from_config</span><span class="p">(</span>
+</span><span id="__span-9-57"><a id="__codelineno-9-57" name="__codelineno-9-57" href="#__codelineno-9-57"></a>        <span class="n">config</span><span class="o">.</span><span class="n">get_section</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">config_ini_section</span><span class="p">,</span> <span class="p">{}),</span>
+</span><span id="__span-9-58"><a id="__codelineno-9-58" name="__codelineno-9-58" href="#__codelineno-9-58"></a>        <span class="n">prefix</span><span class="o">=</span><span class="s1">'sqlalchemy.'</span><span class="p">,</span>
+</span><span id="__span-9-59"><a id="__codelineno-9-59" name="__codelineno-9-59" href="#__codelineno-9-59"></a>        <span class="n">poolclass</span><span class="o">=</span><span class="n">pool</span><span class="o">.</span><span class="n">NullPool</span><span class="p">,</span>
+</span><span id="__span-9-60"><a id="__codelineno-9-60" name="__codelineno-9-60" href="#__codelineno-9-60"></a>    <span class="p">)</span>
+</span><span id="__span-9-61"><a id="__codelineno-9-61" name="__codelineno-9-61" href="#__codelineno-9-61"></a>
+</span><span id="__span-9-62"><a id="__codelineno-9-62" name="__codelineno-9-62" href="#__codelineno-9-62"></a>    <span class="k">async</span> <span class="k">with</span> <span class="n">connectable</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span> <span class="k">as</span> <span class="n">connection</span><span class="p">:</span>
+</span><span id="__span-9-63"><a id="__codelineno-9-63" name="__codelineno-9-63" href="#__codelineno-9-63"></a>        <span class="k">await</span> <span class="n">connection</span><span class="o">.</span><span class="n">run_sync</span><span class="p">(</span><span class="n">do_run_migrations</span><span class="p">)</span>
+</span><span id="__span-9-64"><a id="__codelineno-9-64" name="__codelineno-9-64" href="#__codelineno-9-64"></a>
+</span><span id="__span-9-65"><a id="__codelineno-9-65" name="__codelineno-9-65" href="#__codelineno-9-65"></a>    <span class="k">await</span> <span class="n">connectable</span><span class="o">.</span><span class="n">dispose</span><span class="p">()</span>
+</span><span id="__span-9-66"><a id="__codelineno-9-66" name="__codelineno-9-66" href="#__codelineno-9-66"></a>
+</span><span id="__span-9-67"><a id="__codelineno-9-67" name="__codelineno-9-67" href="#__codelineno-9-67"></a>
+</span><span id="__span-9-68"><a id="__codelineno-9-68" name="__codelineno-9-68" href="#__codelineno-9-68"></a><span class="k">def</span><span class="w"> </span><span class="nf">run_migrations_online</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="__span-9-69"><a id="__codelineno-9-69" name="__codelineno-9-69" href="#__codelineno-9-69"></a><span class="w">    </span><span class="sd">"""Executa as migrações conectado ao banco."""</span>
+</span><span id="__span-9-70"><a id="__codelineno-9-70" name="__codelineno-9-70" href="#__codelineno-9-70"></a>    <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">run_async_migrations</span><span class="p">())</span>
+</span><span id="__span-9-71"><a id="__codelineno-9-71" name="__codelineno-9-71" href="#__codelineno-9-71"></a>
+</span><span id="__span-9-72"><a id="__codelineno-9-72" name="__codelineno-9-72" href="#__codelineno-9-72"></a>
+</span><span id="__span-9-73"><a id="__codelineno-9-73" name="__codelineno-9-73" href="#__codelineno-9-73"></a><span class="k">if</span> <span class="n">context</span><span class="o">.</span><span class="n">is_offline_mode</span><span class="p">():</span>
+</span><span id="__span-9-74"><a id="__codelineno-9-74" name="__codelineno-9-74" href="#__codelineno-9-74"></a>    <span class="n">run_migrations_offline</span><span class="p">()</span>
+</span><span id="__span-9-75"><a id="__codelineno-9-75" name="__codelineno-9-75" href="#__codelineno-9-75"></a><span class="k">else</span><span class="p">:</span>
+</span><span id="__span-9-76"><a id="__codelineno-9-76" name="__codelineno-9-76" href="#__codelineno-9-76"></a>    <span class="n">run_migrations_online</span><span class="p">()</span>
+</span></code></pre></div>
+<h3 id="o-que-cada-parte-faz">O que cada parte faz<a class="headerlink" href="#o-que-cada-parte-faz" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Imports dos modelos</strong>: o <code>Base.metadata</code> só conhece as tabelas cujas classes foram importadas. Cada novo arquivo em <code>models/</code> precisa ser importado aqui, como o <code>usuarios</code>, senão o <code>--autogenerate</code> não encontra a tabela.</li>
+<li><strong><code>config.set_main_option</code></strong>: substitui a URL do <code>alembic.ini</code> pela do <code>.env</code>, para o banco ser configurado em um só lugar.</li>
+<li><strong><code>target_metadata</code></strong>: é o que o Alembic compara com o banco para gerar as migrações automaticamente.</li>
+<li><strong><code>render_as_batch=True</code></strong>: o SQLite tem suporte limitado a <code>ALTER TABLE</code> (não remove nem altera colunas diretamente). Com essa opção, o Alembic recria a tabela por baixo dos panos quando precisa fazer essas alterações.</li>
+<li><strong><code>run_async_migrations</code></strong>: cria uma engine assíncrona e usa <code>run_sync</code> para executar as migrações, já que o Alembic em si trabalha de forma síncrona.</li>
+<li><strong><code>run_migrations_offline</code></strong>: usada com a opção <code>--sql</code>, gera o SQL das migrações sem conectar ao banco.</li>
+</ul>
+<h3 id="testando-a-configuracao">Testando a configuração<a class="headerlink" href="#testando-a-configuracao" title="Permanent link">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>alembic<span class="w"> </span>revision<span class="w"> </span>--autogenerate<span class="w"> </span>-m<span class="w"> </span><span class="s2">"cria tabela usuarios"</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>alembic<span class="w"> </span>upgrade<span class="w"> </span>head
+</span></code></pre></div>
+<p>Se a migração gerada tiver o <code>op.create_table(...)</code> da tabela de usuários, a configuração está funcionando.</p>
+<p>Se as funções <code>upgrade()</code> e <code>downgrade()</code> vierem apenas com <code>pass</code>, o Alembic não encontrou diferença entre os modelos e o banco. As causas mais comuns são:</p>
+<ul>
+<li>o modelo não foi importado no <code>env.py</code>;</li>
+<li>o modelo herda de outra base (ou usa outro <code>registry</code>) diferente da usada em <code>target_metadata</code>;</li>
+<li>a tabela já existe no banco, criada antes por um <code>create_all</code>, por exemplo.</li>
+</ul>
+<p>Nesse caso, apague o arquivo gerado, corrija a causa e rode o comando de novo.</p>
+<h3 id="por-que-importar-usuarios-no-envpy">Por que importar <code>usuarios</code> no <code>env.py</code><a class="headerlink" href="#por-que-importar-usuarios-no-envpy" title="Permanent link">&para;</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">comprix.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">usuarios</span>  <span class="c1"># noqa: F401</span>
+</span></code></pre></div>
+<p>O SQLAlchemy só registra uma tabela no <code>Base.metadata</code> quando a classe do modelo é <strong>carregada</strong> pelo Python. Enquanto o arquivo <code>usuarios.py</code> não for importado, a classe <code>Usuario</code> não existe para o SQLAlchemy, e o <code>Base.metadata</code> fica vazio.</p>
+<p>Esse import serve apenas para carregar o arquivo e registrar a tabela. Nada dele é usado diretamente no <code>env.py</code>, por isso o linter (Ruff ou Flake8) mostraria o aviso <strong>F401 – import não utilizado</strong> e poderia até removê-lo numa correção automática. O comentário <code># noqa: F401</code> diz ao linter para ignorar esse aviso nessa linha, mantendo o import.</p>
+<p>Sempre que um novo arquivo de modelo for criado em <code>models/</code>, ele precisa ser importado da mesma forma:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">comprix.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">produtos</span><span class="p">,</span> <span class="n">usuarios</span>  <span class="c1"># noqa: F401</span>
+</span></code></pre></div>
+<p>Uma alternativa é importar todos os modelos no <code>models/__init__.py</code>. Assim, o <code>env.py</code> só precisa importar o pacote <code>comprix.models</code>, e basta lembrar de atualizar o <code>__init__.py</code>.</p>
+<h3 id="nomeando-as-migracoes-em-ordem">Nomeando as migrações em ordem<a class="headerlink" href="#nomeando-as-migracoes-em-ordem" title="Permanent link">&para;</a></h3>
+<p>Ao rodar o comando abaixo, o texto do <code>-m</code> vira parte do nome do arquivo, mas ele fica <strong>depois</strong> do ID da revisão, que é um hash aleatório:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>alembic<span class="w"> </span>revision<span class="w"> </span>--autogenerate<span class="w"> </span>-m<span class="w"> </span><span class="s2">"01_cria tabela usuarios"</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="c1"># gera: 720c9f529c84_01_cria_tabela_usuarios.py</span>
+</span></code></pre></div>
+<p>Com isso, os arquivos ficam ordenados pelo hash, e não pelo número. Existem duas formas de manter as migrações em ordem.</p>
+<h4 id="opcao-1-numero-como-id-da-revisao">Opção 1: número como ID da revisão<a class="headerlink" href="#opcao-1-numero-como-id-da-revisao" title="Permanent link">&para;</a></h4>
+<p>O parâmetro <code>--rev-id</code> permite definir o ID manualmente:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>alembic<span class="w"> </span>revision<span class="w"> </span>--autogenerate<span class="w"> </span>--rev-id<span class="w"> </span><span class="m">01</span><span class="w"> </span>-m<span class="w"> </span><span class="s2">"01_criar_tabela_usuarios"</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="c1"># gera: 01_cria_tabela_usuarios.py</span>
+</span></code></pre></div>
+<p>A numeração é controlada à mão. Se duas pessoas criarem a migração <code>02</code> em branches diferentes, elas vão entrar em conflito.</p>
+<h4 id="opcao-2-data-no-nome-do-arquivo-recomendada">Opção 2: data no nome do arquivo (recomendada)<a class="headerlink" href="#opcao-2-data-no-nome-do-arquivo-recomendada" title="Permanent link">&para;</a></h4>
+<p>No <code>alembic.ini</code>, descomente e ajuste a linha <code>file_template</code>:</p>
+<div class="language-ini highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="na">file_template</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">%%(year)d_%%(month).2d_%%(day).2d_%%(hour).2d%%(minute).2d-%%(rev)s_%%(slug)s</span>
+</span></code></pre></div>
+<p>Os arquivos passam a ser gerados assim:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>2026_10_21_1051-720c9f529c84_cria_tabela_usuarios.py
+</span></code></pre></div>
+<p>A ordem fica automática pela data, sem numeração manual e sem risco de números repetidos.</p>
+<h4 id="a-ordem-real-das-migracoes">A ordem real das migrações<a class="headerlink" href="#a-ordem-real-das-migracoes" title="Permanent link">&para;</a></h4>
+<p>Para o Alembic, a sequência das migrações não depende do nome do arquivo, e sim do campo <code>down_revision</code> dentro de cada um, que aponta para a migração anterior. A primeira migração tem <code>down_revision = None</code>. O nome do arquivo serve apenas para facilitar a leitura.</p>
+<p>Para ver a sequência oficial:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>alembic<span class="w"> </span><span class="nb">history</span>
+</span></code></pre></div>
+<h3 id="conclusao">Conclusão<a class="headerlink" href="#conclusao" title="Permanent link">&para;</a></h3>
+<p>Parabéns! 🎉 Com o Alembic configurado, o banco de dados do projeto passa a ter um histórico versionado: cada mudança nos modelos vira uma migração que pode ser revisada, aplicada com <code>alembic upgrade head</code> e desfeita com <code>alembic downgrade -1</code>.</p>
+<p>A partir daqui, o fluxo para qualquer alteração no banco é sempre o mesmo:</p>
+<ol>
+<li>criar ou alterar o modelo em <code>models/</code>;</li>
+<li>garantir que ele está importado no <code>env.py</code>;</li>
+<li>gerar a migração com <code>alembic revision --autogenerate</code>;</li>
+<li>revisar o arquivo gerado;</li>
+<li>aplicar com <code>alembic upgrade head</code>.</li>
+</ol>
+<p>Assim, toda a equipe trabalha com a mesma estrutura de banco, e qualquer ambiente novo pode ser criado do zero com um único comando.</p>
 
 
 
@@ -840,6 +1714,22 @@
             </div>
           </a>
         
+        
+          
+          <a href="../routers/" class="md-footer__link md-footer__link--next" aria-label="Next: Routers">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Routers
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
         
       </nav>
     

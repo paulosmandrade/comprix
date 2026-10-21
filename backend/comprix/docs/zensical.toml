@@ -16,14 +16,21 @@ nav = [
   { "Bibliotecas e Frameworks" = [
     "bibliotecas/index.md",
     { "Estrutura do projeto" = "bibliotecas/estrutura.md" },
+    { "Alembic" = "bibliotecas/alembic.md"},
     { "FastAPI" = "bibliotecas/fastapi.md" },
     { "Pydantic" = "bibliotecas/pydantic.md" },
+    { "Pwdlib" = "bibliotecas/pwdlib.md" },
+    { "SQLAlchemy" = "bibliotecas/slqalchemy.md" },
   ]},
   { "App" = "app.md"},
   { "Schemas" = "schemas.md" },
   { "Banco de Dados" = "db.md" },
   { "Sqlite - Models" = "sqlite.md" },
-  { "Migrations" = "migrations.md"}
+  { "Migrations" = "migrations.md"},
+  { "Routers" = [
+    "routers/index.md",
+    {"Usuários" = "routers/usuarios.md"}
+  ]}
 ]
 
 # extra_css = ["stylesheets/extra.css"]
