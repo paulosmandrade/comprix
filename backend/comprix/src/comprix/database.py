@@ -11,8 +11,12 @@ engine = create_async_engine(Settings().DATABASE_URL, echo=True)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    from comprix.routers.usuarios import criar_admin  # noqa: PLC0415
+
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
+
+    await criar_admin()
     yield
     await engine.dispose()
 

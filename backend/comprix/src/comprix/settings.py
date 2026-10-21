@@ -7,3 +7,6 @@ class Settings(BaseSettings):
     )
 
     DATABASE_URL: str = 'sqlite+aiosqlite:///comprix.db'
+    ADMIN_USER: str
+    ADMIN_EMAIL: str
+    ADMIN_SENHA: str

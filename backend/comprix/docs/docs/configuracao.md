@@ -1,8 +1,9 @@
 ---
 icon: lucide/settings
+title: Configurando o ambiente de desenvolvimento
 ---
 
-# Configurando o ambiente de desenvolvimento
+# :lucide-settings: Configurando o ambiente de desenvolvimento
 
 ---
 

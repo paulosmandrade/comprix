@@ -1,8 +1,9 @@
 ---
 icon: lucide/database-zap
+title: Configuranco o banco de dados
 ---
 
-# :material-database-cog: Configurando o banco de dados
+# :lucide-database-zap: Configurando o banco de dados
 
 Agora que já sabemos o que é um banco de dados e por que escolhemos o SQLite, vamos colocá-lo para funcionar no Comprix. Para isso, vamos usar algumas peças que trabalham juntas:
 

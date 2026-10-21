@@ -5,7 +5,7 @@ pwd_context = PasswordHash.recommended()
 
 # Criptograda a senha
 def get_password_hash(senha: str):
-    return pwd_context.hash(senha=senha)
+    return pwd_context.hash(senha)
 
 
 # Verifica senha

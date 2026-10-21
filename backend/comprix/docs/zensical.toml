@@ -27,6 +27,7 @@ nav = [
   { "Banco de Dados" = "db.md" },
   { "Sqlite - Models" = "sqlite.md" },
   { "Migrations" = "migrations.md"},
+  { "Segurança" = "seguranca.md"},
   { "Routers" = [
     "routers/index.md",
     {"Usuários" = "routers/usuarios.md"}

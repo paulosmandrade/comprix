@@ -1,8 +1,9 @@
 ---
 icon: lucide/monitor-cloud
+title: App
 ---
 
-# :material-application-outline: App
+# :lucide-monitor-cloud: App
 
 Vamos criar nosso primeiro arquivo python, que será o principal da nossa aplicação, será o arquivo **app.py**, através dele será inicializado nossa aplicação para as demais rotas e funções do nosso sistema.
 

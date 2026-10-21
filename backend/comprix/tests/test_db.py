@@ -9,8 +9,7 @@ async def test_criar_usuario(session):
     usuario = Usuarios(
         nome='Admin',
         email='admin@comprix.com.br',
-        senha='hash-da-senha',
-        codigo=123456,
+        senha='hash-da-senha'
     )
 
     session.add(usuario)
