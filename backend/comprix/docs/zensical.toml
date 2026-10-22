@@ -27,11 +27,15 @@ nav = [
   { "Banco de Dados" = "db.md" },
   { "Sqlite - Models" = "sqlite.md" },
   { "Migrations" = "migrations.md"},
-  { "Segurança" = "seguranca.md"},
+  { "Segurança" = [
+    "seguranca/index.md",
+  { "Senhas" = "seguranca/senhas.md"},
+  { "Token" = "seguranca/token.md"}
+  ]},
   { "Routers" = [
     "routers/index.md",
     {"Usuários" = "routers/usuarios.md"}
-  ]}
+  ]},
 ]
 
 # extra_css = ["stylesheets/extra.css"]

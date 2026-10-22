@@ -7,9 +7,7 @@ from comprix.models import Usuarios
 @pytest.mark.asyncio
 async def test_criar_usuario(session):
     usuario = Usuarios(
-        nome='Admin',
-        email='admin@comprix.com.br',
-        senha='hash-da-senha'
+        nome='Admin', email='admin@comprix.com.br', senha='hash-da-senha'
     )
 
     session.add(usuario)

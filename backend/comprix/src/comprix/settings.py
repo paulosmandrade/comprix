@@ -1,3 +1,4 @@
+from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -6,7 +7,10 @@ class Settings(BaseSettings):
         env_file='.env', env_file_encoding='utf-8'
     )
 
-    DATABASE_URL: str = 'sqlite+aiosqlite:///comprix.db'
-    ADMIN_USER: str
-    ADMIN_EMAIL: str
-    ADMIN_SENHA: str
+    DATABASE_URL: str = Field(init=False)
+    ADMIN_USER: str = Field(init=False)
+    ADMIN_EMAIL: str = Field(init=False)
+    ADMIN_SENHA: str = Field(init=False)
+    SECRET_KEY: str = Field(init=False)
+    ALGORITHM: str = Field(init=False)
+    ACCESS_TOKEN_EXPIRE_MINUTES: str = Field(init=False)
