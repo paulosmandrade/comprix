@@ -6,7 +6,7 @@ from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from comprix.models import Base
 from comprix.settings import Settings
 
-engine = create_async_engine(Settings().DATABASE_URL, echo=True)
+engine = create_async_engine(Settings().DATABASE_URL, echo=False)
 
 
 @asynccontextmanager

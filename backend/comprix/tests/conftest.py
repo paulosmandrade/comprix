@@ -54,9 +54,9 @@ async def usuario(session):
     senha = 'testing_senha'
 
     usuario = Usuarios(
-        nome="usuário teste",
+        nome='Usuário teste',
         email='usuario@comprix.com.br',
-        senha=get_password_hash(senha)
+        senha=get_password_hash(senha),
     )
 
     session.add(usuario)

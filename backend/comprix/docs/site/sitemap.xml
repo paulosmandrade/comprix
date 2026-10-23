@@ -46,6 +46,12 @@
         <loc>https://www.example.com/routers/</loc>
       </url>
       <url>
+        <loc>https://www.example.com/routers/auth/</loc>
+      </url>
+      <url>
+        <loc>https://www.example.com/routers/refresh/</loc>
+      </url>
+      <url>
         <loc>https://www.example.com/routers/usuarios/</loc>
       </url>
       <url>

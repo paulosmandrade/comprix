@@ -30,10 +30,12 @@ nav = [
   { "Segurança" = [
     "seguranca/index.md",
   { "Senhas" = "seguranca/senhas.md"},
-  { "Token" = "seguranca/token.md"}
+  { "Token" = "seguranca/token.md"},
   ]},
   { "Routers" = [
     "routers/index.md",
+    { "Auth" = "routers/auth.md"},
+    { "Refresh" = "routers/refresh.md"},
     {"Usuários" = "routers/usuarios.md"}
   ]},
 ]

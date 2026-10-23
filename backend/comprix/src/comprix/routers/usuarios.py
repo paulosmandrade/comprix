@@ -8,12 +8,12 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from comprix.database import engine, get_session
 from comprix.models import Usuarios
 from comprix.schemas import UsuarioPublico, UsuarioSchema
-from comprix.security import get_password_hash
+from comprix.security import get_current_user, get_password_hash
 from comprix.settings import Settings
 
 router = APIRouter(prefix='/usuarios', tags=['Cadastro de usuários'])
-
 Session = Annotated[AsyncSession, Depends(get_session)]
+CurrentUser = Annotated[Usuarios, Depends(get_current_user)]
 
 
 async def criar_admin() -> None:
@@ -38,9 +38,15 @@ async def criar_admin() -> None:
 
 
 @router.post(
-    '/', status_code=HTTPStatus.CREATED, response_model=UsuarioPublico
+    '/',
+    status_code=HTTPStatus.CREATED,
+    response_model=UsuarioPublico,
 )
-async def criar_usuarios(user: UsuarioSchema, session: Session):
+async def criar_usuarios(
+    user: UsuarioSchema,
+    session: Session,
+    current_user: CurrentUser,
+):
     db_usuario = await session.scalar(
         select(Usuarios).where(Usuarios.email == user.email)
     )

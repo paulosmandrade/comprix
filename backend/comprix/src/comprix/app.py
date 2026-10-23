@@ -5,11 +5,14 @@ from fastapi import FastAPI
 from fastapi.responses import FileResponse
 
 from comprix.database import lifespan
-from comprix.routers import usuarios
+from comprix.routers import auth, usuarios
 from comprix.schemas.app import Message
 
 app = FastAPI(lifespan=lifespan)
+
+app.include_router(auth.router)
 app.include_router(usuarios.router)
+
 
 FAVICON = Path(__file__).parent / 'static' / 'comprix-icon.ico'
 
