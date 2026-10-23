@@ -33,8 +33,26 @@ class UsuarioLista(BaseModel):
     usuarios: list[UsuarioPublico]
 
 
-class DefinirSenhaSchema(BaseModel):
+class NovaSenhaBase(BaseModel):
+    """Regra da nova senha, compartilhada pelos schemas abaixo."""
+
+    nova_senha: str = Field(min_length=8)
+
+
+class DefinirSenhaSchema(NovaSenhaBase):
     """Dados para o usuário definir a senha pelo link."""
 
     token: str
-    nova_senha: str = Field(min_length=8)
+
+
+class RedefinirSenhaSchema(NovaSenhaBase):
+    """Usuario que esqueceu a senah redefine com o código do e-mail"""
+
+    email: EmailStr
+    codigo: str = Field(pattern=r'^\d{6}$')
+
+
+class EsqueciSenhaSchema(BaseModel):
+    """E-mail de quem esqueceu a senha."""
+
+    email: EmailStr

@@ -1,3 +1,5 @@
+import secrets
+
 from datetime import datetime, timedelta
 from http import HTTPStatus
 from zoneinfo import ZoneInfo
@@ -19,6 +21,8 @@ oauth2_scheme = OAuth2PasswordBearer(
     tokenUrl='auth/token', refreshUrl='auth/refresh'
 )
 
+CODIGO_EXPIRA_MINUTOS = 15
+CODIGO_MAX_TENTATIVAS = 5
 
 # Criptograda a senha
 def get_password_hash(senha: str):

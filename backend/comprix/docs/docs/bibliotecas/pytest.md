@@ -88,8 +88,7 @@ import pytest
 
 
 @pytest.mark.asyncio
-async def test_criar_usuario(session):
-    ...
+async def test_criar_usuario(session): ...
 ```
 
 E as fixtures assíncronas usam `@pytest_asyncio.fixture` no lugar de `@pytest.fixture`.
