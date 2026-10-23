@@ -43,7 +43,7 @@ def create_access_token(data: dict):
     to_encode.update({'exp': expire})
 
     # Claim is_admin
-    if data.username == settings.ADMIN_EMAIL:
+    if to_encode.get('sub') == settings.ADMIN_EMAIL:
         to_encode.update({'is_admin': True})
 
     # Agora vamos criar o TOKEN com jwt encode

@@ -50,6 +50,7 @@ quote-style = 'single'
 [tool.pytest]
 pythonpath = ['src']
 addopts = ['-p', 'no:warnings', '--cov=comprix', '--cov-context=test']
+asyncio_default_fixture_loop_scope = 'function'
 
 [tool.coverage.run]
 concurrency = ['thread', 'greenlet']

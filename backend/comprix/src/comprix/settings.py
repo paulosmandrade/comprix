@@ -13,4 +13,4 @@ class Settings(BaseSettings):
     ADMIN_SENHA: str = Field(init=False)
     SECRET_KEY: str = Field(init=False)
     ALGORITHM: str = Field(init=False)
-    ACCESS_TOKEN_EXPIRE_MINUTES: str = Field(init=False)
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = Field(init=False)
