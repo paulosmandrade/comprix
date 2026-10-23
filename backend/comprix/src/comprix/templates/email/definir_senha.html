@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Defina sua senha no COMPRIX</title>
+</head>
+<body style="margin:0; padding:0; background-color:#f4f5f7; font-family:Arial, Helvetica, sans-serif;">
+
+  <!-- Texto que aparece na prévia da caixa de entrada -->
+  <div style="display:none; max-height:0; overflow:hidden;">
+    Sua conta no COMPRIX foi criada. Defina sua senha até {{ expira_em | e }}.
+  </div>
+
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#f4f5f7; padding:32px 16px;">
+    <tr>
+      <td align="center">
+
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px; background-color:#ffffff; border-radius:12px; overflow:hidden;">
+
+          <!-- Cabeçalho -->
+          <tr>
+            <td style="background-color:#1f6f50; padding:28px 32px; text-align:center;">
+              <span style="color:#ffffff; font-size:24px; font-weight:bold; letter-spacing:2px;">COMPRIX</span>
+            </td>
+          </tr>
+
+          <!-- Conteúdo -->
+          <tr>
+            <td style="padding:36px 32px 8px 32px; color:#1f2933;">
+              <h1 style="margin:0 0 16px 0; font-size:22px; color:#1f2933;">
+                Olá, {{ nome | e }}!
+              </h1>
+              <p style="margin:0 0 16px 0; font-size:16px; line-height:24px; color:#3e4c59;">
+                Sua conta no <strong>COMPRIX</strong> foi criada.
+                Para começar a usar o sistema, defina sua senha clicando no botão abaixo.
+              </p>
+            </td>
+          </tr>
+
+          <!-- Botão -->
+          <tr>
+            <td align="center" style="padding:16px 32px 24px 32px;">
+              <a href="{{ link | e }}"
+                 style="display:inline-block; background-color:#1f6f50; color:#ffffff; text-decoration:none; font-size:16px; font-weight:bold; padding:14px 32px; border-radius:8px;">
+                Definir minha senha
+              </a>
+            </td>
+          </tr>
+
+          <!-- Validade -->
+          <tr>
+            <td style="padding:0 32px 24px 32px;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#fff8e6; border-left:4px solid #f0b429; border-radius:6px;">
+                <tr>
+                  <td style="padding:14px 16px; font-size:14px; line-height:20px; color:#5c4813;">
+                    ⏳ Este link é válido até <strong>{{ expira_em | e }}</strong>
+                    (horário de Brasília) e só pode ser usado uma vez.
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Link alternativo -->
+          <tr>
+            <td style="padding:0 32px 32px 32px; font-size:13px; line-height:20px; color:#7b8794;">
+              Se o botão não funcionar, copie e cole este endereço no navegador:<br>
+              <a href="{{ link | e }}" style="color:#1f6f50; word-break:break-all;">{{ link | e }}</a>
+            </td>
+          </tr>
+
+          <!-- Rodapé -->
+          <tr>
+            <td style="background-color:#f9fafb; padding:20px 32px; font-size:12px; line-height:18px; color:#9aa5b1; text-align:center;">
+              Se você não esperava este e-mail, pode ignorá-lo com segurança.<br>
+              Esta é uma mensagem automática, por favor não responda.
+            </td>
+          </tr>
+
+        </table>
+
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

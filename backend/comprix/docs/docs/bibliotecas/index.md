@@ -20,6 +20,8 @@ Nesta seção apresentamos as principais ferramentas usadas no projeto: o que ca
 | **FastAPI** | Framework web para construir a API: rotas, requisições e respostas | [fastapi.tiangolo.com](https://fastapi.tiangolo.com/pt/) |
 | **Pydantic** | Validação dos dados que entram e saem da API e leitura das configurações do `.env` | [docs.pydantic.dev](https://docs.pydantic.dev/) |
 | **pwdlib** | Geração e verificação de hashes de senhas, com o algoritmo Argon2 | [pypi.org/project/pwdlib](https://pypi.org/project/pwdlib/) |
+| **PyJWT** | Criação e validação dos tokens JWT de acesso e do link de definir senha | [pyjwt.readthedocs.io](https://pyjwt.readthedocs.io/) |
+| **fastapi-mail** | Envio de e-mails com templates HTML (Jinja2) | [sabuhish.github.io/fastapi-mail](https://sabuhish.github.io/fastapi-mail/) |
 
 ## Banco de dados
 
@@ -33,7 +35,8 @@ Nesta seção apresentamos as principais ferramentas usadas no projeto: o que ca
 
 | Ferramenta | Para que serve | Documentação |
 |---|---|---|
-| **pytest** | Execução dos testes automatizados | [docs.pytest.org](https://docs.pytest.org/) |
+| **pytest** | Execução dos testes automatizados (com `pytest-cov` e `pytest-asyncio`) | [docs.pytest.org](https://docs.pytest.org/) |
+| **freezegun** | Congela o relógio nos testes, para simular tokens e links expirados | [github.com/spulec/freezegun](https://github.com/spulec/freezegun) |
 | **Ruff** | Verificação de erros e formatação do código | [docs.astral.sh/ruff](https://docs.astral.sh/ruff/) |
 | **Zensical** | Geração deste site de documentação | [zensical.org](https://zensical.org/) |
 
@@ -43,11 +46,11 @@ Uma requisição percorre o projeto mais ou menos assim:
 
 1. O **FastAPI** recebe a requisição e encaminha para a rota certa.
 2. O **Pydantic** valida os dados recebidos.
-3. Se houver senha envolvida, a **pwdlib** gera ou verifica o hash.
+3. Se houver senha envolvida, a **pwdlib** gera ou verifica o hash; se houver token, o **PyJWT** o cria ou valida.
 4. O **SQLAlchemy** lê ou grava os dados no banco, usando o **aiosqlite**.
 5. O **Pydantic** formata a resposta, e o **FastAPI** a devolve para quem chamou.
 
-Já o **Alembic** atua fora desse fluxo: ele mantém a estrutura do banco atualizada sempre que os modelos mudam.
+Já o **Alembic** atua fora desse fluxo: ele mantém a estrutura do banco atualizada sempre que os modelos mudam. E o **fastapi-mail** entra depois da resposta, enviando e-mails em segundo plano.
 
 !!! tip "Dica"
 

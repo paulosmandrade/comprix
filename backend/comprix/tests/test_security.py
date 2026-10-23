@@ -8,6 +8,7 @@ from jwt import decode, encode
 
 from comprix.security import (
     create_access_token,
+    get_current_admin,
     get_current_user,
     get_password_hash,
     verify_password,
@@ -174,3 +175,31 @@ async def test_usuario_apagado_depois_do_login(session, usuario):
     await session.commit()
 
     await espera_401(session, token)
+
+
+# ---------------------------------------------------------------------------
+# get_current_admin
+# ---------------------------------------------------------------------------
+@pytest.mark.asyncio
+async def test_get_current_admin_com_usuario_admin(usuario_admin):
+    """Usuário admin passa pela verificação e é retornado"""
+    resultado = await get_current_admin(usuario=usuario_admin)
+
+    # Retorna o mesmo usuário recebido
+    assert resultado.id == usuario_admin.id
+    assert resultado.admin is True
+
+
+@pytest.mark.asyncio
+async def test_get_current_admin_com_usuario_comum(usuario):
+    """Usuário comum é barrado com 403"""
+    with pytest.raises(HTTPException) as exc:
+        await get_current_admin(usuario=usuario)
+
+    # Verifica se o status code é 403 PROIBIDO
+    assert exc.value.status_code == HTTPStatus.FORBIDDEN
+
+    # Verifica a mensagem de erro
+    assert exc.value.detail == (
+        'Acesso permitido somente para administradores'
+    )

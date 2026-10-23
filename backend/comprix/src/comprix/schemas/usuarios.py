@@ -6,7 +6,6 @@ class UsuarioSchema(BaseModel):
 
     nome: str = Field(max_length=50)
     email: EmailStr = Field(max_length=100)
-    senha: str = Field(min_length=8)
 
 
 class UsuarioUpdateSchema(BaseModel):
@@ -32,3 +31,10 @@ class UsuarioLista(BaseModel):
     """Lista de usuários devolvida pela API."""
 
     usuarios: list[UsuarioPublico]
+
+
+class DefinirSenhaSchema(BaseModel):
+    """Dados para o usuário definir a senha pelo link."""
+
+    token: str
+    nova_senha: str = Field(min_length=8)

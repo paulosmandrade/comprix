@@ -69,20 +69,21 @@ async def usuario(session):
 
 
 @pytest_asyncio.fixture
-async def admin(session, settings):
-    senha = 'testing_senha'
+async def usuario_admin(session):
+    senha = 'senha_admin'
 
     admin = Usuarios(
-        nome=settings.ADMIN_USER,
-        email=settings.ADMIN_EMAIL,
-        senha=get_password_hash(settings.ADMIN_SENHA),
+        nome='Admin Teste',
+        email='admin@comprix.com.br',
+        senha=get_password_hash(senha),
+        admin=True,
     )
 
     session.add(admin)
     await session.commit()
     await session.refresh(admin)
 
-    admin.clear_password = senha
+    admin.clean_password = senha
 
     return admin
 
@@ -95,3 +96,30 @@ def token(client, usuario):
     )
 
     return response.json()['access_token']
+
+
+@pytest.fixture
+def token_admin(client, usuario_admin):
+    response = client.post(
+        '/auth/token',
+        data={
+            'username': usuario_admin.email,
+            'password': usuario_admin.clean_password,
+        },
+    )
+
+    return response.json()['access_token']
+
+
+@pytest.fixture(autouse=True)
+def emails_enviados(monkeypatch):
+    """Troca o envio real de e-mail por uma lista, em todos os testes."""
+    enviados = []
+
+    async def envio_falso(nome, email, token):
+        enviados.append({'nome': nome, 'email': email, 'token': token})
+
+    monkeypatch.setattr(
+        'comprix.routers.usuarios.enviar_email_definir_senha', envio_falso
+    )
+    return enviados

@@ -100,8 +100,38 @@ def read_root():
     | 200 | `HTTPStatus.OK` | Deu tudo certo |
     | 201 | `HTTPStatus.CREATED` | Um registro foi criado |
     | 204 | `HTTPStatus.NO_CONTENT` | Deu certo, mas não há conteúdo para devolver |
+    | 400 | `HTTPStatus.BAD_REQUEST` | A requisição não pode ser atendida (ex.: link inválido ou expirado) |
+    | 401 | `HTTPStatus.UNAUTHORIZED` | Não autenticado: sem token, token inválido ou expirado |
+    | 403 | `HTTPStatus.FORBIDDEN` | Autenticado, mas sem permissão (ex.: não é administrador) |
     | 404 | `HTTPStatus.NOT_FOUND` | O recurso não foi encontrado |
+    | 409 | `HTTPStatus.CONFLICT` | Conflito com um dado existente (ex.: e-mail já cadastrado) |
     | 422 | `HTTPStatus.UNPROCESSABLE_ENTITY` | Os dados enviados são inválidos |
 
 !!! tip "Veja na documentação"
     Rode o servidor com `poetry serve` e acesse <http://127.0.0.1:8000/docs>. Na rota `GET /`, a seção **Responses** agora mostra o código **200** com o formato da resposta, e o schema `Message` aparece na seção **Schemas**, no fim da página.
+
+## Exportando os schemas no `__init__.py`
+
+Com o crescimento do projeto, o diretório `schemas` passa a ter um arquivo por assunto (`app.py`, `usuarios.py`, ...). Para importar qualquer schema de um só lugar, eles são reunidos no `schemas/__init__.py`:
+
+```python title="src/comprix/schemas/__init__.py" linenums="1"
+from comprix.schemas.app import Message
+from comprix.schemas.usuarios import (
+    DefinirSenhaSchema,
+    UsuarioLista,
+    UsuarioPublico,
+    UsuarioSchema,
+)
+
+__all__ = [
+    'Message',
+    'DefinirSenhaSchema',
+    'UsuarioLista',
+    'UsuarioPublico',
+    'UsuarioSchema',
+]
+```
+
+Assim, as rotas podem escrever `from comprix.schemas import UsuarioSchema`, sem precisar saber em qual arquivo o schema está. O `__all__` tem o mesmo papel explicado nos models: declara os nomes públicos e evita o aviso **F401** do ruff.
+
+Os schemas de usuários são explicados na página [Usuários](routers/usuarios.md#4-schemas).

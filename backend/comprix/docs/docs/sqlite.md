@@ -1,6 +1,6 @@
 ---
 icon: lucide/database-zap
-title: Configuranco o banco de dados
+title: Configurando o banco de dados
 ---
 
 # :lucide-database-zap: Configurando o banco de dados
@@ -164,7 +164,7 @@ def time_zone() -> datetime:
 - **Linhas 10 e 11:** a função `time_zone` devolve a data e a hora atuais nesse fuso.
 
 !!! warning "Atenção ao nome do fuso"
-    O nome correto é `America/Sao_Paulo`, **sem o "n"** no final de America. Com um nome errado, o Python para ao iniciar com o erro `ZoneInfoNotFoundError`.
+    O nome correto é `America/Sao_Paulo`: `America` sem acento e **sem "n"** no final, e `Sao_Paulo` sem til e com sublinhado. Com um nome errado, o Python para ao iniciar com o erro `ZoneInfoNotFoundError`.
 
 ??? info "Por que não usar o horário do banco?"
     O SQLite registra a data e a hora sempre no horário **UTC**, que fica 3 horas à frente de Brasília. Gerando a data no Python, garantimos que ela seja gravada no horário de São Paulo.
@@ -285,6 +285,9 @@ O funcionamento é simples:
 
 !!! danger "Nunca guarde a senha como ela foi digitada"
     A coluna `senha` não vai guardar a senha original, e sim um **hash**: uma versão embaralhada que não pode ser revertida. Assim, mesmo que alguém tenha acesso ao banco, não consegue descobrir a senha dos usuários. Vamos ver como fazer isso mais adiante.
+
+!!! info "O model vai evoluir"
+    Esta é a **primeira versão** do model, usada para entender os conceitos. Mais adiante, com o **Alembic**, a coluna `codigo` é removida, a `senha` passa para 255 caracteres e surgem as colunas `admin`, `codigo_recuperacao`, `codigo_expira_em` e `codigo_tentativas`. A versão atual está em [Migrations](migrations.md#as-migracoes-do-comprix).
 
 ### Criando um usuário
 
@@ -408,6 +411,9 @@ Com isso, quem baixar o projeto do GitHub não precisa criar o banco manualmente
 
 !!! warning "O `create_all` só cria, não altera"
     Se uma tabela já existe, o `create_all` **não mexe nela**. Ou seja, se adicionarmos uma coluna nova em um model, ela não será criada no banco. Durante o desenvolvimento, podemos apagar o arquivo `comprix.db` e deixar a API criá-lo de novo. Quando o projeto tiver dados reais, vamos usar o **Alembic**, uma ferramenta feita para alterar tabelas sem perder os dados.
+
+!!! info "O `lifespan` também vai crescer"
+    Na página [Usuários](routers/usuarios.md#9-funcao-criar_admin-o-primeiro-administrador), o `lifespan` passa a criar também o **administrador** do sistema, logo depois das tabelas.
 
 ### A sessão
 
@@ -598,7 +604,7 @@ async def test_criar_usuario(session):
     await session.commit()
 
     resultado = await session.scalar(
-        select(Usuarios).where(Usuarios.email == 'paulo@email.com')
+        select(Usuarios).where(Usuarios.email == 'admin@comprix.com')
     )
 
     assert resultado.id == 1

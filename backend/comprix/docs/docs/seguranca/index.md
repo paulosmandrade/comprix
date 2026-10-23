@@ -15,6 +15,7 @@ No **COMPRIX**, essa proteção começa em dois pontos:
 |---|---|---|
 | 🗄️ **Senhas no banco de dados** | O que está **guardado** | Hash com **Argon2** |
 | 🎟️ **Token de autorização** | O que está **em trânsito** | **JWT** + **OAuth2** |
+| ✉️ **Link para definir a senha** | O **primeiro acesso** | **JWT** de uso único, enviado por e-mail |
 
 ---
 
@@ -83,9 +84,29 @@ a assinatura **deixa de conferir** e o acesso é **negado**.
 O token tem **prazo de validade curto**. Se for interceptado, só serve por
 **alguns minutos**, o que limita bastante o estrago.
 
+### 👮 Quem pode fazer o quê
+
+Saber **quem** é o usuário não basta: algumas ações, como cadastrar
+usuários, são exclusivas de **administradores**. Essa permissão vem da coluna
+`admin` da tabela `usuarios`, conferida a cada requisição pela função
+`get_current_admin`. Um usuário comum recebe **403 Forbidden**.
+
 ---
 
-## 🤝 3. Duas camadas que se complementam
+## ✉️ 3. A senha é definida pelo próprio usuário
+
+No COMPRIX, o administrador cadastra só o **nome** e o **e-mail**. Ninguém
+escolhe a senha por outra pessoa, e nenhuma senha é enviada por e-mail:
+
+1. O usuário é criado com uma **senha aleatória** que ninguém conhece.
+2. Ele recebe por e-mail um **link** com um token válido por **24 horas**.
+3. Pelo link, ele mesmo define a senha. Depois disso, o link deixa de valer.
+
+Os detalhes estão na página [Usuários](../routers/usuarios.md).
+
+---
+
+## 🤝 4. Camadas que se complementam
 
 > 🗄️ **O hash protege o que está guardado.**
 > 🎟️ **O token protege o que está em trânsito.**
@@ -96,7 +117,7 @@ nenhum.
 
 ---
 
-## ✅ 4. Cuidados básicos
+## ✅ 5. Cuidados básicos
 
 Nada disso funciona sem alguns cuidados:
 

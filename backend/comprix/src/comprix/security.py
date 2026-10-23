@@ -88,3 +88,27 @@ async def get_current_user(
         raise credentials_exception
 
     return usuario
+
+
+async def get_current_admin(
+    usuario: Usuarios = Depends(get_current_user),
+):
+    if not usuario.admin:
+        raise HTTPException(
+            status_code=HTTPStatus.FORBIDDEN,
+            detail='Acesso permitido somente para administradores',
+        )
+
+    return usuario
+
+
+# Criando o token do link de definir senha
+def create_definir_senha_token(email: str) -> str:
+    """Cria o token do link de definir senha, válido por 24 horas."""
+    expire = datetime.now(tz=ZoneInfo('UTC')) + timedelta(hours=24)
+
+    return encode(
+        {'sub': email, 'tipo': 'definir_senha', 'exp': expire},
+        settings.SECRET_KEY,
+        algorithm=settings.ALGORITHM,
+    )

@@ -57,7 +57,7 @@ $ alembic upgrade head
 - O segundo **aplica** no banco todas as migrações que ainda faltam. O `head` significa "a versão mais recente".
 
 !!! warning "Sempre revise a migração gerada"
-    O `--autogenerate` é muito útil, mas não é perfeito. Ele não consegue perceber, por exemplo, que uma coluna foi **renomeada**: para ele, parece que uma coluna foi apagada e outra foi criada, o que faria os dados
+    O `--autogenerate` é muito útil, mas não é perfeito. Ele não consegue perceber, por exemplo, que uma coluna foi **renomeada**: para ele, parece que uma coluna foi apagada e outra foi criada, o que faria os dados daquela coluna serem **perdidos**. Por isso, sempre abra o arquivo gerado e confira as alterações antes de rodar o `alembic upgrade head`.
 
 ## Instalando e configurando o Alembic
 
@@ -77,6 +77,8 @@ $ poetry run alembic init migrations
 ```
 comprix/
 ├── migrations/           # Migrações do banco de dados (Alembic)
+│   ├── versions/         # Arquivos de migração
+│   ├── env.py
 │   ├── README
 │   └── script.py.mako
 ├── src/
@@ -146,11 +148,11 @@ alembic downgrade -1
 
 ## Ajustando o arquivo migrations/env.py
 
-1º Devemos importar as **Settings** do nosso arquivo **settings.py** e o **BaseModel** do pydantic dos nosso modelos.
+1º Devemos importar as **Settings** do nosso arquivo **settings.py** e a classe **Base** (do SQLAlchemy) dos nossos modelos, junto com os arquivos dos modelos.
 
-2º Definir o caminho da nossa base de dados pela URL do SQLAlchemy.
+2º Definir o caminho da nossa base de dados pela URL do `.env` (`DATABASE_URL`).
 
-3º No arquivo migrations/env.py, defina o target_metadata como Base.metadata.create_all. É a partir dele que o Alembic compara os modelos com o banco e gera as migrações automaticamente:
+3º No arquivo migrations/env.py, definir o `target_metadata` como `Base.metadata`. É a partir dele que o Alembic compara os modelos com o banco e gera as migrações automaticamente.
 
 O projeto usa SQLite com o driver assíncrono **aiosqlite**. O template padrão do Alembic é síncrono e não funciona com esse driver, por isso o `env.py` abaixo é baseado no template assíncrono (`alembic init -t async migrations`).
 
@@ -315,7 +317,7 @@ Com isso, os arquivos ficam ordenados pelo hash, e não pelo número. Existem du
 O parâmetro `--rev-id` permite definir o ID manualmente:
 
 ```bash
-alembic revision --autogenerate --rev-id 01 -m "01_criar_tabela_usuarios"
+alembic revision --autogenerate --rev-id 01 -m "cria_tabela_usuarios"
 # gera: 01_cria_tabela_usuarios.py
 ```
 
@@ -346,6 +348,69 @@ Para ver a sequência oficial:
 ```bash
 alembic history
 ```
+
+## As migrações do Comprix
+
+Até aqui, o projeto tem três migrações, todas na tabela `usuarios`:
+
+| Arquivo | O que faz |
+|---|---|
+| `720c9f529c84_01_cria_tabela_usuarios.py` | Primeira migração. Veio **vazia** (só com `pass`), porque a tabela já tinha sido criada antes pelo `create_all`. Ela marca o ponto de partida do histórico. |
+| `d9c95ddfa8ff_02_recuperacao_de_senha_em_usuarios.py` | Remove a coluna `codigo`, cria `codigo_recuperacao`, `codigo_expira_em` e `codigo_tentativas` e aumenta a `senha` de 100 para 255 caracteres. |
+| `e4ae67941be3_03_adiciona_admin_em_usuarios.py` | Cria a coluna `admin`, usada pelo `get_current_admin`. |
+
+Com elas, o model `Usuarios` fica assim:
+
+```python title="src/comprix/models/usuarios.py" linenums="1"
+from datetime import datetime
+
+from sqlalchemy import DateTime, String
+from sqlalchemy.orm import Mapped, mapped_column
+
+from comprix.models.base import Base, atualizado, criado
+
+
+class Usuarios(Base):
+    __tablename__ = 'usuarios'
+    id: Mapped[int] = mapped_column(primary_key=True)
+    created_at: Mapped[criado]
+    updated_at: Mapped[atualizado]
+    nome: Mapped[str] = mapped_column(String(50), nullable=False)
+    email: Mapped[str] = mapped_column(
+        String(100), nullable=False, unique=True
+    )
+    senha: Mapped[str] = mapped_column(String(255), nullable=False)
+    primeiro_acesso: Mapped[bool] = mapped_column(default=True)
+    admin: Mapped[bool] = mapped_column(default=False)
+    status: Mapped[bool] = mapped_column(default=True)
+
+    codigo_recuperacao: Mapped[str | None] = mapped_column(
+        String(255), default=None
+    )
+    codigo_expira_em: Mapped[datetime | None] = mapped_column(
+        DateTime(timezone=True), default=None
+    )
+    codigo_tentativas: Mapped[int] = mapped_column(default=0)
+```
+
+| Coluna nova | Para que serve |
+|---|---|
+| `senha` com `String(255)` | O hash do Argon2 tem cerca de 100 caracteres; 255 dá folga para mudanças de parâmetros do algoritmo. |
+| `admin` | Indica se o usuário é administrador. Começa como `False`. |
+| `codigo_recuperacao` | Código de recuperação de senha (opcional). Preparada para a futura rota de "esqueci minha senha". |
+| `codigo_expira_em` | Até quando o código de recuperação vale. `DateTime(timezone=True)` guarda a data com fuso. |
+| `codigo_tentativas` | Quantas vezes o código foi digitado errado. |
+
+!!! warning "Coluna obrigatória em tabela que já tem dados"
+    Repare que as migrações 02 e 03 criam colunas `nullable=False` (`codigo_tentativas` e `admin`) **sem valor padrão no banco**. O `default=` do model só vale quando o SQLAlchemy insere um registro; ele não preenche as linhas que já existem. Se a tabela tiver usuários, o SQLite recusa a migração, porque as linhas antigas ficariam com a coluna vazia.
+
+    Para colunas obrigatórias em tabelas com dados, acrescente um `server_default` na migração:
+
+    ```python
+    batch_op.add_column(
+        sa.Column('admin', sa.Boolean(), nullable=False, server_default=sa.false())
+    )
+    ```
 
 ### Conclusão
 

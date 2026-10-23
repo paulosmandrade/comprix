@@ -38,12 +38,14 @@ Ela fica no `.env`, **nunca** no código nem no GitHub:
 SECRET_KEY="sua_chave"
 ALGORITHM="HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES="60"
+ADMIN_USER="Administrador"
 ADMIN_EMAIL="seu_email@test.com"
+ADMIN_SENHA="senha_do_admin"
 ```
 
 E no `settings.py`:
 
-```python
+```python title="src/comprix/settings.py"
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -56,7 +58,9 @@ class Settings(BaseSettings):
     SECRET_KEY: str
     ALGORITHM: str
     ACCESS_TOKEN_EXPIRE_MINUTES: int
+    ADMIN_USER: str
     ADMIN_EMAIL: str
+    ADMIN_SENHA: str
 ```
 
 | Variável | Para que serve |
@@ -64,32 +68,34 @@ class Settings(BaseSettings):
 | `SECRET_KEY` | Chave que **assina** o token. Quem a tiver consegue forjar tokens. |
 | `ALGORITHM` | Algoritmo de assinatura. O `HS256` é o padrão para uma API única. |
 | `ACCESS_TOKEN_EXPIRE_MINUTES` | Validade do token. Quanto menor, menor o estrago se for roubado. |
-| `ADMIN_EMAIL` | E-mail que recebe a claim `is_admin` no token. |
+| `ADMIN_USER`, `ADMIN_EMAIL`, `ADMIN_SENHA` | Dados do administrador criado automaticamente pela função `criar_admin()`. O `ADMIN_EMAIL` também recebe a claim `is_admin` no token. |
 
 > ⚠️ Confira se o `.env` está no `.gitignore`.
 
 ---
 
-##  3. ` função create_access_token`: criando o token
+## 3. Função `create_access_token`: criando o token
 
 ### Para que serve
 
 É a função chamada **no momento do login**, depois que a senha foi conferida.
-Ela gera o "crachá digital" do usuário: um token JWT que diz **quem ele é**,
-**até quando** o acesso vale e, se for o caso, que ele é **administrador**.
+Ela gera o "crachá digital" do usuário: um token JWT que diz **quem ele é** e
+**até quando** o acesso vale.
 
 O usuário guarda esse token e o envia em todas as próximas requisições, sem
 precisar mandar a senha de novo.
 
 ### 📄 O código
 
-```python
-from datetime import datetime
+```python title="src/comprix/security.py"
+from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo
 
 from jwt import encode
 
 from comprix.settings import Settings
+
+settings = Settings()
 
 
 # Criando o Token
@@ -101,11 +107,11 @@ def create_access_token(data: dict):
         minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES
     )
 
-    # Dentro do dicionário adiciona a CLAIN que tem a expiração do Token
+    # Dentro do dicionário adiciona a CLAIM que tem a expiração do Token
     to_encode.update({'exp': expire})
 
     # Claim is_admin
-    if data.username == settings.ADMIN_EMAIL:
+    if to_encode.get('sub') == settings.ADMIN_EMAIL:
         to_encode.update({'is_admin': True})
 
     # Agora vamos criar o TOKEN com jwt encode
@@ -116,12 +122,12 @@ def create_access_token(data: dict):
     return encode_jwt
 ```
 
-### Explicando passo a passo a função create_access_token
+### Explicando passo a passo
 
 #### 1 Recebendo os dados
 
 ```python
-def create_access_token(data: dict) -> str:
+def create_access_token(data: dict):
 ```
 
 A função recebe um **dicionário** com as informações que vão dentro do token.
@@ -132,13 +138,12 @@ create_access_token(data={'sub': usuario.email})
 ```
 
 A chave `sub` (*subject*, "assunto") é uma **claim padrão do JWT** e
-identifica **o dono do token**. O retorno (`-> str`) é o token pronto, em
-forma de texto.
+identifica **o dono do token**. O retorno é o token pronto, em forma de texto.
 
 #### 2 Fazendo uma cópia
 
 ```python
-    to_encode = data.copy()
+to_encode = data.copy()
 ```
 
 Vamos acrescentar informações ao dicionário. O `.copy()` garante que essas
@@ -158,7 +163,7 @@ to_encode.update({'exp': expire})
 |---|---|
 | `datetime.now(tz=ZoneInfo('UTC'))` | Pega a hora **atual em UTC**. O JWT trabalha sempre em UTC, para não depender do fuso do servidor. |
 | `timedelta(minutes=...)` | Representa um intervalo de N minutos, vindo do `.env`. |
-| `+` | Soma os dois: "agora + 30 minutos", por exemplo. |
+| `+` | Soma os dois: "agora + 60 minutos", por exemplo. |
 | `{'exp': expire}` | Grava o resultado na claim **`exp`** (*expiration*). |
 
 O PyJWT converte o `datetime` em número (timestamp) automaticamente. Depois
@@ -167,28 +172,39 @@ desse horário, o token é **recusado** em qualquer validação.
 > ⏳ Validade curta é uma proteção: se o token for roubado, ele só serve por
 > alguns minutos.
 
-#### 4 Marcando o administrador
+#### 4 A claim `is_admin`
 
 ```python
 if to_encode.get('sub') == settings.ADMIN_EMAIL:
     to_encode.update({'is_admin': True})
 ```
 
-Se o e-mail do usuário (`sub`) for igual ao e-mail de admin configurado no
-`.env`, o token ganha a claim **`is_admin`**. Para usuários comuns, essa
-claim **simplesmente não existe** no token.
+Se o e-mail do usuário (`sub`) for igual ao `ADMIN_EMAIL` do `.env`, o token
+ganha a claim **`is_admin`**. Para os demais usuários, essa claim **não
+existe** no token.
 
 Usamos `.get('sub')` em vez de `['sub']` para não quebrar caso o `sub` não
 venha: o `.get` devolve `None` em vez de lançar erro.
 
-> A versão anterior usava `data.username`. Como `data` é um **dicionário**,
-> isso lançava `AttributeError` em todo login. Em dicionários, acessamos os
-> valores pela chave: `data['sub']` ou `data.get('sub')`.
+!!! warning "A claim `is_admin` é apenas informativa"
+    O backend **não usa** essa claim para liberar ou bloquear rotas. Quem
+    decide se um usuário é administrador é a **coluna `admin` da tabela
+    `usuarios`**, verificada pela função `get_current_admin`
+    ([seção 5](#5-funcao-get_current_admin-restringindo-ao-administrador)).
+
+    Ela pode ser útil no **frontend**, por exemplo para mostrar ou esconder o
+    menu de administração. Mas tem limitações:
+
+    - só vale para o `ADMIN_EMAIL`, não para outros usuários com `admin=True`;
+    - se a permissão for retirada, o token antigo continua dizendo
+      `is_admin: true` até expirar.
 
 #### 5 Assinando o token
 
 ```python
-return encode(to_encode, settings.SECRET_KEY, algorithm=settings.ALGORITHM)
+encode_jwt = encode(
+    to_encode, settings.SECRET_KEY, algorithm=settings.ALGORITHM
+)
 ```
 
 O `encode` do PyJWT:
@@ -207,8 +223,7 @@ eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGIuY29tIiwiZXhwIjoxNzYxMjM0NTY3fQ.k3Jx...
 ```json
 {
   "sub": "usuario@comprix.com",
-  "exp": 1761234567,
-  "is_admin": true
+  "exp": 1761234567
 }
 ```
 
@@ -216,15 +231,16 @@ eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGIuY29tIiwiZXhwIjoxNzYxMjM0NTY3fQ.k3Jx...
 |---|---|
 | `sub` | **Quem** é o dono do token |
 | `exp` | **Até quando** ele vale (em segundos desde 1970, UTC) |
-| `is_admin` | Só aparece para o e-mail de administrador |
+| `is_admin` | Só aparece para o `ADMIN_EMAIL` (informativa) |
 
 > 💡 **O payload pode ser lido por qualquer um**, porque é só base64. Mas
 > **não pode ser alterado**: se alguém trocar o `sub` ou incluir
 > `"is_admin": true`, a assinatura deixa de conferir e o token é recusado.
 > Por isso **nunca** coloque senha ou dados sensíveis no token.
 
+---
 
-## 4. `função get_current_user`: validando o token
+## 4. Função `get_current_user`: validando o token
 
 ### Para que serve
 
@@ -254,37 +270,19 @@ e o `oauth2_scheme` entrega à função apenas a parte depois de `Bearer`.
 | Parâmetro | O que faz |
 |---|---|
 | `tokenUrl` | Indica a rota de login. Ativa o botão **Authorize** no `/docs`. |
-| `refreshUrl` | **Apenas informativo** para a documentação. A rota `auth/refresh` precisa ser implementada à parte. |
+| `refreshUrl` | **Apenas informativo** para a documentação. A rota está implementada em [Refresh Token](../routers/refresh.md). |
 
 > Se o cabeçalho `Authorization` não vier, o próprio FastAPI responde **401**
 > antes mesmo de chamar a função.
 
 ### O código
 
-```python
-from http import HTTPStatus
-
-from fastapi import Depends, HTTPException
-from fastapi.security import OAuth2PasswordBearer
-from jwt import DecodeError, ExpiredSignatureError, decode
-from sqlalchemy import select
-from sqlalchemy.ext.asyncio import AsyncSession
-
-from comprix.database import get_session
-from comprix.models import Usuarios
-from comprix.settings import Settings
-
-settings = Settings()
-oauth2_scheme = OAuth2PasswordBearer(
-    tokenUrl='auth/token', refreshUrl='auth/refresh'
-)
-
-
+```python title="src/comprix/security.py"
+# Validando token de usuarios
 async def get_current_user(
     session: AsyncSession = Depends(get_session),
     token: str = Depends(oauth2_scheme),
-) -> Usuarios:
-    """Valida o token e retorna o usuário logado."""
+):
     credentials_exception = HTTPException(
         status_code=HTTPStatus.UNAUTHORIZED,
         detail='Credencial inválida',
@@ -295,16 +293,21 @@ async def get_current_user(
         payload = decode(
             token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM]
         )
-    except InvalidTokenError:
+        subject_email = payload.get('sub')
+
+        if not subject_email:
+            raise credentials_exception
+
+    except DecodeError:
         raise credentials_exception
 
-    subject_email = payload.get('sub')
-    if not subject_email:
+    except ExpiredSignatureError:
         raise credentials_exception
 
     usuario = await session.scalar(
         select(Usuarios).where(Usuarios.email == subject_email)
     )
+
     if not usuario:
         raise credentials_exception
 
@@ -319,7 +322,7 @@ async def get_current_user(
 async def get_current_user(
     session: AsyncSession = Depends(get_session),
     token: str = Depends(oauth2_scheme),
-) -> Usuarios:
+):
 ```
 
 Ninguém chama essa função diretamente: o **FastAPI** a executa sozinho e
@@ -355,45 +358,60 @@ try:
     payload = decode(
         token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM]
     )
-except InvalidTokenError:
+    subject_email = payload.get('sub')
+
+    if not subject_email:
+        raise credentials_exception
+
+except DecodeError:
+    raise credentials_exception
+
+except ExpiredSignatureError:
     raise credentials_exception
 ```
 
 O `decode` faz o caminho inverso do `encode` e, no processo, **valida tudo**:
 
-| Verificação | Se falhar, lança |
-|---|---|
-| O token tem o formato `header.payload.assinatura`? | `DecodeError` |
-| A assinatura confere com a `SECRET_KEY`? | `InvalidSignatureError` |
-| A claim `exp` ainda não passou? | `ExpiredSignatureError` |
+| Verificação | Se falhar, lança | Capturado por |
+|---|---|---|
+| O token tem o formato `header.payload.assinatura`? | `DecodeError` | `except DecodeError` |
+| A assinatura confere com a `SECRET_KEY`? | `InvalidSignatureError` | `except DecodeError` (é uma subclasse dele) |
+| A claim `exp` ainda não passou? | `ExpiredSignatureError` | `except ExpiredSignatureError` |
 
-Todas essas exceções são "filhas" de **`InvalidTokenError`**, então um único
-`except` cobre todos os casos.
+Dentro do mesmo `try`, pegamos o e-mail da claim `sub`. Um token **sem dono**
+não serve para nada, então também é recusado.
 
 > O `algorithms=[...]` é **obrigatório por segurança**. Ele impede que um
 > atacante monte um token dizendo "use o algoritmo `none`" (sem assinatura)
 > e engane o servidor.
 
-Se tudo estiver certo, `payload` é o dicionário original:
-`{'sub': '...', 'exp': ..., 'is_admin': True}`.
+!!! tip "Dica: um único `except`"
+    Todas as exceções de token do PyJWT herdam de `InvalidTokenError`. Se
+    quiser simplificar, os dois `except` podem virar um só:
 
-#### 4 Identificando o dono do token
+    ```python
+    from jwt import InvalidTokenError
 
-```python
-subject_email = payload.get('sub')
-if not subject_email:
-    raise credentials_exception
-```
+    try:
+        payload = decode(
+            token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM]
+        )
+        subject_email = payload.get('sub')
 
-Pega o e-mail da claim `sub`. Um token **sem dono** não serve para nada,
-então é recusado.
+        if not subject_email:
+            raise credentials_exception
 
-#### 5 Conferindo no banco
+    except InvalidTokenError:
+        raise credentials_exception
+    ```
+
+#### 4 Conferindo no banco
 
 ```python
 usuario = await session.scalar(
     select(Usuarios).where(Usuarios.email == subject_email)
 )
+
 if not usuario:
     raise credentials_exception
 ```
@@ -405,7 +423,7 @@ login**. Por isso buscamos no banco:
 - `session.scalar(...)` executa e devolve **o objeto** ou `None`;
 - se for `None`, o acesso é negado.
 
-#### 6 Entregando o usuário
+#### 5 Entregando o usuário
 
 ```python
 return usuario
@@ -414,8 +432,11 @@ return usuario
 A rota recebe o objeto `Usuarios` completo, pronto para uso:
 
 ```python
+CurrentUser = Annotated[Usuarios, Depends(get_current_user)]
+
+
 @router.get('/me')
-async def me(usuario: Usuarios = Depends(get_current_user)):
+async def me(usuario: CurrentUser):
     return usuario
 ```
 
@@ -437,16 +458,106 @@ Requisição
 
 ---
 
-## 5. O módulo `security.py` completo
+## 5. Função `get_current_admin`: restringindo ao administrador
+
+### Para que serve
+
+Algumas rotas, como **criar, alterar e excluir usuários**, só podem ser usadas
+por administradores. O `get_current_admin` é um **segundo porteiro**: ele
+reaproveita o `get_current_user` e, depois, confere se o usuário é admin.
+
+### O código
+
+```python title="src/comprix/security.py"
+async def get_current_admin(
+    usuario: Usuarios = Depends(get_current_user),
+):
+    if not usuario.admin:
+        raise HTTPException(
+            status_code=HTTPStatus.FORBIDDEN,
+            detail='Acesso permitido somente para administradores',
+        )
+
+    return usuario
+```
+
+### Passo a passo
+
+#### 1 Reaproveitando o `get_current_user`
 
 ```python
+usuario: Usuarios = Depends(get_current_user)
+```
+
+Antes de executar o `get_current_admin`, o FastAPI executa o
+`get_current_user`. Ou seja, o token já foi **validado** e o usuário já foi
+**buscado no banco**. Se algo falhar ali, a resposta é **401** e o
+`get_current_admin` nem chega a rodar.
+
+#### 2 Conferindo a permissão
+
+```python
+if not usuario.admin:
+    raise HTTPException(
+        status_code=HTTPStatus.FORBIDDEN,
+        detail='Acesso permitido somente para administradores',
+    )
+```
+
+A verificação usa a **coluna `admin` do banco**, não a claim `is_admin` do
+token. Assim:
+
+- qualquer usuário com `admin=True` é reconhecido como administrador;
+- se a permissão for retirada no banco, o efeito é **imediato**, mesmo que
+  o token ainda esteja válido.
+
+#### 3 401 ou 403?
+
+| Status | Significado | Quem responde |
+|---|---|---|
+| `401 Unauthorized` | "Não sei quem você é": sem token, token inválido ou expirado | `get_current_user` |
+| `403 Forbidden` | "Sei quem você é, mas você não tem permissão" | `get_current_admin` |
+
+### Usando nas rotas
+
+```python title="src/comprix/routers/usuarios.py"
+from comprix.security import get_current_admin
+
+CurrentUserAdmin = Annotated[Usuarios, Depends(get_current_admin)]
+
+
+@router.post(
+    '/',
+    status_code=HTTPStatus.CREATED,
+    response_model=UsuarioPublico,
+)
+async def criar_usuarios(
+    user: UsuarioSchema,
+    session: Session,
+    current_user: CurrentUserAdmin,
+): ...
+```
+
+Basta receber um parâmetro do tipo `CurrentUserAdmin`. Mesmo sem ser usado
+dentro da função, ele obriga o FastAPI a executar a verificação.
+
+| Tipo | Quem pode acessar |
+|---|---|
+| `CurrentUser` | Qualquer usuário logado |
+| `CurrentUserAdmin` | Somente administradores |
+
+---
+
+## 6. O módulo `security.py` completo
+
+```python title="src/comprix/security.py"
 from datetime import datetime, timedelta
 from http import HTTPStatus
 from zoneinfo import ZoneInfo
 
 from fastapi import Depends, HTTPException
 from fastapi.security import OAuth2PasswordBearer
-from jwt import InvalidTokenError, decode, encode
+from jwt import DecodeError, ExpiredSignatureError, decode, encode
 from pwdlib import PasswordHash
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -462,39 +573,45 @@ oauth2_scheme = OAuth2PasswordBearer(
 )
 
 
-def get_password_hash(senha: str) -> str:
-    """Gera o hash Argon2 da senha."""
+# Criptograda a senha
+def get_password_hash(senha: str):
     return pwd_context.hash(senha)
 
 
-def verify_password(senha: str, hashed_password: str) -> bool:
-    """Confere a senha digitada com o hash salvo no banco."""
+# Verifica senha
+def verify_password(senha: str, hashed_password: str):
     return pwd_context.verify(senha, hashed_password)
 
 
-def create_access_token(data: dict) -> str:
-    """Cria o token JWT de acesso.
-
-    `data` deve conter a claim 'sub' com o e-mail do usuário.
-    """
+# Criando o Token
+def create_access_token(data: dict):
     to_encode = data.copy()
 
+    # Acrescenta minutos no tempo atual, para validade do token
     expire = datetime.now(tz=ZoneInfo('UTC')) + timedelta(
         minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES
     )
+
+    # Dentro do dicionário adiciona a CLAIM que tem a expiração do Token
     to_encode.update({'exp': expire})
 
+    # Claim is_admin
     if to_encode.get('sub') == settings.ADMIN_EMAIL:
         to_encode.update({'is_admin': True})
 
-    return encode(to_encode, settings.SECRET_KEY, algorithm=settings.ALGORITHM)
+    # Agora vamos criar o TOKEN com jwt encode
+    encode_jwt = encode(
+        to_encode, settings.SECRET_KEY, algorithm=settings.ALGORITHM
+    )
+
+    return encode_jwt
 
 
+# Validando token de usuarios
 async def get_current_user(
     session: AsyncSession = Depends(get_session),
     token: str = Depends(oauth2_scheme),
-) -> Usuarios:
-    """Valida o token e retorna o usuário logado."""
+):
     credentials_exception = HTTPException(
         status_code=HTTPStatus.UNAUTHORIZED,
         detail='Credencial inválida',
@@ -505,71 +622,105 @@ async def get_current_user(
         payload = decode(
             token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM]
         )
-    except InvalidTokenError:
+        subject_email = payload.get('sub')
+
+        if not subject_email:
+            raise credentials_exception
+
+    except DecodeError:
         raise credentials_exception
 
-    subject_email = payload.get('sub')
-    if not subject_email:
+    except ExpiredSignatureError:
         raise credentials_exception
 
     usuario = await session.scalar(
         select(Usuarios).where(Usuarios.email == subject_email)
     )
+
     if not usuario:
         raise credentials_exception
 
     return usuario
+
+
+# Validando se o usuario e administrador
+async def get_current_admin(
+    usuario: Usuarios = Depends(get_current_user),
+):
+    if not usuario.admin:
+        raise HTTPException(
+            status_code=HTTPStatus.FORBIDDEN,
+            detail='Acesso permitido somente para administradores',
+        )
+
+    return usuario
+
+
+# Criando o token do link de definir senha
+def create_definir_senha_token(email: str) -> str:
+    """Cria o token do link de definir senha, válido por 24 horas."""
+    expire = datetime.now(tz=ZoneInfo('UTC')) + timedelta(hours=24)
+
+    return encode(
+        {'sub': email, 'tipo': 'definir_senha', 'exp': expire},
+        settings.SECRET_KEY,
+        algorithm=settings.ALGORITHM,
+    )
 ```
 
-### O que mudou em relação à versão anterior
-
-| Antes | Depois | Por quê |
-|---|---|---|
-| `data.username` | `to_encode.get('sub')` | `data` é um dicionário; a linha antiga lançava `AttributeError` em todo login. |
-| `except DecodeError` + `except ExpiredSignatureError` | `except InvalidTokenError` | Um único `except` cobre **todos** os erros de token. |
-| Sem tipo de retorno | `-> str`, `-> bool`, `-> Usuarios` | Ajuda o editor, o autocompletar e o mypy. |
+A função `create_definir_senha_token` é explicada na página
+[Usuários](../routers/usuarios.md#5-o-token-do-link-ajustes-no-securitypy).
 
 ---
 
-## 6. Testes
+## 7. Testes
 
-Como o projeto já usa **SQLite em memória**, os testes vão usar um **banco de
+Como o projeto já usa **SQLite em memória**, os testes usam um **banco de
 verdade** em vez de sessões falsas. As fixtures ficam no `conftest.py` e são
 reaproveitadas por todos os arquivos de teste.
 
 ### Dependências
 
 ```bash
-poetry add pytest-asyncio aiosqlite
+poetry add --group dev pytest-asyncio
 ```
 
-E no `pyproject.toml`, para o pytest-asyncio não emitir avisos:
+O `aiosqlite` já foi instalado como dependência principal na página
+[Sqlite - Models](../sqlite.md), porque a API também usa.
+
+E no `pyproject.toml`, a configuração do pytest:
 
 ```toml
-[tool.pytest.ini_options]
-pythonpath = '.'
+[tool.pytest]
+pythonpath = ['src']
+addopts = ['-p', 'no:warnings', '--cov=comprix', '--cov-context=test']
 asyncio_default_fixture_loop_scope = 'function'
 ```
 
----
-
-### 6.1 Problemas no `conftest.py` atual
-
-| Problema | Consequência |
+| Opção | Para que serve |
 |---|---|
-| A fixture `client` cria **outro** banco em memória, diferente do da fixture `session` | Um usuário criado pela `session` **não existe** para a API. O login nos testes nunca encontraria ninguém. |
-| O banco do `client` não roda o `create_all` | A API acessaria um banco **sem tabelas**. |
-| `monkeypatch.setattr('comprix.database.engine', ...)` | Se o `get_session` já capturou o engine original na importação, a troca não tem efeito e os testes podem bater no **banco real**. |
-| `sqlite:///:memory:` sem `StaticPool` | No SQLite em memória, **cada conexão é um banco novo e vazio**. Sem o `StaticPool`, conexões diferentes enxergam bancos diferentes. |
-
-A solução é usar **um único banco** e fazer a API usar a **mesma sessão** dos
-testes, com o `app.dependency_overrides`.
+| `pythonpath = ['src']` | Permite importar `comprix` nos testes, já que o pacote fica em `src`. |
+| `addopts` | Opções usadas em toda execução: esconde avisos e mede a cobertura por teste. |
+| `asyncio_default_fixture_loop_scope` | Evita o aviso do pytest-asyncio sobre o escopo do *event loop*. |
 
 ---
 
-### 6.2 Novo `tests/conftest.py`
+### 7.1 Por que o `conftest.py` é montado assim
 
-```python
+Alguns cuidados evitam problemas difíceis de encontrar:
+
+| Cuidado | Sem ele... |
+|---|---|
+| A API e os testes usam **o mesmo banco** | Um usuário criado pela `session` **não existiria** para a API, e o login nos testes nunca encontraria ninguém. |
+| O banco de testes roda o `create_all` | A API acessaria um banco **sem tabelas**. |
+| Usar `app.dependency_overrides` em vez de `monkeypatch` no engine | Se o `get_session` já tiver capturado o engine original, a troca não tem efeito e os testes podem bater no **banco real**. |
+| `StaticPool` no SQLite em memória | **Cada conexão seria um banco novo e vazio**, e conexões diferentes enxergariam bancos diferentes. |
+
+---
+
+### 7.2 O `tests/conftest.py`
+
+```python title="tests/conftest.py"
 import pytest
 import pytest_asyncio
 from fastapi.testclient import TestClient
@@ -623,10 +774,11 @@ def client(session):
 
 @pytest_asyncio.fixture
 async def usuario(session):
-    senha = 'senha-de-teste-123'
+    senha = 'testing_senha'
 
     usuario = Usuarios(
-        email='usuario@comprix.com',
+        nome='Usuário teste',
+        email='usuario@comprix.com.br',
         senha=get_password_hash(senha),
     )
     session.add(usuario)
@@ -638,12 +790,14 @@ async def usuario(session):
 
 
 @pytest_asyncio.fixture
-async def admin(session, settings):
-    senha = 'senha-de-admin-123'
+async def usuario_admin(session):
+    senha = 'senha_admin'
 
     admin = Usuarios(
-        email=settings.ADMIN_EMAIL,
+        nome='Admin Teste',
+        email='admin@comprix.com.br',
         senha=get_password_hash(senha),
+        admin=True,
     )
     session.add(admin)
     await session.commit()
@@ -660,14 +814,30 @@ def token(client, usuario):
         data={'username': usuario.email, 'password': usuario.clean_password},
     )
     return response.json()['access_token']
+
+
+@pytest.fixture
+def token_admin(client, usuario_admin):
+    response = client.post(
+        '/auth/token',
+        data={
+            'username': usuario_admin.email,
+            'password': usuario_admin.clean_password,
+        },
+    )
+    return response.json()['access_token']
 ```
 
-> ⚠️ Ajuste `Usuarios(email=..., senha=...)` para os campos reais do seu
-> model. Se houver outros campos obrigatórios, como `nome`, inclua-os aqui.
+> ⚠️ Ajuste os campos de `Usuarios(...)` para os campos reais do seu model.
+> Se houver outros campos obrigatórios, inclua-os aqui.
+
+> 💡 Mais adiante, na página [Usuários](../routers/usuarios.md#131-ajustes-no-conftestpy),
+> o `conftest.py` recebe mais uma fixture, a `emails_enviados`, que impede os
+> testes de enviarem e-mails de verdade.
 
 ---
 
-### 6.3 Entendendo cada fixture
+### 7.3 Entendendo cada fixture
 
 > 💡 **Fixture** é uma função que **prepara algo** para o teste. O teste só
 > precisa declarar o nome dela como parâmetro, e o pytest executa a fixture
@@ -676,8 +846,8 @@ def token(client, usuario):
 
 #### `settings`
 
-Entrega as configurações do `.env` para os testes, como o `ADMIN_EMAIL`, a
-`SECRET_KEY` e o tempo de expiração.
+Entrega as configurações do `.env` para os testes, como a `SECRET_KEY`, o
+`ALGORITHM`, o `ADMIN_EMAIL` e o tempo de expiração.
 
 #### `session`: o banco de testes
 
@@ -716,33 +886,40 @@ rotas.
 
 O `.clear()` no final desfaz a troca, para não vazar para outros testes.
 
-#### `usuario` e `admin`: dados prontos no banco
+#### `usuario` e `usuario_admin`: dados prontos no banco
 
-Gravam um usuário comum e um administrador no banco de testes, já com a senha
-**em hash**, como no sistema real.
+Gravam um usuário **comum** e um **administrador** (`admin=True`) no banco de
+testes, já com a senha **em hash**, como no sistema real.
 
 ```python
 usuario.clean_password = senha
 ```
 
 O banco só guarda o hash, mas os testes de login precisam da **senha pura**.
-Por isso ela fica num atributo extra do objeto, que **só existe nos testes**.
+Por isso ela fica num atributo extra do objeto, que **só existe nos testes** e
+não vai para o banco.
 
-O `admin` usa o `settings.ADMIN_EMAIL`, então recebe a claim `is_admin`.
+!!! warning "Senha em texto puro nos testes"
+    No login dos testes, use `usuario.clean_password`, nunca `usuario.senha`.
+    O `usuario.senha` é o **hash**, e enviá-lo faz o `verify_password` falhar
+    com **401**.
 
-#### `token`: um usuário já logado
+#### `token` e `token_admin`: usuários já logados
 
-Faz o login de verdade em `/auth/token` e devolve o token. Qualquer teste que
-precise de um usuário autenticado só declara `token` como parâmetro.
+Fazem o login de verdade em `/auth/token` e devolvem o token. Qualquer teste
+que precise de um usuário autenticado só declara `token` (usuário comum) ou
+`token_admin` (administrador) como parâmetro.
+
+O `token_admin` é usado nos testes de integração da página de **Usuários**.
 
 ---
 
-### 6.4 Testes unitários: `tests/test_security.py`
+### 7.4 Testes unitários: `tests/test_security.py`
 
-Testam as funções do `security.py` **diretamente**, mas agora com o **banco
-de verdade** da fixture `session`.
+Testam as funções do `security.py` **diretamente**, com o **banco de
+verdade** da fixture `session`.
 
-```python
+```python title="tests/test_security.py"
 from datetime import datetime, timedelta
 from http import HTTPStatus
 from zoneinfo import ZoneInfo
@@ -753,10 +930,38 @@ from jwt import decode, encode
 
 from comprix.security import (
     create_access_token,
+    get_current_admin,
     get_current_user,
     get_password_hash,
     verify_password,
 )
+
+
+# ---------------------------------------------------------------------------
+# Hash de senha
+# ---------------------------------------------------------------------------
+def test_hash_nao_e_a_senha_em_texto_puro():
+    senha_hash = get_password_hash('minha_senha')
+    # senha_hash é diferente do texto puro
+    assert senha_hash != 'minha_senha'
+    # senha_hash começa com $argon2
+    assert senha_hash.startswith('$argon2')
+
+
+def test_hash_da_mesma_senha_muda_a_cada_requisicao():
+    assert get_password_hash('abc') != get_password_hash('abc')
+
+
+def test_verify_password_senha_correta():
+    senha_hash = get_password_hash('minha_senha')
+    # Retorna True para a senha correta
+    assert verify_password('minha_senha', senha_hash)
+
+
+def test_verify_password_senha_errada():
+    senha_hash = get_password_hash('minha_senha')
+    # Retorna False para a senha errada
+    assert not verify_password('outra_senha', senha_hash)
 
 
 # ---------------------------------------------------------------------------
@@ -784,46 +989,33 @@ async def espera_401(session, token: str):
 
 
 # ---------------------------------------------------------------------------
-# Hash de senha
-# ---------------------------------------------------------------------------
-def test_hash_nao_e_a_senha_em_texto_puro():
-    hash_ = get_password_hash('minhasenha')
-    assert hash_ != 'minhasenha'
-    assert hash_.startswith('$argon2')
-
-
-def test_verify_password():
-    hash_ = get_password_hash('minhasenha')
-    assert verify_password('minhasenha', hash_)
-    assert not verify_password('outrasenha', hash_)
-
-
-# ---------------------------------------------------------------------------
 # create_access_token
 # ---------------------------------------------------------------------------
 def test_token_contem_sub_e_exp(settings):
-    token = create_access_token({'sub': 'teste@comprix.com'})
+    token = create_access_token({'sub': 'teste@comprix.com.br'})
     payload = decode(
         token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM]
     )
 
-    assert payload['sub'] == 'teste@comprix.com'
+    assert payload['sub'] == 'teste@comprix.com.br'
     assert 'exp' in payload
 
 
 def test_token_expira_no_tempo_configurado(settings):
+    diferenca_segundos = 5
     inicio = agora().timestamp()
-    token = create_access_token({'sub': 'teste@comprix.com'})
+    token = create_access_token({'sub': 'teste@comprix.com.br'})
     payload = decode(
         token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM]
     )
 
     esperado = inicio + settings.ACCESS_TOKEN_EXPIRE_MINUTES * 60
-    assert abs(payload['exp'] - esperado) < 5
+
+    assert abs(payload['exp'] - esperado) < diferenca_segundos
 
 
 def test_usuario_comum_nao_recebe_is_admin(settings):
-    token = create_access_token({'sub': 'teste@comprix.com'})
+    token = create_access_token({'sub': 'teste@comprix.com.br'})
     payload = decode(
         token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM]
     )
@@ -839,9 +1031,9 @@ def test_admin_recebe_is_admin(settings):
 
 
 def test_nao_altera_o_dicionario_original():
-    data = {'sub': 'teste@comprix.com'}
+    data = {'sub': 'teste@comprix.com.br'}
     create_access_token(data)
-    assert data == {'sub': 'teste@comprix.com'}
+    assert data == {'sub': 'teste@comprix.com.br'}
 
 
 # ---------------------------------------------------------------------------
@@ -859,7 +1051,7 @@ async def test_token_valido_retorna_o_usuario_do_banco(session, usuario):
 
 @pytest.mark.asyncio
 async def test_token_malformado(session):
-    await espera_401(session, 'isto-nao-e-um-jwt')
+    await espera_401(session, 'isso_nao_e_um_jwt')
 
 
 @pytest.mark.asyncio
@@ -904,6 +1096,34 @@ async def test_usuario_apagado_depois_do_login(session, usuario):
     await session.commit()
 
     await espera_401(session, token)
+
+
+# ---------------------------------------------------------------------------
+# get_current_admin
+# ---------------------------------------------------------------------------
+@pytest.mark.asyncio
+async def test_get_current_admin_com_usuario_admin(usuario_admin):
+    """Usuário admin passa pela verificação e é retornado"""
+    resultado = await get_current_admin(usuario=usuario_admin)
+
+    # Retorna o mesmo usuário recebido
+    assert resultado.id == usuario_admin.id
+    assert resultado.admin is True
+
+
+@pytest.mark.asyncio
+async def test_get_current_admin_com_usuario_comum(usuario):
+    """Usuário comum é barrado com 403"""
+    with pytest.raises(HTTPException) as exc:
+        await get_current_admin(usuario=usuario)
+
+    # Verifica se o status code é 403 PROIBIDO
+    assert exc.value.status_code == HTTPStatus.FORBIDDEN
+
+    # Verifica a mensagem de erro
+    assert exc.value.detail == (
+        'Acesso permitido somente para administradores'
+    )
 ```
 
 ### Entendendo os testes unitários
@@ -912,9 +1132,9 @@ async def test_usuario_apagado_depois_do_login(session, usuario):
 
 - **`agora()`**: hora atual em UTC, a mesma referência do módulo.
 - **`token_manual()`**: o `create_access_token` sempre gera tokens
-  **corretos**. Para testar erros, precisamos de tokens "defeituosos": vencidos,
-  sem `sub` ou assinados com outra chave. Esta função monta um token com
-  **qualquer payload** e **qualquer chave**.
+  **corretos**. Para testar erros, precisamos de tokens "defeituosos":
+  vencidos, sem `sub` ou assinados com outra chave. Esta função monta um
+  token com **qualquer payload** e **qualquer chave**.
 - **`espera_401()`**: usa `pytest.raises(HTTPException)` para dizer "**espero**
   que este bloco lance erro". Se não lançar, o teste falha. Depois confere o
   status **401** e o cabeçalho `WWW-Authenticate`.
@@ -924,7 +1144,9 @@ async def test_usuario_apagado_depois_do_login(session, usuario):
 | Teste | Garante que... |
 |---|---|
 | `test_hash_nao_e_a_senha_em_texto_puro` | a senha nunca é guardada como foi digitada e o algoritmo é o Argon2 |
-| `test_verify_password` | a senha certa é aceita e a errada é recusada |
+| `test_hash_da_mesma_senha_muda_a_cada_requisicao` | o *salt* aleatório gera um hash diferente a cada vez |
+| `test_verify_password_senha_correta` | a senha certa é aceita |
+| `test_verify_password_senha_errada` | a senha errada é recusada |
 
 #### `create_access_token`
 
@@ -932,16 +1154,16 @@ async def test_usuario_apagado_depois_do_login(session, usuario):
 |---|---|
 | `test_token_contem_sub_e_exp` | o token identifica o usuário e tem validade |
 | `test_token_expira_no_tempo_configurado` | a validade bate com o `.env` (com 5 s de tolerância para o tempo de execução) |
-| `test_usuario_comum_nao_recebe_is_admin` | um usuário comum **não** vira admin por engano |
-| `test_admin_recebe_is_admin` | o e-mail do `ADMIN_EMAIL` recebe a claim |
+| `test_usuario_comum_nao_recebe_is_admin` | um e-mail comum **não** recebe a claim `is_admin` |
+| `test_admin_recebe_is_admin` | o `ADMIN_EMAIL` recebe a claim |
 | `test_nao_altera_o_dicionario_original` | o `.copy()` funciona e não há efeitos colaterais |
 
 Esses testes não precisam de banco: só geram o token e o abrem com `decode`.
 
 #### `get_current_user`
 
-Aqui está a principal melhoria: a função consulta **o banco em memória de
-verdade**, recebido pela fixture `session`.
+A função consulta **o banco em memória de verdade**, recebido pela fixture
+`session`.
 
 > 💡 Chamamos `get_current_user(session=..., token=...)` passando os
 > valores **diretamente**. Fora de uma rota, o `Depends` não é acionado.
@@ -960,144 +1182,49 @@ O último teste só é possível com um banco real: o usuário é gravado pela
 fixture, o token é gerado, o usuário é **apagado de verdade** com
 `session.delete` e, então, o mesmo token passa a ser recusado.
 
----
+#### `get_current_admin`
 
-### 6.5 Testes de integração: `tests/test_auth.py`
+Aqui passamos o usuário direto no parâmetro `usuario=`, sem token. Numa
+chamada direta, o `Depends(get_current_user)` é ignorado, então o teste foca
+**apenas** na regra de administrador.
 
-Testam o **fluxo completo pela API**, como um cliente real faria: login →
-token → rota protegida.
-
-```python
-from datetime import datetime, timedelta
-from http import HTTPStatus
-from zoneinfo import ZoneInfo
-
-from jwt import decode, encode
-
-
-def test_login_retorna_token(client, usuario):
-    response = client.post(
-        '/auth/token',
-        data={'username': usuario.email, 'password': usuario.clean_password},
-    )
-    dados = response.json()
-
-    assert response.status_code == HTTPStatus.OK
-    assert dados['token_type'] == 'bearer'
-    assert 'access_token' in dados
-
-
-def test_login_com_senha_errada(client, usuario):
-    response = client.post(
-        '/auth/token',
-        data={'username': usuario.email, 'password': 'senha-errada'},
-    )
-
-    assert response.status_code == HTTPStatus.UNAUTHORIZED
-
-
-def test_login_com_email_inexistente(client):
-    response = client.post(
-        '/auth/token',
-        data={'username': 'ninguem@comprix.com', 'password': 'qualquer'},
-    )
-
-    assert response.status_code == HTTPStatus.UNAUTHORIZED
-
-
-def test_login_do_admin_gera_token_com_is_admin(client, admin, settings):
-    response = client.post(
-        '/auth/token',
-        data={'username': admin.email, 'password': admin.clean_password},
-    )
-    token = response.json()['access_token']
-    payload = decode(
-        token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM]
-    )
-
-    assert payload['is_admin'] is True
-
-
-def test_rota_protegida_com_token(client, usuario, token):
-    response = client.get(
-        '/auth/me', headers={'Authorization': f'Bearer {token}'}
-    )
-
-    assert response.status_code == HTTPStatus.OK
-    assert response.json()['email'] == usuario.email
-
-
-def test_rota_protegida_sem_token(client):
-    response = client.get('/auth/me')
-
-    assert response.status_code == HTTPStatus.UNAUTHORIZED
-
-
-def test_rota_protegida_com_token_expirado(client, usuario, settings):
-    token = encode(
-        {
-            'sub': usuario.email,
-            'exp': datetime.now(tz=ZoneInfo('UTC')) - timedelta(minutes=1),
-        },
-        settings.SECRET_KEY,
-        algorithm=settings.ALGORITHM,
-    )
-
-    response = client.get(
-        '/auth/me', headers={'Authorization': f'Bearer {token}'}
-    )
-
-    assert response.status_code == HTTPStatus.UNAUTHORIZED
-    assert response.json() == {'detail': 'Credencial inválida'}
-```
-
-> ⚠️ Ajuste `/auth/me` se a sua rota protegida estiver em outro caminho.
-
-### 🔍 Entendendo os testes de integração
-
-Estes testes são **síncronos** (não usam `async`) porque o `TestClient`
-cuida do loop assíncrono da API sozinho. Mesmo assim, eles podem usar as
-fixtures assíncronas `usuario` e `admin`.
-
-O formulário de login vai em `data=` (e não em `json=`) porque o
-`OAuth2PasswordRequestForm` espera um **formulário**, como o padrão OAuth2
-exige.
-
-| Teste | O que faz | Garante que... |
+| Teste | O que simula | Garante que... |
 |---|---|---|
-| `test_login_retorna_token` | faz login com e-mail e senha corretos | o login devolve **200**, um `access_token` e o tipo `bearer` |
-| `test_login_com_senha_errada` | usa a senha errada | senha errada não gera token (**401**) |
-| `test_login_com_email_inexistente` | usa um e-mail que não está no banco | não dá para logar com conta inexistente (**401**) |
-| `test_login_do_admin_gera_token_com_is_admin` | faz login como admin e abre o token | o fluxo real de login marca o admin |
-| `test_rota_protegida_com_token` | chama `/auth/me` com o token da fixture | um usuário logado acessa a rota e recebe **os próprios dados** |
-| `test_rota_protegida_sem_token` | chama `/auth/me` sem cabeçalho | rotas protegidas exigem login (**401**) |
-| `test_rota_protegida_com_token_expirado` | envia um token vencido | a API recusa tokens vencidos e responde com a mensagem genérica |
-
-> 🔒 Os testes de senha errada e de e-mail inexistente devolvem o **mesmo**
-> erro. Isso é intencional: se as respostas fossem diferentes, um atacante
-> descobriria quais e-mails estão cadastrados.
+| `test_get_current_admin_com_usuario_admin` | usuário com `admin=True` | o administrador passa e é devolvido |
+| `test_get_current_admin_com_usuario_comum` | usuário com `admin=False` | o usuário comum é barrado com **403** |
 
 ---
 
-### 6.6 Estrutura final
+### 7.5 Estrutura final
 
 ```text
 comprix/
 ├── src/
 │   └── comprix/
+│       ├── models/
+│       ├── routers/
+│       │   ├── auth.py
+│       │   └── usuarios.py
+│       ├── schemas/
 │       ├── app.py
 │       ├── database.py
-│       ├── models.py
 │       ├── security.py
 │       └── settings.py
 └── tests/
     ├── conftest.py        👈 fixtures compartilhadas
     ├── test_security.py   👈 testes unitários (funções + banco em memória)
+    ├── test_auth.py       👈 integração: login e refresh
+    └── test_usuarios.py   👈 integração: rotas de usuários
 ```
+
+Os testes de integração ficam nas páginas de cada rota:
+[Auth](../routers/auth.md) e [Refresh Token](../routers/refresh.md) para o
+login e a renovação do token, e a página de [Usuários](../routers/usuarios.md)
+para as permissões de administrador.
 
 ### 🧭 Unitário x integração
 
-| | Unitários (`test_security.py`) | Integração (`test_auth.py`) |
+| | Unitários (`test_security.py`) | Integração (`test_auth.py`, `test_usuarios.py`) |
 |---|---|---|
 | **O que testam** | As funções do `security.py` isoladas | O fluxo completo pela API |
 | **Como chamam** | `create_access_token(...)`, `await get_current_user(...)` | `client.post(...)`, `client.get(...)` |
@@ -1109,26 +1236,51 @@ integração garantem que as peças funcionam **juntas**.
 ### ▶️ Rodando
 
 ```bash
-pytest -v
+poetry run pytest tests/test_security.py -v
 ```
 
-Ou só um arquivo:
+Saída esperada:
+
+```text
+tests/test_security.py::test_hash_nao_e_a_senha_em_texto_puro PASSED
+tests/test_security.py::test_hash_da_mesma_senha_muda_a_cada_requisicao PASSED
+tests/test_security.py::test_verify_password_senha_correta PASSED
+tests/test_security.py::test_verify_password_senha_errada PASSED
+tests/test_security.py::test_token_contem_sub_e_exp PASSED
+tests/test_security.py::test_token_expira_no_tempo_configurado PASSED
+tests/test_security.py::test_usuario_comum_nao_recebe_is_admin PASSED
+tests/test_security.py::test_admin_recebe_is_admin PASSED
+tests/test_security.py::test_nao_altera_o_dicionario_original PASSED
+tests/test_security.py::test_token_valido_retorna_o_usuario_do_banco PASSED
+tests/test_security.py::test_token_malformado PASSED
+tests/test_security.py::test_token_expirado PASSED
+tests/test_security.py::test_token_assinado_com_outra_chave PASSED
+tests/test_security.py::test_token_sem_sub PASSED
+tests/test_security.py::test_token_de_email_que_nao_existe PASSED
+tests/test_security.py::test_usuario_apagado_depois_do_login PASSED
+tests/test_security.py::test_get_current_admin_com_usuario_admin PASSED
+tests/test_security.py::test_get_current_admin_com_usuario_comum PASSED
+
+============================== 18 passed ==============================
+```
+
+Todos os testes do projeto:
 
 ```bash
-pytest tests/test_auth.py -v
+poetry run pytest -v
 ```
-
-> Rodado contra a versão antiga do `security.py`, o
-> `test_login_retorna_token` falharia com `AttributeError: 'dict' object has
-> no attribute 'username'`. É para isso que os testes existem: o erro aparece
-> aqui, e não no primeiro login em produção.
 
 ---
 
-## ⏭️ 7. Próximos passos
+## ⏭️ 8. Próximos passos
 
-- 🔄 Implementar a rota `auth/refresh` para renovar o token sem pedir a senha
-  de novo.
-- 👑 Trocar o `ADMIN_EMAIL` pela coluna de admin da tabela `usuarios`
-  (migration `03`), para permitir mais de um administrador.
-- 🧾 Medir a cobertura dos testes com `pytest --cov=comprix`.
+- [x] Implementar a rota `auth/refresh`. Veja [Refresh Token](../routers/refresh.md).
+- [x] Usar a coluna `admin` da tabela `usuarios` para as permissões, com o
+      `get_current_admin`.
+- [x] Medir a cobertura dos testes (o `--cov=comprix` já está no `addopts`
+      do `pyproject.toml`).
+- [ ] Proteger as rotas de **alterar** e **excluir** usuários com
+      `CurrentUserAdmin`.
+- [ ] Decidir se a claim `is_admin` continua no token (uso no frontend) ou se
+      será removida.
+- [ ] Recusar usuários com `status=False` (inativos) no `get_current_user`.

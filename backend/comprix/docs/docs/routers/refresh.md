@@ -281,7 +281,7 @@ Por isso, aqui não verificamos a mensagem: ela vem do FastAPI
 #### `test_refresh_token_invalido`
 
 ```python
-headers={'Authorization': 'Bearer token-invalido'}
+headers = {'Authorization': 'Bearer token-invalido'}
 ```
 
 Envia um texto qualquer no lugar do token. O `decode` lança `DecodeError`, e o
@@ -407,6 +407,7 @@ sequenceDiagram
 ### Próximos passos
 
 - [ ] Proteger as rotas da aplicação usando `CurrentUser`.
-- [ ] Usar a claim `is_admin` para restringir rotas administrativas.
+- [x] Restringir rotas administrativas com o `CurrentUserAdmin` (veja
+      [Usuários](usuarios.md)).
 - [ ] Avaliar o modelo com dois tokens (*access* curto + *refresh* longo), caso
       a aplicação precise de sessões mais longas com mais segurança.

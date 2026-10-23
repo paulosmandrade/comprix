@@ -293,6 +293,10 @@
       
         
       
+        
+      
+        
+      
     
     
     
@@ -505,6 +509,60 @@
 
                 
               
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bibliotecas/pytest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Pytest
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bibliotecas/ruff/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Ruff
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
             </ul>
           </nav>
         
@@ -530,6 +588,34 @@
     
   
   App
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../settings/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-sliders-horizontal" viewBox="0 0 24 24"><path d="M10 5H3M12 19H3M14 3v4M16 17v4M21 12h-9M21 19h-5M21 5h-7M8 10v4M8 12H3"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  Settings
 
     
   </span>
@@ -678,7 +764,7 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
         
           
           <div class="md-nav__link md-nav__container">
@@ -701,15 +787,15 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_9" id="__nav_9_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_10" id="__nav_10_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
         
-          <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
-            <label class="md-nav__title" for="__nav_9">
+          <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+            <label class="md-nav__title" for="__nav_10">
               <span class="md-nav__icon md-icon"></span>
               
   
@@ -815,7 +901,7 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" checked>
         
           
           <div class="md-nav__link md-nav__container">
@@ -838,15 +924,15 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_10" id="__nav_10_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_11" id="__nav_11_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
         
-          <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="true">
-            <label class="md-nav__title" for="__nav_10">
+          <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="true">
+            <label class="md-nav__title" for="__nav_11">
               <span class="md-nav__icon md-icon"></span>
               
   
@@ -1415,7 +1501,7 @@
         
   
   
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-user-key" viewBox="0 0 24 24"><path d="M20 11v6M20 13h2M3 21v-2a4 4 0 0 1 4-4h6a4 4 0 0 1 2.072.578"/><circle cx="10" cy="7" r="4"/><circle cx="20" cy="19" r="2"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M16 3.128a4 4 0 0 1 0 7.744M22 21v-2a4 4 0 0 0-3-3.87"/><circle cx="9" cy="7" r="4"/></svg>
   
   <span class="md-ellipsis">
     
@@ -2025,8 +2111,8 @@ no cabeçalho <code>Authorization</code> das rotas protegidas.</p>
 <td>Funções de segurança: hash de senha, criação e validação do token</td>
 </tr>
 <tr>
-<td><code>src/comprix/auth.py</code></td>
-<td>Rota HTTP <code>POST /auth/token</code> (login)</td>
+<td><code>src/comprix/routers/auth.py</code></td>
+<td>Rotas HTTP <code>POST /auth/token</code> (login) e <code>POST /auth/refresh</code></td>
 </tr>
 <tr>
 <td><code>src/comprix/app.py</code></td>
@@ -2093,7 +2179,7 @@ Use ao cadastrar ou alterar a senha de um usuário. A senha nunca é salva em te
 <hr />
 <h2 id="authpy-rota-de-login"><code>auth.py</code> — rota de login<a class="headerlink" href="#authpy-rota-de-login" title="Permanent link">&para;</a></h2>
 <h3 id="post-authtoken"><code>POST /auth/token</code><a class="headerlink" href="#post-authtoken" title="Permanent link">&para;</a></h3>
-<p>Perceba na imagem abaixo, que agora na nossa documentação do Swagger, temos um botão <strong>Autorize</strong>.</p>
+<p>Perceba na imagem abaixo, que agora na nossa documentação do Swagger, temos um botão <strong>Authorize</strong>.</p>
 <p><img alt="Swagger" src="../../assets/seguranca/Swagger_Autorize.png" width="800" /></p>
 <p>Recebe os dados como <strong>form-data</strong> (<code>application/x-www-form-urlencoded</code>),
 como exige a especificação OAuth2.</p>
@@ -2160,17 +2246,18 @@ quais emails estão cadastrados.</p>
 </span></code></pre></div>
 <hr />
 <h2 id="nossa-primeira-rota">Nossa primeira Rota<a class="headerlink" href="#nossa-primeira-rota" title="Permanent link">&para;</a></h2>
-<p>Sabemos agora como é todo o procedimento de seguração da nossa aplicação, vamos
+<p>Sabemos agora como é todo o procedimento de segurança da nossa aplicação, vamos
 para o nosso código.</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>src/comprix/
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>├── routers/
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>│   ├── __init__.py
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>│   └── auth.py      ← novo arquivo
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>├── app.py
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>├── database.py
-</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>├── models.py
-</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>├── security.py
-</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>└── settings.py
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>├── models/
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>├── routers/
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>│   ├── __init__.py
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>│   └── auth.py      ← novo arquivo
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>├── schemas/
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>├── app.py
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>├── database.py
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>├── security.py
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>└── settings.py
 </span></code></pre></div>
 <div class="admonition tip">
 <p class="admonition-title">Dica</p>
@@ -2393,8 +2480,8 @@ usuário no banco de testes antes de cada teste que a solicita.</p>
 </span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>    <span class="n">senha</span> <span class="o">=</span> <span class="s1">'testing_senha'</span>
 </span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>
 </span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>    <span class="n">usuario</span> <span class="o">=</span> <span class="n">Usuarios</span><span class="p">(</span>
-</span><span id="__span-15-6"><a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>        <span class="n">nome</span><span class="o">=</span><span class="s1">'Usuário Teste'</span><span class="p">,</span>
-</span><span id="__span-15-7"><a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a>        <span class="n">email</span><span class="o">=</span><span class="s1">'teste@comprix.com'</span><span class="p">,</span>
+</span><span id="__span-15-6"><a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>        <span class="n">nome</span><span class="o">=</span><span class="s1">'Usuário teste'</span><span class="p">,</span>
+</span><span id="__span-15-7"><a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a>        <span class="n">email</span><span class="o">=</span><span class="s1">'usuario@comprix.com.br'</span><span class="p">,</span>
 </span><span id="__span-15-8"><a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>        <span class="n">senha</span><span class="o">=</span><span class="n">get_password_hash</span><span class="p">(</span><span class="n">senha</span><span class="p">),</span>  <span class="c1"># o banco guarda o hash</span>
 </span><span id="__span-15-9"><a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a>    <span class="p">)</span>
 </span><span id="__span-15-10"><a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a>    <span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">usuario</span><span class="p">)</span>
@@ -2655,11 +2742,13 @@ email e senha para testar as rotas protegidas direto pela documentação.</p>
 </div>
 <h3 id="proximos-passos">Próximos passos<a class="headerlink" href="#proximos-passos" title="Permanent link">&para;</a></h3>
 <ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Proteger as rotas da aplicação usando <code>get_current_user</code> como dependência.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Criar a rota <code>POST /auth/refresh</code> para renovar o token (já declarada no
-      <code>refreshUrl</code> do <code>oauth2_scheme</code>).</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Testar rotas protegidas com token válido, inválido e expirado.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Usar a claim <code>is_admin</code> para restringir rotas administrativas.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Criar a rota <code>POST /auth/refresh</code> para renovar o token (já declarada no
+      <code>refreshUrl</code> do <code>oauth2_scheme</code>). Veja <a href="../refresh/">Refresh</a>.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Testar rotas protegidas com token válido, inválido e expirado.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Restringir rotas administrativas com o <code>get_current_admin</code>, que usa a
+      coluna <code>admin</code> do banco (e não a claim <code>is_admin</code>). Veja
+      <a href="../../seguranca/token/#5-funcao-get_current_admin-restringindo-ao-administrador">Token</a>.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Proteger as demais rotas da aplicação usando <code>get_current_user</code> como dependência.</li>
 </ul>
 
 

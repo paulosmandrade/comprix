@@ -98,7 +98,9 @@ Todo assunto novo segue sempre a mesma sequência:
 
 Cada assunto tem sua própria página nesta seção, com o passo a passo completo da sua construção:
 
-- **Usuários**
+- [x] [**Auth**](auth.md): login com `POST /auth/token`
+- [x] [**Refresh**](refresh.md): renovação do token com `POST /auth/refresh`
+- [x] [**Usuários**](usuarios.md): cadastro e definição de senha (alterar e excluir em breve)
 - **Seções**
 - **Grupos**
 - **Produtos**

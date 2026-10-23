@@ -39,7 +39,7 @@ no cabeçalho `Authorization` das rotas protegidas.
 | Arquivo | Responsabilidade |
 |---|---|
 | `src/comprix/security.py` | Funções de segurança: hash de senha, criação e validação do token |
-| `src/comprix/auth.py` | Rota HTTP `POST /auth/token` (login) |
+| `src/comprix/routers/auth.py` | Rotas HTTP `POST /auth/token` (login) e `POST /auth/refresh` |
 | `src/comprix/app.py` | Registra o router com `app.include_router(auth.router)` |
 
 > **Importante:** `security.py` só contém **funções**. Quem expõe o login via HTTP é
@@ -97,7 +97,7 @@ async def me(usuario: CurrentUser):
 
 ### `POST /auth/token`
 
-Perceba na imagem abaixo, que agora na nossa documentação do Swagger, temos um botão **Autorize**.
+Perceba na imagem abaixo, que agora na nossa documentação do Swagger, temos um botão **Authorize**.
 
 ![Swagger](../assets/seguranca/Swagger_Autorize.png){ width="800" }
 
@@ -146,18 +146,19 @@ curl http://127.0.0.1:8000/rota-protegida \
 
 ## Nossa primeira Rota
 
-Sabemos agora como é todo o procedimento de seguração da nossa aplicação, vamos
+Sabemos agora como é todo o procedimento de segurança da nossa aplicação, vamos
 para o nosso código.
 
 
 ```
 src/comprix/
+├── models/
 ├── routers/
 │   ├── __init__.py
 │   └── auth.py      ← novo arquivo
+├── schemas/
 ├── app.py
 ├── database.py
-├── models.py
 ├── security.py
 └── settings.py
 ```
@@ -424,8 +425,8 @@ async def usuario(session):
     senha = 'testing_senha'
 
     usuario = Usuarios(
-        nome='Usuário Teste',
-        email='teste@comprix.com',
+        nome='Usuário teste',
+        email='usuario@comprix.com.br',
         senha=get_password_hash(senha),  # o banco guarda o hash
     )
     session.add(usuario)
@@ -628,8 +629,10 @@ Com isso, temos a **primeira rota** da aplicação funcionando e testada. 🎉
 
 ### Próximos passos
 
-- [ ] Proteger as rotas da aplicação usando `get_current_user` como dependência.
-- [ ] Criar a rota `POST /auth/refresh` para renovar o token (já declarada no
-      `refreshUrl` do `oauth2_scheme`).
-- [ ] Testar rotas protegidas com token válido, inválido e expirado.
-- [ ] Usar a claim `is_admin` para restringir rotas administrativas.
+- [x] Criar a rota `POST /auth/refresh` para renovar o token (já declarada no
+      `refreshUrl` do `oauth2_scheme`). Veja [Refresh](refresh.md).
+- [x] Testar rotas protegidas com token válido, inválido e expirado.
+- [x] Restringir rotas administrativas com o `get_current_admin`, que usa a
+      coluna `admin` do banco (e não a claim `is_admin`). Veja
+      [Token](../seguranca/token.md#5-funcao-get_current_admin-restringindo-ao-administrador).
+- [ ] Proteger as demais rotas da aplicação usando `get_current_user` como dependência.

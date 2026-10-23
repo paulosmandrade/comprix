@@ -16,9 +16,10 @@ async def lifespan(app: FastAPI):
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
 
-    await criar_admin()
+    async with AsyncSession(engine, expire_on_commit=False) as session:
+        await criar_admin(session)
+
     yield
-    await engine.dispose()
 
 
 async def get_session():  # pragma: no cover

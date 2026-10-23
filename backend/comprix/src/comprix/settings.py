@@ -14,3 +14,10 @@ class Settings(BaseSettings):
     SECRET_KEY: str = Field(init=False)
     ALGORITHM: str = Field(init=False)
     ACCESS_TOKEN_EXPIRE_MINUTES: int = Field(init=False)
+
+    MAIL_USERNAME: str
+    MAIL_PASSWORD: str
+    MAIL_FROM: str
+    MAIL_SERVER: str
+    MAIL_PORT: int
+    FRONTEND_URL: str
